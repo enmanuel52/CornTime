@@ -73,6 +73,9 @@ kotlin {
             implementation(libs.androidx.datastore.preferences)
 
             implementation(libs.ktorfit)
+
+            implementation(libs.coil.compose)
+            implementation(libs.coil.network.okhttp)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
