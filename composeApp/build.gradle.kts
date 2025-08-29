@@ -12,6 +12,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.serialization)
     alias(libs.plugins.androidx.room)
     alias(libs.plugins.kotest)
+    alias(libs.plugins.ktorfit)
 }
 
 kotlin {
@@ -70,6 +71,8 @@ kotlin {
 
             implementation(libs.androidx.datastore)
             implementation(libs.androidx.datastore.preferences)
+
+            implementation(libs.ktorfit)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
