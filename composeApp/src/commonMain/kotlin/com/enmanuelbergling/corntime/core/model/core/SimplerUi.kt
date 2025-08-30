@@ -1,5 +1,7 @@
 package com.enmanuelbergling.corntime.core.model.core
 
+import org.jetbrains.compose.resources.StringResource
+
 
 sealed interface SimplerUi {
     data object Loading : SimplerUi
@@ -8,5 +10,5 @@ sealed interface SimplerUi {
     /**
      * @param messageRes must be a string resource
      * */
-    data class Error(val messageRes: Int) : SimplerUi
+    data class Error(val messageRes: StringResource) : SimplerUi
 }

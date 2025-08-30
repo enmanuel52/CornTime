@@ -80,6 +80,9 @@ kotlin {
 
             implementation(libs.constraintlayout.compose.multiplatform)
 
+            implementation(libs.paging.common)
+            implementation(libs.paging.compose.common)
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

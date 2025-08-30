@@ -14,9 +14,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.paging.LoadState
-import androidx.paging.compose.LazyPagingItems
+import app.cash.paging.compose.LazyPagingItems
 import com.enmanuelbergling.corntime.core.ui.theme.Dimen
-import com.valentinilk.shimmer.shimmer
 
 typealias Material3 = MaterialTheme
 
@@ -26,7 +25,8 @@ val Material3.dimen: Dimen
     get() = LocalDimen.current
 
 @Stable
-fun Modifier.shimmerIf(condition: () -> Boolean) = if (condition()) this then shimmer() else this
+fun Modifier.shimmerIf(condition: () -> Boolean) = if (condition()) this then Modifier//shimmer()
+else this
 
 val LazyPagingItems<*>.isRefreshing: Boolean
     get() = loadState.refresh == LoadState.Loading

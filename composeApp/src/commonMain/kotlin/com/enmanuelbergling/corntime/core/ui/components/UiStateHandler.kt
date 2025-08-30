@@ -6,7 +6,7 @@ import androidx.compose.material3.SnackbarResult
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.paging.LoadState
-import androidx.paging.compose.LazyPagingItems
+import app.cash.paging.compose.LazyPagingItems
 import com.enmanuelbergling.corntime.core.model.core.SimplerUi
 import org.jetbrains.compose.resources.stringResource
 

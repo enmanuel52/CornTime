@@ -1,10 +1,8 @@
-package com.enmanuelbergling.core.ui.core
+package com.enmanuelbergling.corntime.core.ui.core
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.enmanuelbergling.core.common.util.TAG
-import com.enmanuelbergling.core.model.core.PageModel
+import com.enmanuelbergling.corntime.core.model.core.PageModel
 
 open class GenericPagingSource<Model : Any>(
     private val request: suspend (page: Int) -> PageModel<Model>,
@@ -33,7 +31,7 @@ open class GenericPagingSource<Model : Any>(
                 nextKey = nextKey
             )
         } catch (exception: Exception) {
-            Log.d(TAG, "load: ${exception.message}")
+            println( "load: ${exception.message}")
             LoadResult.Error(exception)
         }
     }

@@ -1,14 +1,9 @@
 package com.enmanuelbergling.corntime.core.ui.components
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Star
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.enmanuelbergling.corntime.core.ui.theme.Gold
-import com.gowtham.ratingbar.RatingBar
 
 @Composable
 fun RatingStars(
@@ -17,7 +12,8 @@ fun RatingStars(
     size: Dp = 20.dp,
     spaceBetween: Dp = 2.dp,
 ) {
-    RatingBar(
+    TODO("implement a rating system")
+    /*RatingBar(
         value = value,
         onValueChange = {},
         onRatingChanged = {},
@@ -30,5 +26,5 @@ fun RatingStars(
         modifier = modifier,
         size = size,
         spaceBetween = spaceBetween
-    )
+    )*/
 }
