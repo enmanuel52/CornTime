@@ -1,6 +1,5 @@
-package com.enmanuelbergling.core.ui.core
+package com.enmanuelbergling.corntime.core.ui.core
 
-import android.annotation.SuppressLint
 import android.os.Parcel
 import android.os.Parcelable
 import androidx.compose.foundation.lazy.grid.LazyGridItemScope
@@ -8,9 +7,10 @@ import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridItemScope
 import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridScope
 import androidx.compose.runtime.Composable
-import androidx.paging.PagingData
+import androidx.constraintlayout.compose.platform.annotation.SuppressLint
 import androidx.paging.compose.LazyPagingItems
 import kotlinx.coroutines.flow.Flow
+import kotlin.collections.get
 
 /**
  * Adds the [LazyPagingItems] and their content to the scope. The range from 0 (inclusive) to

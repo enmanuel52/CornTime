@@ -1,4 +1,4 @@
-package com.enmanuelbergling.core.ui.components.walkthrough.model
+package com.enmanuelbergling.corntime.core.ui.components.walkthrough.model
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable

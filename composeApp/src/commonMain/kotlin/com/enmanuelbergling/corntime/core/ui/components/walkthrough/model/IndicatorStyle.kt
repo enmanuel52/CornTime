@@ -1,4 +1,4 @@
-package com.enmanuelbergling.core.ui.components.walkthrough.model
+package com.enmanuelbergling.corntime.core.ui.components.walkthrough.model
 
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.ui.graphics.Shape

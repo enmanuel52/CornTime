@@ -1,10 +1,9 @@
-package com.enmanuelbergling.core.ui.components
+package com.enmanuelbergling.corntime.core.ui.components
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
@@ -19,11 +18,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun ArtisticBackground(modifier: Modifier = Modifier) {
     Box(
@@ -39,7 +37,6 @@ fun ArtisticBackground(modifier: Modifier = Modifier) {
 
 @Composable
 private fun MiddleShape() {
-    val configuration = LocalConfiguration.current
 
     Box(
         modifier = Modifier
@@ -47,9 +44,8 @@ private fun MiddleShape() {
             .aspectRatio(1f)
             .graphicsLayer(scaleX = 1.1f, scaleY = 1.1f)
             .offset(
-                -configuration.screenWidthDp.dp * .25f,
-                configuration.screenWidthDp.dp * .4f,
-
+                100.dp,
+                300.dp,
                 )
             .rotate(30f)
             .clip(RoundedCornerShape(25))
@@ -68,16 +64,14 @@ private fun MiddleShape() {
 
 @Composable
 private fun BottomShape() {
-    val configuration = LocalConfiguration.current
-
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .aspectRatio(1f)
             .graphicsLayer(scaleX = 1.2f, scaleY = 1.2f)
             .offset(
-                configuration.screenWidthDp.dp * .15f,
-                configuration.screenWidthDp.dp * .7f,
+                100.dp,
+                500.dp,
 
                 )
             .rotate(60f)
@@ -96,7 +90,6 @@ private fun BottomShape() {
 
 @Composable
 private fun TopCornerStain() {
-    val configuration = LocalConfiguration.current
 
     val containerColor = MaterialTheme.colorScheme.tertiaryContainer
     Canvas(
@@ -105,8 +98,8 @@ private fun TopCornerStain() {
             .aspectRatio(1f)
             .graphicsLayer(scaleX = 1.2f, scaleY = 1.2f)
             .offset(
-                -configuration.screenWidthDp.dp * .3f,
-                -configuration.screenWidthDp.dp * .25f,
+                200.dp,
+                250.dp,
 
                 )
             .rotate(60f)

@@ -1,4 +1,4 @@
-package com.enmanuelbergling.core.ui.components.walkthrough
+package com.enmanuelbergling.corntime.core.ui.components.walkthrough
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
@@ -12,16 +12,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import com.enmanuelbergling.core.ui.components.walkthrough.components.Indicator
-import com.enmanuelbergling.core.ui.components.walkthrough.components.InstagramPager
-import com.enmanuelbergling.core.ui.components.walkthrough.components.WalkStepUi
-import com.enmanuelbergling.core.ui.components.walkthrough.model.DimenTokens
-import com.enmanuelbergling.core.ui.components.walkthrough.model.IndicatorStyle
-import com.enmanuelbergling.core.ui.components.walkthrough.model.StepStyle
-import com.enmanuelbergling.core.ui.components.walkthrough.model.WalkScrollStyle
-import com.enmanuelbergling.core.ui.components.walkthrough.model.WalkStep
-import com.enmanuelbergling.core.ui.components.walkthrough.model.WalkThroughColors
-import com.enmanuelbergling.core.ui.components.walkthrough.model.WalkThroughDefaults
+import com.enmanuelbergling.corntime.core.ui.components.walkthrough.components.Indicator
+import com.enmanuelbergling.corntime.core.ui.components.walkthrough.components.InstagramPager
+import com.enmanuelbergling.corntime.core.ui.components.walkthrough.components.WalkStepUi
+import com.enmanuelbergling.corntime.core.ui.components.walkthrough.model.DimenTokens
+import com.enmanuelbergling.corntime.core.ui.components.walkthrough.model.IndicatorStyle
+import com.enmanuelbergling.corntime.core.ui.components.walkthrough.model.StepStyle
+import com.enmanuelbergling.corntime.core.ui.components.walkthrough.model.WalkScrollStyle
+import com.enmanuelbergling.corntime.core.ui.components.walkthrough.model.WalkStep
+import com.enmanuelbergling.corntime.core.ui.components.walkthrough.model.WalkThroughColors
+import com.enmanuelbergling.corntime.core.ui.components.walkthrough.model.WalkThroughDefaults
 
 /**
  * @param steps for every single page

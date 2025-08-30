@@ -1,4 +1,4 @@
-package com.enmanuelbergling.core.ui.components.common
+package com.enmanuelbergling.corntime.core.ui.components.common
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -20,12 +20,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import com.enmanuelbergling.corntime.core.ui.core.dimen
-import com.enmanuelbergling.core.ui.R
+import corntime.composeapp.generated.resources.Res
+import corntime.composeapp.generated.resources.play
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -45,7 +46,7 @@ fun WatchListCard(
             Modifier.padding(MaterialTheme.dimen.small),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(painter = painterResource(R.drawable.play), contentDescription = "play list icon")
+            Icon(painter = painterResource(Res.drawable.play), contentDescription = "play list icon")
 
             Spacer(modifier = Modifier.width(MaterialTheme.dimen.medium))
 

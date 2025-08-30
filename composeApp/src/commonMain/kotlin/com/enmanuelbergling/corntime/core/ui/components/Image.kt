@@ -1,4 +1,4 @@
-package com.enmanuelbergling.core.ui.components
+package com.enmanuelbergling.corntime.core.ui.components
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -9,18 +9,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.RenderVectorGroup
 import androidx.compose.ui.graphics.vector.VectorPainter
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import coil.compose.AsyncImage
-import com.enmanuelbergling.core.common.util.BASE_IMAGE_URL
-import com.enmanuelbergling.core.ui.R
+import coil3.compose.AsyncImage
 import com.enmanuelbergling.corntime.core.ui.theme.DimensionTokens
+import com.enmanuelbergling.corntime.core.util.BASE_IMAGE_URL
+import corntime.composeapp.generated.resources.Res
+import corntime.composeapp.generated.resources.mr_bean
+import org.jetbrains.compose.resources.painterResource
 
 /**
  * Crete a [VectorPainter] with the given [ImageVector] and [Color]*/
 @Composable
 fun rememberVectorPainter(image: ImageVector, color: Color): VectorPainter =
-    androidx.compose.ui.graphics.vector.rememberVectorPainter(
+    rememberVectorPainter(
         defaultWidth = image.defaultWidth,
         defaultHeight = image.defaultHeight,
         viewportWidth = image.viewportWidth,
@@ -38,10 +40,10 @@ fun UserImage(avatarPath: String?, modifier: Modifier = Modifier) {
         model = "$BASE_IMAGE_URL$avatarPath",
         contentDescription = "user image",
         placeholder = painterResource(
-            id = R.drawable.mr_bean
+             Res.drawable.mr_bean
         ),
         error = painterResource(
-            id = R.drawable.mr_bean
+           Res.drawable.mr_bean
         ),
         modifier = modifier
             .size(DimensionTokens.ProfileImageSize)

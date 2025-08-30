@@ -1,4 +1,4 @@
-package com.enmanuelbergling.core.ui.components.walkthrough.components
+package com.enmanuelbergling.corntime.core.ui.components.walkthrough.components
 
 import androidx.annotation.IntRange
 import androidx.compose.foundation.layout.PaddingValues

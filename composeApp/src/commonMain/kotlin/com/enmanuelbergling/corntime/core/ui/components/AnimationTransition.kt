@@ -1,4 +1,4 @@
-package com.enmanuelbergling.core.ui.components
+package com.enmanuelbergling.corntime.core.ui.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.AnimatedVisibilityScope

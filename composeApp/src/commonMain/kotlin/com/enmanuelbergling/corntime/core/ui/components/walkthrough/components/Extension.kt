@@ -1,4 +1,4 @@
-package com.enmanuelbergling.core.ui.components.walkthrough.components
+package com.enmanuelbergling.corntime.core.ui.components.walkthrough.components
 
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.SpringSpec

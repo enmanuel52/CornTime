@@ -1,4 +1,4 @@
-package com.enmanuelbergling.core.ui.components.walkthrough.components
+package com.enmanuelbergling.corntime.core.ui.components.walkthrough.components
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
@@ -22,10 +22,10 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.unit.Dp
-import com.enmanuelbergling.core.ui.components.walkthrough.model.DimenTokens
-import com.enmanuelbergling.core.ui.components.walkthrough.model.IndicatorColors
-import com.enmanuelbergling.core.ui.components.walkthrough.model.IndicatorDefaults
-import com.enmanuelbergling.core.ui.components.walkthrough.model.IndicatorStyle
+import com.enmanuelbergling.corntime.core.ui.components.walkthrough.model.DimenTokens
+import com.enmanuelbergling.corntime.core.ui.components.walkthrough.model.IndicatorColors
+import com.enmanuelbergling.corntime.core.ui.components.walkthrough.model.IndicatorDefaults
+import com.enmanuelbergling.corntime.core.ui.components.walkthrough.model.IndicatorStyle
 
 /**
  * @param pagerState is required to handle the exact state

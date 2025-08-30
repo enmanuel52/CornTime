@@ -1,4 +1,4 @@
-package com.enmanuelbergling.core.ui.components.shaders
+package com.enmanuelbergling.corntime.core.ui.shaders
 
 import org.intellij.lang.annotations.Language
 

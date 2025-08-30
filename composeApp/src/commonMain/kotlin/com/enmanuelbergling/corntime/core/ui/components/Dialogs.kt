@@ -1,11 +1,10 @@
-package com.enmanuelbergling.core.ui.components
+package com.enmanuelbergling.corntime.core.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
@@ -25,14 +24,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.enmanuelbergling.core.ui.R
 import com.enmanuelbergling.corntime.core.ui.core.dimen
+import corntime.composeapp.generated.resources.Res
+import corntime.composeapp.generated.resources.accept
+import corntime.composeapp.generated.resources.are_you_sure_of_this
+import corntime.composeapp.generated.resources.cancel
+import corntime.composeapp.generated.resources.confirmation
+import corntime.composeapp.generated.resources.delete
+import corntime.composeapp.generated.resources.delete_icon
+import org.jetbrains.compose.resources.stringResource
 
 
 @Composable
@@ -44,7 +48,7 @@ fun DefaultErrorDialog(
         onDismissRequest = onDismissDialog,
         confirmButton = {
             TextButton(onClick = onDismissDialog) {
-                Text(text = stringResource(R.string.accept))
+                Text(text = stringResource(Res.string.accept))
             }
         },
         text = {
@@ -54,7 +58,7 @@ fun DefaultErrorDialog(
         icon = {
             Icon(
                 imageVector = Icons.Rounded.Error,
-                contentDescription = stringResource(id = R.string.delete_icon)
+                contentDescription = stringResource(Res.string.delete_icon)
             )
         }
     )
@@ -118,12 +122,8 @@ fun CtiContentDialog(
                     modifier = Modifier.align(if (icon != null) Alignment.CenterHorizontally else Alignment.Start)
                 ) { title() }
 
-                val maxHeight = LocalConfiguration.current.screenHeightDp
-
                 LazyColumn(
-                    modifier = Modifier.heightIn(
-                        max = maxHeight.times(60).div(100).dp
-                    ),
+                    modifier = Modifier.weight(.6f),
                     verticalArrangement = Arrangement.spacedBy(verticalSpacing)
                 ) {
                     content()
@@ -152,23 +152,23 @@ fun CtiContentDialog(
 fun DeleteMovieConfirmationDialog(onDismiss: () -> Unit, onDelete: () -> Unit) {
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(text = stringResource(R.string.confirmation)) },
+        title = { Text(text = stringResource(Res.string.confirmation)) },
         text = {
             Text(
-                text = stringResource(R.string.are_you_sure_of_this)
+                text = stringResource(Res.string.are_you_sure_of_this)
             )
         },
         confirmButton = {
             TextButton(onClick = onDelete) {
                 Text(
-                    text = stringResource(R.string.delete),
+                    text = stringResource(Res.string.delete),
                     color = MaterialTheme.colorScheme.error
                 )
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text(text = stringResource(R.string.cancel))
+                Text(text = stringResource(Res.string.cancel))
             }
         }
     )

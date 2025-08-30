@@ -23,18 +23,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
-import com.enmanuelbergling.core.common.util.BASE_POSTER_IMAGE_URL
-import com.enmanuelbergling.core.ui.R
-import com.enmanuelbergling.core.ui.core.BoundsTransition
-import com.enmanuelbergling.core.ui.core.LocalSharedTransitionScope
+import coil3.compose.AsyncImage
+import com.enmanuelbergling.corntime.core.ui.core.BoundsTransition
+import com.enmanuelbergling.corntime.core.ui.core.LocalSharedTransitionScope
 import com.enmanuelbergling.corntime.core.ui.core.dimen
-import com.valentinilk.shimmer.shimmer
+import com.enmanuelbergling.corntime.core.util.BASE_POSTER_IMAGE_URL
+import corntime.composeapp.generated.resources.Res
+import corntime.composeapp.generated.resources.mr_bean
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
@@ -70,7 +70,7 @@ fun ActorPlaceHolder(modifier: Modifier = Modifier) {
 fun ActorsRowPlaceholder(modifier: Modifier = Modifier) {
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(MaterialTheme.dimen.small),
-        modifier = modifier.shimmer()
+//        modifier = modifier.shimmer(),
     ) {
         items(50) { ActorPlaceHolder(modifier = Modifier.width(110.dp)) }
     }
@@ -91,13 +91,13 @@ fun AnimatedContentScope.ActorCard(
             AsyncImage(
                 model = BASE_POSTER_IMAGE_URL + imageUrl,
                 contentDescription = "movie image",
-                error = painterResource(id = R.drawable.mr_bean),
-                placeholder = painterResource(id = R.drawable.mr_bean),
+                error = painterResource( Res.drawable.mr_bean),
+                placeholder = painterResource(Res.drawable.mr_bean),
                 modifier = Modifier
                     .aspectRatio(.65f)
                         then with(sharedTransitionScope) {
                     Modifier.sharedElement(
-                        state = rememberSharedContentState(key = imageUrl.orEmpty()),
+                        sharedContentState = rememberSharedContentState(key = imageUrl.orEmpty()),
                         animatedVisibilityScope = this@ActorCard,
                         boundsTransform = BoundsTransition
                     )

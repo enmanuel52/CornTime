@@ -1,4 +1,4 @@
-package com.enmanuelbergling.core.ui.components.common
+package com.enmanuelbergling.corntime.core.ui.components.common
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -23,18 +23,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
-import com.enmanuelbergling.core.common.util.BASE_POSTER_IMAGE_URL
-import com.enmanuelbergling.core.model.movie.Movie
-import com.enmanuelbergling.core.ui.R
-import com.enmanuelbergling.core.ui.components.RatingStars
+import coil3.compose.AsyncImage
+import com.enmanuelbergling.corntime.core.ui.components.RatingStars
+import com.enmanuelbergling.corntime.core.model.movie.Movie
 import com.enmanuelbergling.corntime.core.ui.core.dimen
 import com.enmanuelbergling.corntime.core.ui.theme.CornTimeTheme
+import com.enmanuelbergling.corntime.core.util.BASE_POSTER_IMAGE_URL
+import corntime.composeapp.generated.resources.Res
+import corntime.composeapp.generated.resources.pop_corn_and_cinema_poster
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -52,8 +53,8 @@ fun MovieLandCard(
             AsyncImage(
                 model = BASE_POSTER_IMAGE_URL + movie.posterPath,
                 contentDescription = "movie image",
-                error = painterResource(id = R.drawable.pop_corn_and_cinema_poster),
-                placeholder = painterResource(id = R.drawable.pop_corn_and_cinema_poster),
+                error = painterResource(Res.drawable.pop_corn_and_cinema_poster),
+                placeholder = painterResource(Res.drawable.pop_corn_and_cinema_poster),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .aspectRatio(.65f)

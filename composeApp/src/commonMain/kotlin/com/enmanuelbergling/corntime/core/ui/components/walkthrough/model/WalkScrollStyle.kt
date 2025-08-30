@@ -1,4 +1,4 @@
-package com.enmanuelbergling.core.ui.components.walkthrough.model
+package com.enmanuelbergling.corntime.core.ui.components.walkthrough.model
 
 import androidx.annotation.IntRange
 

@@ -1,4 +1,4 @@
-package com.enmanuelbergling.core.ui.components.walkthrough.components
+package com.enmanuelbergling.corntime.core.ui.components.walkthrough.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -13,12 +13,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import com.enmanuelbergling.core.ui.components.walkthrough.model.DimenTokens
-import com.enmanuelbergling.core.ui.components.walkthrough.model.StepStyle
-import com.enmanuelbergling.core.ui.components.walkthrough.model.WalkStep
+import com.enmanuelbergling.corntime.core.ui.components.walkthrough.model.DimenTokens
+import com.enmanuelbergling.corntime.core.ui.components.walkthrough.model.StepStyle
+import com.enmanuelbergling.corntime.core.ui.components.walkthrough.model.WalkStep
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.painterResource
 
 /**
  * It just contains the image and text in specific screen
@@ -52,9 +53,9 @@ internal fun WalkStepUi(
 }
 
 @Composable
-private fun Image(resource: Int) {
+private fun Image(resource: DrawableResource) {
     Image(
-        painter = painterResource(id = resource),
+        painter = painterResource(resource),
         contentDescription = null,
         contentScale = ContentScale.FillBounds,
         modifier = Modifier
