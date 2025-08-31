@@ -16,7 +16,7 @@ import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 
-const val ACCOUNT_ID = "account_id"
+const val ACCOUNT_ID = "20552692"
 class UserService(private val httpClient: KtorClient) {
 
     internal suspend fun getAccount(sessionId: String): UserDetailsDTO = httpClient

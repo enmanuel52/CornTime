@@ -11,7 +11,7 @@ import io.ktor.client.plugins.plugin
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
-const val API_KEY = ""
+const val API_KEY = "5d5036fdbe23a556a61621aa06bc39f9"
 
 private val httpClient = HttpClient {
 

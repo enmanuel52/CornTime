@@ -1,7 +1,12 @@
 package com.enmanuelbergling.corntime.core.util
 
-expect class System {
+import kotlinx.coroutines.flow.Flow
+import org.koin.core.module.Module
 
+expect val systemModule: Module
+
+expect class System {
+    fun isNetworkAvailable(): Flow<Boolean>
 }
 
 /**
