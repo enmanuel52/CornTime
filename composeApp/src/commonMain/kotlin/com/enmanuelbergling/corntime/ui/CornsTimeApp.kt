@@ -227,7 +227,7 @@ fun DrawerContent(
 
             Text(
                 text = stringResource(Res.string.menu), style = MaterialTheme.typography.displayMedium,
-                color = LocalContentColor.current.copy(alpha = .8f)
+                color = MaterialTheme.colorScheme.onBackground
             )
 
             Spacer(modifier = Modifier.height(MaterialTheme.dimen.mediumSmall))
@@ -284,8 +284,8 @@ fun NavDrawerItem(
     )
 
     val colorAnimation by animateColorAsState(
-        targetValue = if (selected) LocalContentColor.current
-        else LocalContentColor.current.copy(alpha = .6f),
+        targetValue = if (selected) MaterialTheme.colorScheme.primary
+        else MaterialTheme.colorScheme.onBackground,
         label = "color animation",
     )
 
