@@ -12,6 +12,8 @@ import com.enmanuelbergling.corntime.core.data.remote.ktor.service.UserService
 import com.enmanuelbergling.corntime.core.data.remote.ktorfit.KtorfitClient
 import com.enmanuelbergling.corntime.core.data.remote.ktorfit.service.MoviesFilterService
 import com.enmanuelbergling.corntime.core.data.remote.ktorfit.service.MoviesSearchService
+import com.enmanuelbergling.corntime.core.data.remote.ktorfit.service.createMoviesFilterService
+import com.enmanuelbergling.corntime.core.data.remote.ktorfit.service.createMoviesSearchService
 import com.enmanuelbergling.corntime.core.domain.datasource.remote.ActorRemoteDS
 import com.enmanuelbergling.corntime.core.domain.datasource.remote.AuthRemoteDS
 import com.enmanuelbergling.corntime.core.domain.datasource.remote.MovieRemoteDS
@@ -30,8 +32,8 @@ val remoteModule = module {
 
     single { getKtorClient(get()) }
 
-    single { KtorfitClient.create<MoviesFilterService>() }
-    single { KtorfitClient.create<MoviesSearchService>() }
+    single<MoviesFilterService> { KtorfitClient.createMoviesFilterService() }
+    single<MoviesSearchService> { KtorfitClient.createMoviesSearchService() }
 
     singleOf(::MovieService)
 

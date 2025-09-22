@@ -8,5 +8,5 @@ import org.koin.dsl.module
 
 actual val platformRemoteModule: Module
     get() = module {
-        single{ Darwin }.binds(arrayOf(HttpClientEngine::class))
+        single{ Darwin.create() }.binds(arrayOf(HttpClientEngine::class))
     }

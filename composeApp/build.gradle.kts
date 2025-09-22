@@ -83,7 +83,7 @@ kotlin {
             implementation(libs.paging.common)
             implementation(libs.paging.compose.common)
 
-            implementation("dev.chrisbanes.haze:haze:1.6.10")
+            implementation(libs.haze)
 
         }
         commonTest.dependencies {
