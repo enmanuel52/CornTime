@@ -34,14 +34,14 @@ class CornTimeAppState(
 
     val isTopDestination: Boolean
         @Composable get() = currentDestination?.let { destination ->
-            TopDestination.entries.map { it.route }
+            TopDestination.entries.mapNotNull { it.route }
                 .any { route -> destination.hasRoute(route::class) }
         } ?: false
 
     val mainDrawerEnabled: Boolean
         @Composable get() = currentDestination?.let { destination ->
             listOf(TopDestination.Movies, TopDestination.Series, TopDestination.Actors)
-                .map { it.route }
+                .mapNotNull { it.route }
                 .any { route -> destination.hasRoute(route::class) }
         } ?: false
 

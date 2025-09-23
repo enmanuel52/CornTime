@@ -24,7 +24,7 @@ enum class TopDestination(
      val label: StringResource,
      val selectedIconRes: DrawableResource,
      val unselectedIconRes: DrawableResource,
-    val route: Any,
+    val route: Any?,
 ) {
     Movies(
         Res.string.movies,
@@ -36,25 +36,25 @@ enum class TopDestination(
         Res.string.series,
         Res.drawable.tv_solid,
         Res.drawable.tv_outline,
-        Any()//SeriesDestination
+        null//SeriesDestination
     ),
     Actors(
         Res.string.actors,
         Res.drawable.check_badge_solid,
         Res.drawable.check_badge_outline,
-        Any()//ActorsDestination
+        null//ActorsDestination
     ),
     Lists(
         Res.string.watch_lists,
         Res.drawable.bookmark_solid,
         Res.drawable.bookmark_outline,
-        Any()//WatchListDestination
+        null//WatchListDestination
     ),
     Settings(
         Res.string.settings,
         Res.drawable.cog_solid,
         Res.drawable.cog_outline,
-        Any()//SettingsDestination
+        null//SettingsDestination
     );
 
     val loginRequired: Boolean

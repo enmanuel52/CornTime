@@ -235,7 +235,7 @@ fun DrawerContent(
             TopDestination.entries
                 .filterNot { it.loginRequired && userDetails == null }
                 .forEach { destination ->
-                    val selected = isSelected(destination.route)
+                    val selected = destination.route?.let { route -> isSelected(route) } == true
                     NavDrawerItem(
                         label = stringResource(destination.label),
                         selected = selected,
