@@ -26,6 +26,7 @@ actual class System {
             monitor.cancel()
         }*/
         trySend(true)
+        awaitClose {  }
     }
 }
 
