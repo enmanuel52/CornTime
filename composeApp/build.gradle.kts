@@ -76,7 +76,7 @@ kotlin {
             implementation(libs.ktorfit)
 
             implementation(libs.coil.compose)
-//            implementation(libs.coil.network.okhttp)
+            implementation(libs.coil.network.ktor)
 
             implementation(libs.constraintlayout.compose.multiplatform)
 
