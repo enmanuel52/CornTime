@@ -14,6 +14,8 @@ import com.enmanuelbergling.corntime.feature.movies.navigation.MoviesDestination
 import com.enmanuelbergling.corntime.feature.movies.navigation.MoviesGraphDestination
 import com.enmanuelbergling.corntime.feature.movies.navigation.navigateToMoviesGraph
 import com.enmanuelbergling.corntime.feature.series.navigation.navigateToSeriesGraph
+import com.enmanuelbergling.corntime.feature.settings.navigation.navigateToSettingsGraph
+import com.enmanuelbergling.corntime.feature.watchlists.navigation.navigateToListGraph
 import com.enmanuelbergling.corntime.navigation.TopDestination
 
 @Composable
@@ -74,8 +76,7 @@ class CornTimeAppState(
                 }
             )
 
-            else -> Unit
-            /*TopDestination.Lists -> navController.navigateToListGraph(
+            TopDestination.Lists -> navController.navigateToListGraph(
                 navOptions {
                     popUpTo<MoviesDestination>()
                 }
@@ -85,7 +86,7 @@ class CornTimeAppState(
                 navOptions {
                     popUpTo<MoviesDestination>()
                 }
-            )*/
+            )
 
         }
     }

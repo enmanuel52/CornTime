@@ -3,17 +3,25 @@ package com.enmanuelbergling.corntime.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
+import androidx.navigation.navOptions
 import com.enmanuelbergling.corntime.feature.actor.navigation.actorsGraph
 import com.enmanuelbergling.corntime.feature.actor.navigation.navigateToActorsDetails
+import com.enmanuelbergling.corntime.feature.movies.navigation.MoviesGraphDestination
 import com.enmanuelbergling.corntime.feature.movies.navigation.movieSearchScreen
 import com.enmanuelbergling.corntime.feature.movies.navigation.moviesFilterScreen
 import com.enmanuelbergling.corntime.feature.movies.navigation.moviesGraph
 import com.enmanuelbergling.corntime.feature.movies.navigation.navigateToMovieFilter
 import com.enmanuelbergling.corntime.feature.movies.navigation.navigateToMovieSearch
 import com.enmanuelbergling.corntime.feature.movies.navigation.navigateToMoviesDetails
+import com.enmanuelbergling.corntime.feature.movies.navigation.navigateToMoviesGraph
 import com.enmanuelbergling.corntime.feature.movies.navigation.navigateToMoviesSection
 import com.enmanuelbergling.corntime.feature.series.navigation.seriesGraph
+import com.enmanuelbergling.corntime.feature.settings.navigation.settingsGraph
+import com.enmanuelbergling.corntime.feature.watchlists.navigation.listGraph
+import com.enmanuelbergling.corntime.feature.watchlists.navigation.navigateToListDetailsScreen
 import com.enmanuelbergling.corntime.ui.CornTimeAppState
+import com.enmanuelbergling.feature.auth.navigation.loginScreen
+import com.enmanuelbergling.feature.auth.navigation.navigateToLoginScreen
 
 
 @Composable
@@ -62,10 +70,10 @@ fun CtiNavHost(
             onOpenDrawer = onOpenDrawer,
         )
 
-        /*loginScreen(
+        loginScreen(
             onLoginSucceed = {
                 navController.navigateToMoviesGraph(
-                    navOptions {
+                    navOptions = navOptions {
                         popUpTo(MoviesGraphDestination) {
                             inclusive = true
                         }
@@ -78,12 +86,14 @@ fun CtiNavHost(
         listGraph(
             onDetails = navController::navigateToListDetailsScreen,
             onMovieDetails = navController::navigateToMoviesDetails,
-            onAddShortcut = { watchlist -> state.addWatchlistShortcut(context, watchlist) },
+            onAddShortcut = { watchlist ->
+//                state.addWatchlistShortcut(context, watchlist)
+                            },
             onDeleteShortcut = { watchlistId ->
-                state.deleteWatchlistShortcut(
+                /*state.deleteWatchlistShortcut(
                     context = context,
                     watchlistId = watchlistId
-                )
+                )*/
             },
             onBack = navController::navigateUp,
             onOpenDrawer = onOpenDrawer,
@@ -94,6 +104,6 @@ fun CtiNavHost(
                 state.navigateToDrawerDestination(TopDestination.Movies)
             },
             onLogin = navController::navigateToLoginScreen
-        )*/
+        )
     }
 }

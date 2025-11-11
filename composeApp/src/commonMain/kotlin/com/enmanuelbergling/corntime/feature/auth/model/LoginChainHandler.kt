@@ -1,0 +1,13 @@
+package com.enmanuelbergling.corntime.feature.auth.model
+
+import com.enmanuelbergling.corntime.core.domain.design.ChainHandler
+
+class LoginChainHandler(
+    private val firstHandler: CreateRequestTokenChainHandler,
+) : ChainHandler<LoginChainState> {
+    override val nextChainHandler: ChainHandler<LoginChainState>
+        get() = firstHandler
+
+    override suspend fun handle(request: LoginChainState) = Unit
+
+}

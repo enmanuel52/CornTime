@@ -3,6 +3,8 @@ package com.enmanuelbergling.corntime.navigation
 import com.enmanuelbergling.corntime.feature.actor.navigation.ActorsDestination
 import com.enmanuelbergling.corntime.feature.movies.navigation.MoviesDestination
 import com.enmanuelbergling.corntime.feature.series.navigation.SeriesDestination
+import com.enmanuelbergling.corntime.feature.settings.navigation.SettingsDestination
+import com.enmanuelbergling.corntime.feature.watchlists.navigation.WatchListDestination
 import corntime.composeapp.generated.resources.Res
 import corntime.composeapp.generated.resources.actors
 import corntime.composeapp.generated.resources.bookmark_outline
@@ -50,13 +52,13 @@ enum class TopDestination(
         Res.string.watch_lists,
         Res.drawable.bookmark_solid,
         Res.drawable.bookmark_outline,
-        null//WatchListDestination
+        WatchListDestination
     ),
     Settings(
         Res.string.settings,
         Res.drawable.cog_solid,
         Res.drawable.cog_outline,
-        null//SettingsDestination
+        SettingsDestination
     );
 
     val loginRequired: Boolean

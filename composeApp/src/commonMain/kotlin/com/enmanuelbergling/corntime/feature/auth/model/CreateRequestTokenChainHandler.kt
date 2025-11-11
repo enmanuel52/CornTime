@@ -1,0 +1,25 @@
+package com.enmanuelbergling.corntime.feature.auth.model
+
+import com.enmanuelbergling.corntime.core.domain.design.CannotHandleException
+import com.enmanuelbergling.corntime.core.domain.design.ChainHandler
+import com.enmanuelbergling.corntime.core.domain.usecase.auth.CreateRequestTokenUC
+import com.enmanuelbergling.corntime.core.model.core.ResultHandler
+import kotlinx.coroutines.flow.update
+
+class CreateRequestTokenChainHandler(
+    private val nextHandler: CreateSessionFromLoginChainHandler,
+    private val createRequestTokenUC: CreateRequestTokenUC,
+) : ChainHandler<LoginChainState> {
+    override val nextChainHandler: ChainHandler<LoginChainState>
+        get() = nextHandler
+
+    override suspend fun handle(request: LoginChainState) =
+        when (val result = createRequestTokenUC()) {
+            is ResultHandler.Error -> throw CannotHandleException(result.exception.message.orEmpty())
+            is ResultHandler.Success -> request.update {
+                it.copy(
+                    requestToken = result.data.orEmpty()
+                )
+            }
+        }
+}
