@@ -198,7 +198,11 @@ private fun AnimatedContentScope.MovieDetailsScreen(
                 modifier = Modifier
                     .hazeEffect(
                         hazeState,
-                        style = HazeStyle(MaterialTheme.colorScheme.background.copy(alpha = .5f), tint = null)
+                        style = HazeStyle(
+                            backgroundColor = MaterialTheme.colorScheme.background
+                                .copy(alpha = .5f),
+                            tint = null,
+                        )
                     )
                     .fillMaxWidth(),
                 // Need to make app bar transparent to see the content behind
@@ -220,7 +224,7 @@ private fun AnimatedContentScope.MovieDetailsScreen(
                 .fillMaxSize()
                 .padding(paddingValues),
             contentPadding = WindowInsets.navigationBars.asPaddingValues(),
-            ) {
+        ) {
             details?.let {
                 detailsImage(backdropUrl = BASE_BACKDROP_IMAGE_URL + details.backdropPath)
 
@@ -349,7 +353,7 @@ private fun LazyListScope.persons(
                 modifier = Modifier.padding(start = MaterialTheme.dimen.small)
             )
 
-            Spacer(modifier =Modifier. height(MaterialTheme.dimen.small))
+            Spacer(modifier = Modifier.height(MaterialTheme.dimen.small))
 
             if (isLoading && persons.isEmpty()) {
                 ActorsRowPlaceholder()

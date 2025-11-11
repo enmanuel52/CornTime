@@ -1,5 +1,6 @@
 package com.enmanuelbergling.corntime.di
 
+import com.enmanuelbergling.corntime.feature.actor.di.actorsModule
 import com.enmanuelbergling.corntime.feature.movies.di.moviesModule
 import com.enmanuelbergling.corntime.ui.CornTimeVM
 import org.koin.core.module.dsl.viewModelOf
@@ -9,7 +10,7 @@ val featuresModule = module {
     includes(
         listOf(
             moviesModule,
-//            actorsModule,
+            actorsModule,
 //            watchlistModule,
 //            settingsModule
         )

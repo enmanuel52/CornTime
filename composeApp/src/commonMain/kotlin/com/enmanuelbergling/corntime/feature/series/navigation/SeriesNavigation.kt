@@ -1,0 +1,30 @@
+package com.enmanuelbergling.corntime.feature.series.navigation
+
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
+import androidx.navigation.NavOptions
+import androidx.navigation.navigation
+import com.enmanuelbergling.corntime.core.ui.components.topComposable
+import com.enmanuelbergling.corntime.feature.series.home.SeriesScreen
+import kotlinx.serialization.Serializable
+
+
+@Serializable
+data object SeriesGraphDestination
+
+@Serializable
+data object SeriesDestination
+
+fun NavHostController.navigateToSeriesGraph(navOptions: NavOptions) {
+    navigate(SeriesGraphDestination, navOptions)
+}
+
+fun NavGraphBuilder.seriesGraph(
+    onOpenDrawer: () -> Unit,
+) {
+    navigation<SeriesGraphDestination>(startDestination = SeriesDestination) {
+        topComposable<SeriesDestination> {
+            SeriesScreen(onOpenDrawer)
+        }
+    }
+}

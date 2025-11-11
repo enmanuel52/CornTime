@@ -3,13 +3,16 @@ package com.enmanuelbergling.corntime.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
-import com.enmanuelbergling.corntime.feature.movies.navigation.moviesGraph
-import com.enmanuelbergling.corntime.feature.movies.navigation.moviesFilterScreen
+import com.enmanuelbergling.corntime.feature.actor.navigation.actorsGraph
+import com.enmanuelbergling.corntime.feature.actor.navigation.navigateToActorsDetails
 import com.enmanuelbergling.corntime.feature.movies.navigation.movieSearchScreen
+import com.enmanuelbergling.corntime.feature.movies.navigation.moviesFilterScreen
+import com.enmanuelbergling.corntime.feature.movies.navigation.moviesGraph
 import com.enmanuelbergling.corntime.feature.movies.navigation.navigateToMovieFilter
 import com.enmanuelbergling.corntime.feature.movies.navigation.navigateToMovieSearch
 import com.enmanuelbergling.corntime.feature.movies.navigation.navigateToMoviesDetails
 import com.enmanuelbergling.corntime.feature.movies.navigation.navigateToMoviesSection
+import com.enmanuelbergling.corntime.feature.series.navigation.seriesGraph
 import com.enmanuelbergling.corntime.ui.CornTimeAppState
 
 
@@ -32,9 +35,9 @@ fun CtiNavHost(
             onBack = navController::navigateUp,
             onMovie = navController::navigateToMoviesDetails,
             onActor = { action ->
-//                navController.navigateToActorsDetails(
-//                    action.id, action.imageUrl, action.name
-//                )
+                navController.navigateToActorsDetails(
+                    action.id, action.imageUrl, action.name
+                )
             },
             onMore = navController::navigateToMoviesSection,
             onSearch = state.navController::navigateToMovieSearch,
@@ -46,7 +49,7 @@ fun CtiNavHost(
 
         moviesFilterScreen(navController::navigateToMoviesDetails, navController::navigateUp)
 
-        /*seriesGraph(onOpenDrawer = onOpenDrawer)
+        seriesGraph(onOpenDrawer = onOpenDrawer)
 
         actorsGraph(
             onBack = navController::navigateUp,
@@ -59,7 +62,7 @@ fun CtiNavHost(
             onOpenDrawer = onOpenDrawer,
         )
 
-        loginScreen(
+        /*loginScreen(
             onLoginSucceed = {
                 navController.navigateToMoviesGraph(
                     navOptions {

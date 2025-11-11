@@ -9,9 +9,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
+import com.enmanuelbergling.corntime.feature.actor.navigation.navigateToActorsGraph
 import com.enmanuelbergling.corntime.feature.movies.navigation.MoviesDestination
 import com.enmanuelbergling.corntime.feature.movies.navigation.MoviesGraphDestination
 import com.enmanuelbergling.corntime.feature.movies.navigation.navigateToMoviesGraph
+import com.enmanuelbergling.corntime.feature.series.navigation.navigateToSeriesGraph
 import com.enmanuelbergling.corntime.navigation.TopDestination
 
 @Composable
@@ -58,9 +60,8 @@ class CornTimeAppState(
                 }
             )
 
-            else -> Unit
 
-            /*TopDestination.Series -> navController.navigateToSeriesGraph(
+            TopDestination.Series -> navController.navigateToSeriesGraph(
                 navOptions {
                     popUpTo<MoviesDestination>()
                 }
@@ -73,7 +74,8 @@ class CornTimeAppState(
                 }
             )
 
-            TopDestination.Lists -> navController.navigateToListGraph(
+            else -> Unit
+            /*TopDestination.Lists -> navController.navigateToListGraph(
                 navOptions {
                     popUpTo<MoviesDestination>()
                 }
