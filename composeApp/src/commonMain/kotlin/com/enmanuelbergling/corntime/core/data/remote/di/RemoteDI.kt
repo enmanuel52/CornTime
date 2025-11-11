@@ -20,6 +20,7 @@ import com.enmanuelbergling.corntime.core.domain.datasource.remote.MovieRemoteDS
 import com.enmanuelbergling.corntime.core.domain.datasource.remote.UserRemoteDS
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.bind
 import org.koin.dsl.module
 
 /**
@@ -45,11 +46,11 @@ val remoteModule = module {
 }
 
 val remoteDsModule = module {
-    single<MovieRemoteDS> { MovieRemoteDSImpl(get(), get(), get()) }
+    singleOf(::MovieRemoteDSImpl).bind(MovieRemoteDS::class)
 
-    single<ActorRemoteDS> { ActorRemoteDSImpl(get()) }
+    singleOf(::ActorRemoteDSImpl).bind(ActorRemoteDS::class)
 
-    single<AuthRemoteDS> { AuthRemoteDSImpl(get()) }
+    singleOf(::AuthRemoteDSImpl).bind(AuthRemoteDS::class)
 
-    single<UserRemoteDS> { UserRemoteDSImpl(get()) }
+    singleOf(::UserRemoteDSImpl).bind(UserRemoteDS::class)
 }
