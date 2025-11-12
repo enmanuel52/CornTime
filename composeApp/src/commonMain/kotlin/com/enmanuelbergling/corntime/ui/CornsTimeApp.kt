@@ -6,8 +6,10 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.withInfiniteAnimationFrameMillis
 import androidx.compose.animation.rememberSplineBasedDecay
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.AnchoredDraggableState
 import androidx.compose.foundation.gestures.DraggableAnchors
@@ -41,6 +43,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -52,9 +55,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import com.enmanuelbergling.corntime.core.model.user.UserDetails
+import com.enmanuelbergling.corntime.core.ui.components.runtimeShader
+import com.enmanuelbergling.corntime.core.ui.components.shaders.HotPlasmaShader
 import com.enmanuelbergling.corntime.core.ui.core.LocalSharedTransitionScope
 import com.enmanuelbergling.corntime.core.ui.core.dimen
 import com.enmanuelbergling.corntime.core.ui.theme.CornTimeTheme
+import com.enmanuelbergling.corntime.core.ui.theme.onBackgroundLight
+import com.enmanuelbergling.corntime.core.ui.theme.primaryLight
+import com.enmanuelbergling.corntime.feature.settings.home.SPEED
 import com.enmanuelbergling.corntime.navigation.CtiNavHost
 import com.enmanuelbergling.corntime.navigation.TopDestination
 import corntime.composeapp.generated.resources.Res
@@ -108,6 +116,14 @@ fun CornsTimeApp(
         )
     }
 
+    val shaderTime by produceState(0f) {
+        while (true) {
+            withInfiniteAnimationFrameMillis {
+                value = it / 1000f * SPEED
+            }
+        }
+    }
+
     Scaffold(
         snackbarHost = { SnackbarHost(snackBarHostState) },
         contentWindowInsets = WindowInsets(0)
@@ -116,6 +132,10 @@ fun CornsTimeApp(
             modifier = Modifier
                 .padding(paddingValues)
         ) {
+            Box(
+                Modifier.fillMaxSize().drawerShader(shaderTime)
+                    .background(MaterialTheme.colorScheme.background)
+            )
             DrawerContent(
                 onDrawerDestination = { drawerDestination ->
                     state.navigateToDrawerDestination(drawerDestination)
@@ -177,13 +197,14 @@ fun CornsTimeApp(
                         }
 
                         if (draggableState.currentValue == NewDrawerState.Open) {
-                            Box(modifier = Modifier
-                                .fillMaxSize()
-                                .clickable(null, null) {
-                                    scope.launch {
-                                        draggableState.animateTo(NewDrawerState.Closed)
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .clickable(null, null) {
+                                        scope.launch {
+                                            draggableState.animateTo(NewDrawerState.Closed)
+                                        }
                                     }
-                                }
                             )
                         }
                     }
@@ -210,6 +231,10 @@ fun CornsTimeApp(
 
 val OnSurfaceLight = Color(0xFF231918)
 
+val onShaderColor  = onBackgroundLight
+val onShaderActiveColor = primaryLight
+
+
 @Composable
 fun DrawerContent(
     onDrawerDestination: (TopDestination) -> Unit,
@@ -226,8 +251,9 @@ fun DrawerContent(
         CompositionLocalProvider(value = LocalContentColor provides OnSurfaceLight) {
 
             Text(
-                text = stringResource(Res.string.menu), style = MaterialTheme.typography.displayMedium,
-                color = MaterialTheme.colorScheme.onBackground
+                text = stringResource(Res.string.menu),
+                style = MaterialTheme.typography.displayMedium,
+                color = onShaderColor
             )
 
             Spacer(modifier = Modifier.height(MaterialTheme.dimen.mediumSmall))
@@ -246,7 +272,7 @@ fun DrawerContent(
                 }
 
             NavDrawerItem(
-                label = stringResource( Res.string.logout),
+                label = stringResource(Res.string.logout),
                 selected = false,
                 iconRes = Res.drawable.power_outline,
                 modifier = Modifier.fillMaxWidth(),
@@ -284,8 +310,7 @@ fun NavDrawerItem(
     )
 
     val colorAnimation by animateColorAsState(
-        targetValue = if (selected) MaterialTheme.colorScheme.primary
-        else MaterialTheme.colorScheme.onBackground,
+        targetValue = if (selected) onShaderActiveColor else onShaderColor,
         label = "color animation",
     )
 
@@ -330,4 +355,10 @@ private fun DrawerContentPrev() {
             onLogout = {},
         )
     }
+}
+
+private fun Modifier.drawerShader(
+    shaderTime: Float,
+) = runtimeShader(HotPlasmaShader) {
+    uniform("time", shaderTime)
 }

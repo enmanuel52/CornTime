@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.withInfiniteAnimationFrameMillis
 import androidx.compose.animation.expandIn
 import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -52,6 +53,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.produceState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -64,7 +66,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
-import com.enmanuelbergling.corntime.core.ui.components.ArtisticBackground
+import com.enmanuelbergling.corntime.core.ui.components.runtimeShader
+import com.enmanuelbergling.corntime.core.ui.components.shaders.ColorWarpShader
+import com.enmanuelbergling.corntime.core.ui.components.shaders.HSLColorSpaceShader
+import com.enmanuelbergling.corntime.core.ui.components.shaders.TileableWaterCaustic
+import com.enmanuelbergling.corntime.core.ui.components.shaders.VDropTunnel
 import com.enmanuelbergling.corntime.core.ui.core.dimen
 import com.enmanuelbergling.corntime.core.ui.theme.CornTimeTheme
 import com.enmanuelbergling.corntime.core.util.BASE_IMAGE_URL
@@ -83,6 +89,8 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
+const val SPEED = 1.1f
+
 @Composable
 fun SettingsRoute(onBack: () -> Unit, onLogin: () -> Unit) {
 
@@ -97,11 +105,11 @@ fun SettingsRoute(onBack: () -> Unit, onLogin: () -> Unit) {
         onBack = onBack,
         onLogin = onLogin,
         uiState = SettingUiState(
-            userState,
-            darkMode,
-            dynamicColor,
-            menuState.darkThemeVisible,
-            menuState.dynamicColorVisible
+            userDetails = userState,
+            darkTheme = darkMode,
+            dynamicColor = dynamicColor,
+            darkThemeMenuOpen = menuState.darkThemeVisible,
+            dynamicThemeMenuOpen = menuState.dynamicColorVisible
         ),
         onEvent = viewModel::onEvent,
     )
@@ -155,19 +163,32 @@ private fun SettingsScreen(
     ) { paddingValues ->
         Box {
 
-            ArtisticBackground(Modifier.fillMaxSize())
+            val shaderTime by produceState(0f) {
+                while (true) {
+                    withInfiniteAnimationFrameMillis {
+                        value = it / 1000f * SPEED
+                    }
+                }
+            }
 
             Box(
                 Modifier
                     .padding(paddingValues)
                     .fillMaxSize()
             ) {
+
                 ProfileWrapper(
                     userState = uiState.userDetails,
                     visibleState = visibleState,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .fillMaxHeight(.5f),
+                        .fillMaxHeight(.5f)
+                        .drawShader(
+                            shader = ProfileShader.DropTunnel,
+                            shaderTime = shaderTime,
+                            contentColor = null,
+                            containerColor = MaterialTheme.colorScheme.background,
+                        ),
                 )
 
                 SettingOptions(
@@ -446,7 +467,10 @@ internal fun ProfileWrapper(
     modifier: Modifier = Modifier,
 ) {
 
-    Box(modifier = modifier, contentAlignment = Alignment.Center) {
+    Box(contentAlignment = Alignment.Center) {
+        // Patch in order to make the shaders work
+        Box(modifier = modifier.background(MaterialTheme.colorScheme.background))
+
         ProfileImageUi(
             userUi = userState,
             modifier = Modifier.size(110.dp),
@@ -510,4 +534,28 @@ fun ProfileImage(avatarPath: String?, modifier: Modifier = Modifier) {
             error = painterResource(Res.drawable.mr_bean),
         )
     }
+}
+
+private enum class ProfileShader(val value: String) {
+    AwesomeHole(ColorWarpShader),
+    Omelette(HSLColorSpaceShader),
+    DropTunnel(VDropTunnel),
+    Sea(TileableWaterCaustic),
+}
+
+private fun Modifier.drawShader(
+    shader: ProfileShader,
+    shaderTime: Float,
+    contentColor: Color?,
+    containerColor: Color?,
+) = runtimeShader(shader.value) {
+    contentColor?.let {
+        uniform("primaryColor", it)
+    }
+
+    containerColor?.let {
+        uniform("backgroundColor", it)
+    }
+
+    uniform("time", shaderTime)
 }
