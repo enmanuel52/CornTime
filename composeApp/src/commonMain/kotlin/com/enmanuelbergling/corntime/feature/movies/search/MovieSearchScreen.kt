@@ -83,36 +83,42 @@ fun MovieSearchScreen(
     val keyboardController = LocalSoftwareKeyboardController.current
 
     SearchBar(
-        query = query,
-        onQueryChange = viewModel::onQueryChange,
-        onSearch = {
-            viewModel.onSuggestionEvent(SuggestionEvent.Add(query))
-            keyboardController?.hide()
+        inputField = {
+            SearchBarDefaults.InputField(
+                query = query,
+                onQueryChange = viewModel::onQueryChange,
+                onSearch = {
+                    viewModel.onSuggestionEvent(SuggestionEvent.Add(query))
+                    keyboardController?.hide()
+                },
+                modifier = Modifier.fillMaxSize(),
+                leadingIcon = {
+                    IconButton(onClick = onBack) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Rounded.ArrowBackIos,
+                            contentDescription = stringResource(Res.string.back_icon)
+                        )
+                    }
+                },
+                trailingIcon = {
+                    if (query.isNotBlank()) {
+                        IconButton(onClick = { viewModel.onQueryChange("") }) {
+                            Icon(
+                                imageVector = Icons.Rounded.Clear,
+                                contentDescription = stringResource(Res.string.clear_string_icon)
+                            )
+                        }
+                    }
+                },
+                placeholder = {
+                    Text(text = "Search for a movie")
+                },
+                expanded = true,
+                onExpandedChange = {},
+            )
         },
-        active = true,
-        onActiveChange = {},
-        modifier = Modifier.fillMaxSize(),
-        leadingIcon = {
-            IconButton(onClick = onBack) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Rounded.ArrowBackIos,
-                    contentDescription = stringResource(Res.string.back_icon)
-                )
-            }
-        },
-        trailingIcon = {
-            if (query.isNotBlank()) {
-                IconButton(onClick = { viewModel.onQueryChange("") }) {
-                    Icon(
-                        imageVector = Icons.Rounded.Clear,
-                        contentDescription = stringResource(Res.string.clear_string_icon)
-                    )
-                }
-            }
-        },
-        placeholder = {
-            Text(text = "Search for a movie")
-        },
+        expanded = true,
+        onExpandedChange = {},
         colors = SearchBarDefaults.colors(containerColor = MaterialTheme.colorScheme.background)
     ) {
         if (movies.isRefreshing && query.isNotBlank()) {

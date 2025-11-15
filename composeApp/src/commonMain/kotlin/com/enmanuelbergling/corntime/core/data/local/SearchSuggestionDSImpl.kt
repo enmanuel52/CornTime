@@ -29,7 +29,7 @@ class SearchSuggestionDSImpl(private val dataStore: DataStore<Preferences>): Sea
 
     override suspend fun clearSuggestions() {
         dataStore.edit {
-            it.clear()
+            it.remove(Keys.SUGGESTIONS)
         }
     }
 
