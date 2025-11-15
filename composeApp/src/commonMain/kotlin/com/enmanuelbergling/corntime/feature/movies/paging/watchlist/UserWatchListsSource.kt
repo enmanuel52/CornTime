@@ -1,6 +1,6 @@
 package com.enmanuelbergling.corntime.feature.movies.paging.watchlist
 
-import com.enmanuelbergling.corntime.core.data.remote.ktor.service.ACCOUNT_ID
+import CornTime.composeApp.BuildConfig
 import com.enmanuelbergling.corntime.core.domain.datasource.remote.UserRemoteDS
 import com.enmanuelbergling.corntime.core.model.core.PageModel
 import com.enmanuelbergling.corntime.core.model.core.ResultHandler
@@ -11,7 +11,7 @@ import com.enmanuelbergling.corntime.core.ui.core.GenericPagingSource
 internal class UserWatchListsSource(service: UserRemoteDS, filter: AccountListsFilter) :
     GenericPagingSource<WatchList>(
         request = { page ->
-            val result = service.getWatchLists(ACCOUNT_ID, filter.sessionId, page)
+            val result = service.getWatchLists(BuildConfig.ACCOUNT_ID, filter.sessionId, page)
             when (result) {
                 is ResultHandler.Error -> PageModel(emptyList(), 0)
                 is ResultHandler.Success -> result.data ?: PageModel(emptyList(), 0)

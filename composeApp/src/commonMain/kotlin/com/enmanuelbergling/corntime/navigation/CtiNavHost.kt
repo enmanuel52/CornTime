@@ -86,15 +86,6 @@ fun CtiNavHost(
         listGraph(
             onDetails = navController::navigateToListDetailsScreen,
             onMovieDetails = navController::navigateToMoviesDetails,
-            onAddShortcut = { watchlist ->
-//                state.addWatchlistShortcut(context, watchlist)
-                            },
-            onDeleteShortcut = { watchlistId ->
-                /*state.deleteWatchlistShortcut(
-                    context = context,
-                    watchlistId = watchlistId
-                )*/
-            },
             onBack = navController::navigateUp,
             onOpenDrawer = onOpenDrawer,
         )

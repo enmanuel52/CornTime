@@ -1,5 +1,6 @@
 package com.enmanuelbergling.corntime.core.data.remote.ktorfit
 
+import CornTime.composeApp.BuildConfig
 import com.enmanuelbergling.corntime.core.data.remote.BASE_URL
 import com.enmanuelbergling.corntime.core.util.getSystemLanguage
 import de.jensklingenberg.ktorfit.Ktorfit
@@ -10,8 +11,6 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.plugin
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
-
-const val API_KEY = "5d5036fdbe23a556a61621aa06bc39f9"
 
 private val httpClient = HttpClient {
 
@@ -35,7 +34,7 @@ private val httpClient = HttpClient {
     plugin(HttpSend).intercept { request ->
         val newRequest = request.apply {
             url {
-                parameters.append(name = "api_key", value = API_KEY)
+                parameters.append(name = "api_key", value = BuildConfig.API_KEY)
                 parameters.append(name = "language", value = getSystemLanguage())
             }
         }

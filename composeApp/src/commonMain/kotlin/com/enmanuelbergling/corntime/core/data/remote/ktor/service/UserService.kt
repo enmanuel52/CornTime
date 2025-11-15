@@ -1,5 +1,6 @@
 package com.enmanuelbergling.corntime.core.data.remote.ktor.service
 
+import CornTime.composeApp.BuildConfig
 import com.enmanuelbergling.corntime.core.data.remote.ktor.KtorClient
 import com.enmanuelbergling.corntime.core.data.remote.dto.user.UserDetailsDTO
 import com.enmanuelbergling.corntime.core.data.remote.dto.user.watch.AccountListsPageDTO
@@ -16,11 +17,10 @@ import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 
-const val ACCOUNT_ID = "20552692"
 class UserService(private val httpClient: KtorClient) {
 
     internal suspend fun getAccount(sessionId: String): UserDetailsDTO = httpClient
-        .get("account/$ACCOUNT_ID") {
+        .get("account/${BuildConfig.ACCOUNT_ID}") {
             url {
                 parameters.append("session_id", sessionId)
             }

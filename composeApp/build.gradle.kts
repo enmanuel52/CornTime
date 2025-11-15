@@ -1,6 +1,9 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.io.FileInputStream
+import java.io.InputStreamReader
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -13,6 +16,31 @@ plugins {
     alias(libs.plugins.androidx.room)
     alias(libs.plugins.kotest)
     alias(libs.plugins.ktorfit)
+    alias(libs.plugins.gradle.build.config)
+}
+
+val secretProperties = Properties()
+val localPropertiesFile = project.file("../secrets.properties")
+if (localPropertiesFile.exists() && localPropertiesFile.isFile) {
+    InputStreamReader(FileInputStream(localPropertiesFile), Charsets.UTF_8).use { reader ->
+        secretProperties.load(reader)
+    }
+} else {
+    error("File ${localPropertiesFile.path} not found")
+}
+
+buildConfig {
+    buildConfigField(
+        type = "String",
+        name = "API_KEY",
+        value = "${secretProperties.getProperty("API_KEY")}"
+    )
+
+    buildConfigField(
+        type = "String",
+        name = "ACCOUNT_ID",
+        value = "${secretProperties.getProperty("ACCOUNT_ID")}"
+    )
 }
 
 kotlin {
@@ -22,7 +50,7 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -33,7 +61,7 @@ kotlin {
             isStatic = true
         }
     }
-    
+
     jvm()
 
     room {

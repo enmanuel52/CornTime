@@ -1,7 +1,7 @@
 package com.enmanuelbergling.corntime.core.data.remote.ktor
 
+import CornTime.composeApp.BuildConfig
 import com.enmanuelbergling.corntime.core.data.remote.BASE_URL
-import com.enmanuelbergling.corntime.core.data.remote.ktorfit.API_KEY
 import com.enmanuelbergling.corntime.core.model.core.NetworkException
 import com.enmanuelbergling.corntime.core.util.getSystemLanguage
 import io.ktor.client.HttpClient
@@ -24,7 +24,7 @@ fun getKtorClient(engine: HttpClientEngine): HttpClient = HttpClient(engine) {
     defaultRequest {
         url(BASE_URL)
         url {
-            parameters.append(name = "api_key", value = API_KEY)
+            parameters.append(name = "api_key", value = BuildConfig.API_KEY)
             parameters.append(name = "language", value = getSystemLanguage())
         }
     }
