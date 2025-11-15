@@ -7,7 +7,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import androidx.navigation.toRoute
 import com.enmanuelbergling.corntime.core.ui.components.topComposable
-import com.enmanuelbergling.corntime.core.ui.model.WatchlistShortcut
 import com.enmanuelbergling.corntime.feature.watchlists.details.WatchListDetailsRoute
 import com.enmanuelbergling.corntime.feature.watchlists.home.WatchListRoute
 import kotlinx.serialization.Serializable
@@ -39,8 +38,6 @@ fun NavHostController.navigateToListDetailsScreen(
 fun NavGraphBuilder.listGraph(
     onDetails: (listId: Int, listName: String) -> Unit,
     onMovieDetails: (movieId: Int) -> Unit,
-    onAddShortcut: (WatchlistShortcut) -> Unit,
-    onDeleteShortcut: (watchlistId: Int) -> Unit,
     onBack: () -> Unit,
     onOpenDrawer: () -> Unit,
 ) {
@@ -59,8 +56,6 @@ fun NavGraphBuilder.listGraph(
                 listId = listId,
                 listName = listName,
                 onMovieDetails = onMovieDetails,
-                onAddShortcut = onAddShortcut,
-                onDeleteShortcut = onDeleteShortcut,
                 onBack = onBack
             )
         }

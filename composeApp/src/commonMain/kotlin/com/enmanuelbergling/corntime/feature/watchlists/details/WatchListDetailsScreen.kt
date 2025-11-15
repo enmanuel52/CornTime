@@ -46,11 +46,8 @@ import com.enmanuelbergling.corntime.core.ui.components.common.MovieLandCardPlac
 import com.enmanuelbergling.corntime.core.ui.core.dimen
 import com.enmanuelbergling.corntime.core.ui.core.isRefreshing
 import com.enmanuelbergling.corntime.core.ui.core.shimmerIf
-import com.enmanuelbergling.corntime.core.ui.model.WatchlistShortcut
 import corntime.composeapp.generated.resources.Res
 import corntime.composeapp.generated.resources.back_icon
-import corntime.composeapp.generated.resources.bookmark_outline
-import corntime.composeapp.generated.resources.bookmark_solid
 import corntime.composeapp.generated.resources.delete_icon
 import corntime.composeapp.generated.resources.trash
 import org.jetbrains.compose.resources.painterResource
@@ -63,8 +60,6 @@ fun WatchListDetailsRoute(
     listId: Int,
     listName: String,
     onMovieDetails: (movieId: Int) -> Unit,
-    onAddShortcut: (WatchlistShortcut) -> Unit,
-    onDeleteShortcut: (watchlistId: Int) -> Unit,
     onBack: () -> Unit,
 ) {
 
@@ -73,31 +68,14 @@ fun WatchListDetailsRoute(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val movies = viewModel.movies.collectAsLazyPagingItems()
 
-
-    val (isPinned, onPinned) = rememberSaveable {
-        mutableStateOf(
-//            context.isDynamicShortcutActive(watchlistShortcutId(listId))
-            false
-        )
-    }
-
     WatchListDetailsScreen(
         listName = listName,
         movies = movies,
         uiState = uiState,
-        isPinned = false,
         onDeleteMovie = viewModel::deleteMovieFromList,
         onMovieDetails = onMovieDetails,
         onBack = onBack,
         onIdle = viewModel::onIdle,
-        onAddShortcut = {
-            onAddShortcut(WatchlistShortcut(listId, listName))
-            onPinned(true)
-        },
-        onDeleteShortcut = {
-            onDeleteShortcut(listId)
-            onPinned(false)
-        }
     )
 }
 
@@ -109,13 +87,10 @@ fun WatchListDetailsScreen(
     listName: String,
     movies: LazyPagingItems<Movie>,
     uiState: SimplerUi,
-    isPinned: Boolean,
     onDeleteMovie: (Int) -> Unit,
     onMovieDetails: (movieId: Int) -> Unit,
     onBack: () -> Unit,
     onIdle: () -> Unit,
-    onAddShortcut: () -> Unit,
-    onDeleteShortcut: () -> Unit,
 ) {
     HandleUiState(uiState = uiState, onIdle = onIdle, movies::refresh)
 
@@ -144,19 +119,6 @@ fun WatchListDetailsScreen(
                         Icon(
                             imageVector = Icons.Rounded.ArrowBackIosNew,
                             contentDescription = stringResource(Res.string.back_icon)
-                        )
-                    }
-                },
-                actions = {
-                    IconButton(
-                        onClick = {
-                            if (isPinned) onDeleteShortcut()
-                            else onAddShortcut()
-                        }
-                    ) {
-                        Icon(
-                            painter = painterResource(if (isPinned) Res.drawable.bookmark_solid else Res.drawable.bookmark_outline),
-                            contentDescription = "bookmark icon"
                         )
                     }
                 },
