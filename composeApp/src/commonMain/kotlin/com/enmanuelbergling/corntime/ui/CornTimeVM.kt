@@ -2,13 +2,7 @@ package com.enmanuelbergling.corntime.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.enmanuelbergling.core.domain.usecase.user.LogoutUC
-import com.enmanuelbergling.core.domain.usecase.onboarding.FinishOnboardingUC
-import com.enmanuelbergling.core.domain.usecase.onboarding.IsOnboardingUC
-import com.enmanuelbergling.core.domain.usecase.settings.GetDarkThemeUC
-import com.enmanuelbergling.core.domain.usecase.settings.GetDynamicColorUC
-import com.enmanuelbergling.core.domain.usecase.user.GetSavedUserUC
-import com.enmanuelbergling.corntime.core.util.System
+import com.enmanuelbergling.core.remote.System
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch

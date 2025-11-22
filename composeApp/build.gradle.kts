@@ -78,6 +78,8 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.core.model)
             implementation(projects.core.domain)
+            implementation(projects.core.remote)
+            implementation(projects.core.local)
 
             implementation(compose.runtime)
             implementation(compose.foundation)
