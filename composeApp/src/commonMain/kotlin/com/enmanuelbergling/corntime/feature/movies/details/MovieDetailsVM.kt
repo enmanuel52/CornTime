@@ -4,15 +4,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.enmanuelbergling.core.domain.usecase.auth.GetSavedSessionIdUC
-import com.enmanuelbergling.core.domain.usecase.user.watchlist.AddMovieToListUC
-import com.enmanuelbergling.core.domain.usecase.user.watchlist.CheckItemStatusUC
 import com.enmanuelbergling.core.model.core.NetworkException
 import com.enmanuelbergling.core.model.core.ResultHandler
-import com.enmanuelbergling.corntime.core.model.SimplerUi
+import com.enmanuelbergling.core.ui.SimplerUi
 import com.enmanuelbergling.core.model.user.AccountListsFilter
 import com.enmanuelbergling.core.model.user.WatchList
-import com.enmanuelbergling.corntime.core.ui.components.messageResource
+import com.enmanuelbergling.core.ui.components.messageResource
 import com.enmanuelbergling.corntime.feature.movies.details.model.MovieDetailsChainHandler
 import com.enmanuelbergling.corntime.feature.movies.paging.watchlist.GetUserWatchListsUC
 import com.enmanuelbergling.corntime.feature.movies.details.model.MovieDetailsUiData

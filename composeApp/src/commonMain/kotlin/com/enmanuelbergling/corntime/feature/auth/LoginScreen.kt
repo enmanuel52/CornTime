@@ -31,11 +31,11 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.enmanuelbergling.corntime.core.ui.components.ArtisticBackground
-import com.enmanuelbergling.corntime.core.ui.components.HandleUiState
-import com.enmanuelbergling.corntime.core.ui.core.dimen
-import com.enmanuelbergling.corntime.core.ui.design.CtiTextField
-import com.enmanuelbergling.corntime.core.ui.theme.CornTimeTheme
+import com.enmanuelbergling.core.ui.components.ArtisticBackground
+import com.enmanuelbergling.core.ui.components.HandleUiState
+import com.enmanuelbergling.core.ui.core.dimen
+import com.enmanuelbergling.core.ui.design.CtiTextField
+import com.enmanuelbergling.core.ui.theme.CornTimeTheme
 import com.enmanuelbergling.corntime.feature.auth.model.LoginEvent
 import com.enmanuelbergling.corntime.feature.auth.model.LoginForm
 import corntime.composeapp.generated.resources.Res

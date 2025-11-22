@@ -4,15 +4,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.enmanuelbergling.core.domain.usecase.form.BasicFormValidationUC
-import com.enmanuelbergling.core.domain.usecase.auth.GetSavedSessionIdUC
-import com.enmanuelbergling.core.domain.usecase.user.watchlist.CreateListUC
-import com.enmanuelbergling.core.domain.usecase.user.watchlist.DeleteListUC
 import com.enmanuelbergling.core.model.core.ResultHandler
-import com.enmanuelbergling.corntime.core.model.SimplerUi
+import com.enmanuelbergling.core.ui.SimplerUi
 import com.enmanuelbergling.core.model.user.AccountListsFilter
 import com.enmanuelbergling.core.model.user.WatchList
-import com.enmanuelbergling.corntime.core.ui.components.messageResource
+import com.enmanuelbergling.core.ui.components.messageResource
 import com.enmanuelbergling.corntime.feature.watchlists.model.CreateListEvent
 import com.enmanuelbergling.corntime.feature.watchlists.model.CreateListForm
 import com.enmanuelbergling.corntime.feature.watchlists.paging.GetUserWatchListsUC

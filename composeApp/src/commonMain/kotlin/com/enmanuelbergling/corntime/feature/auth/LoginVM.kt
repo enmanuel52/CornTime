@@ -2,10 +2,9 @@ package com.enmanuelbergling.corntime.feature.auth
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.enmanuelbergling.core.domain.usecase.form.BasicFormValidationUC
 import com.enmanuelbergling.core.model.core.NetworkException
-import com.enmanuelbergling.corntime.core.model.SimplerUi
-import com.enmanuelbergling.corntime.core.ui.components.messageResource
+import com.enmanuelbergling.core.ui.SimplerUi
+import com.enmanuelbergling.core.ui.components.messageResource
 import com.enmanuelbergling.corntime.feature.auth.model.LoginChain
 import com.enmanuelbergling.corntime.feature.auth.model.LoginChainHandler
 import com.enmanuelbergling.corntime.feature.auth.model.LoginEvent

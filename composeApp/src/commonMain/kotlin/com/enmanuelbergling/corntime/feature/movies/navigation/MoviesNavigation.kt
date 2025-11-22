@@ -7,12 +7,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import androidx.navigation.toRoute
 import com.enmanuelbergling.core.model.MovieSection
-import com.enmanuelbergling.corntime.core.ui.components.topComposable
-import com.enmanuelbergling.corntime.core.ui.navigation.ActorDetailNavAction
+import com.enmanuelbergling.core.ui.components.topComposable
+import com.enmanuelbergling.core.ui.navigation.ActorDetailNavAction
 import com.enmanuelbergling.corntime.feature.movies.search.MovieSearchScreen
 import com.enmanuelbergling.corntime.feature.movies.details.MovieDetailsScreen
 import com.enmanuelbergling.corntime.feature.movies.filter.MoviesFilterRoute
-import com.enmanuelbergling.feature.movies.home.MoviesScreen
+import com.enmanuelbergling.corntime.feature.movies.home.MoviesScreen
 import com.enmanuelbergling.corntime.feature.movies.list.NowPlayingMoviesScreen
 import com.enmanuelbergling.corntime.feature.movies.list.PopularMoviesScreen
 import com.enmanuelbergling.corntime.feature.movies.list.TopRatedMoviesScreen

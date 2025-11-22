@@ -3,11 +3,9 @@ package com.enmanuelbergling.corntime.feature.watchlists.details
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
-import com.enmanuelbergling.core.domain.usecase.auth.GetSavedSessionIdUC
-import com.enmanuelbergling.core.domain.usecase.user.watchlist.DeleteMovieFromListUC
 import com.enmanuelbergling.core.model.core.ResultHandler
-import com.enmanuelbergling.corntime.core.model.SimplerUi
-import com.enmanuelbergling.corntime.core.ui.components.messageResource
+import com.enmanuelbergling.core.ui.SimplerUi
+import com.enmanuelbergling.core.ui.components.messageResource
 import com.enmanuelbergling.corntime.feature.watchlists.paging.GetWatchListMoviesUC
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

@@ -14,10 +14,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.enmanuelbergling.corntime.core.ui.components.walkthrough.WalkThrough
-import com.enmanuelbergling.corntime.core.ui.components.walkthrough.model.IndicatorStyle
-import com.enmanuelbergling.corntime.core.ui.components.walkthrough.model.WalkScrollStyle
-import com.enmanuelbergling.corntime.core.ui.components.walkthrough.model.WalkStep
+import com.enmanuelbergling.core.ui.components.walkthrough.WalkThrough
+import com.enmanuelbergling.core.ui.components.walkthrough.model.IndicatorStyle
+import com.enmanuelbergling.core.ui.components.walkthrough.model.WalkScrollStyle
+import com.enmanuelbergling.core.ui.components.walkthrough.model.WalkStep
 import corntime.composeapp.generated.resources.*
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.DrawableResource

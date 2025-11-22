@@ -1,4 +1,4 @@
-package com.enmanuelbergling.feature.actor.details
+package com.enmanuelbergling.corntime.feature.actor.details
 
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
@@ -47,17 +47,17 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
 import com.enmanuelbergling.core.model.actor.KnownMovie
-import com.enmanuelbergling.corntime.core.model.SimplerUi
-import com.enmanuelbergling.corntime.core.ui.components.HandleUiState
-import com.enmanuelbergling.corntime.core.ui.components.RatingStars
-import com.enmanuelbergling.corntime.core.ui.components.common.MovieCard
-import com.enmanuelbergling.corntime.core.ui.components.common.MovieCardPlaceholder
-import com.enmanuelbergling.corntime.core.ui.core.BoundsTransition
-import com.enmanuelbergling.corntime.core.ui.core.LocalSharedTransitionScope
-import com.enmanuelbergling.corntime.core.ui.core.dimen
-import com.enmanuelbergling.corntime.core.ui.core.shimmer
-import com.enmanuelbergling.corntime.core.ui.core.shimmerIf
-import com.enmanuelbergling.corntime.core.util.BASE_POSTER_IMAGE_URL
+import com.enmanuelbergling.core.ui.SimplerUi
+import com.enmanuelbergling.core.ui.components.HandleUiState
+import com.enmanuelbergling.core.ui.components.RatingStars
+import com.enmanuelbergling.core.ui.components.common.MovieCard
+import com.enmanuelbergling.core.ui.components.common.MovieCardPlaceholder
+import com.enmanuelbergling.core.ui.core.dimen
+import com.enmanuelbergling.core.ui.core.shimmer
+import com.enmanuelbergling.core.ui.core.shimmerIf
+import com.enmanuelbergling.core.ui.BASE_POSTER_IMAGE_URL
+import com.enmanuelbergling.core.ui.core.BoundsTransition
+import com.enmanuelbergling.core.ui.core.LocalSharedTransitionScope
 import com.enmanuelbergling.corntime.feature.actor.details.ActorDetailsVM
 import com.enmanuelbergling.corntime.feature.actor.details.model.ActorDetailsUiData
 import corntime.composeapp.generated.resources.Res

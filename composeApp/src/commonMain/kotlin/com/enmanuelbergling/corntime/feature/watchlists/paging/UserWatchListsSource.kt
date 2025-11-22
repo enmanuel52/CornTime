@@ -6,7 +6,7 @@ import com.enmanuelbergling.core.model.core.PageModel
 import com.enmanuelbergling.core.model.core.ResultHandler
 import com.enmanuelbergling.core.model.user.AccountListsFilter
 import com.enmanuelbergling.core.model.user.WatchList
-import com.enmanuelbergling.corntime.core.ui.core.GenericPagingSource
+import com.enmanuelbergling.core.ui.core.GenericPagingSource
 
 internal class UserWatchListsSource(service: UserRemoteDS, filter: AccountListsFilter) :
     GenericPagingSource<WatchList>(

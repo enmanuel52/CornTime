@@ -18,7 +18,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.ShaderBrush
 import androidx.compose.ui.graphics.lerp
-import com.enmanuelbergling.corntime.core.ui.components.shaders.HotPlasmaShader
+import com.enmanuelbergling.core.ui.components.shaders.HotPlasmaShader
 import kotlin.math.ceil
 
 

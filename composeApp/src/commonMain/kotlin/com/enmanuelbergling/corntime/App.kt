@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.enmanuelbergling.core.model.settings.DarkTheme
-import com.enmanuelbergling.corntime.core.ui.theme.CornTimeTheme
+import com.enmanuelbergling.core.ui.theme.CornTimeTheme
 import com.enmanuelbergling.corntime.ui.CornTimeVM
 import com.enmanuelbergling.corntime.ui.CornsTimeApp
 import com.enmanuelbergling.corntime.ui.OnboardingScreen
@@ -28,7 +28,10 @@ fun App() {
         isOnline = isOnlineState,
     )
 
-    CornTimeTheme(darkTheme = darkTheme, dynamicColor = dynamicColor) {
+    CornTimeTheme(
+        darkTheme = darkTheme,
+        dynamicColor = dynamicColor
+    ) {
         CornsTimeApp(
             state = appState,
             userDetails = userDetails,

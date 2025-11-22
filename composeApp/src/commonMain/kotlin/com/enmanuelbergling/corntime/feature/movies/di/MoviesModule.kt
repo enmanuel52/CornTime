@@ -15,7 +15,7 @@ import com.enmanuelbergling.corntime.feature.movies.paging.watchlist.GetUserWatc
 import com.enmanuelbergling.corntime.feature.movies.search.MovieSearchVM
 import com.enmanuelbergling.corntime.feature.movies.details.model.MovieDetailsChainStart
 import com.enmanuelbergling.corntime.feature.movies.filter.MoviesFilterVM
-import com.enmanuelbergling.feature.movies.list.viewmodel.NowPlayingMoviesVM
+import com.enmanuelbergling.corntime.feature.movies.list.viewmodel.NowPlayingMoviesVM
 import com.enmanuelbergling.feature.movies.list.viewmodel.PopularMoviesVM
 import com.enmanuelbergling.feature.movies.list.viewmodel.TopRatedMoviesVM
 import com.enmanuelbergling.feature.movies.list.viewmodel.UpcomingMoviesVM

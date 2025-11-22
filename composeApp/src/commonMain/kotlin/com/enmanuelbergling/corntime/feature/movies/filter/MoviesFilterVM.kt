@@ -3,12 +3,11 @@ package com.enmanuelbergling.corntime.feature.movies.filter
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
-import com.enmanuelbergling.core.domain.usecase.movie.GetMovieGenresUC
 import com.enmanuelbergling.core.model.core.ResultHandler
-import com.enmanuelbergling.corntime.core.model.SimplerUi
+import com.enmanuelbergling.core.ui.SimplerUi
 import com.enmanuelbergling.core.model.movie.Genre
 import com.enmanuelbergling.core.model.movie.MovieFilter
-import com.enmanuelbergling.corntime.core.ui.components.messageResource
+import com.enmanuelbergling.core.ui.components.messageResource
 import com.enmanuelbergling.corntime.feature.movies.paging.usecase.GetFilteredMoviesUC
 import com.enmanuelbergling.corntime.feature.movies.filter.model.MovieFilterEvent
 import kotlinx.coroutines.ExperimentalCoroutinesApi

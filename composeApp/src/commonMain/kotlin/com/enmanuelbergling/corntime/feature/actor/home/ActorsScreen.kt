@@ -29,12 +29,12 @@ import androidx.paging.LoadState
 import app.cash.paging.compose.LazyPagingItems
 import app.cash.paging.compose.collectAsLazyPagingItems
 import com.enmanuelbergling.core.model.actor.Actor
-import com.enmanuelbergling.corntime.core.ui.components.common.ActorCard
-import com.enmanuelbergling.corntime.core.ui.components.common.ActorPlaceHolder
-import com.enmanuelbergling.corntime.core.ui.core.dimen
-import com.enmanuelbergling.corntime.core.ui.core.items
-import com.enmanuelbergling.corntime.core.ui.core.shimmerIf
-import com.enmanuelbergling.corntime.core.ui.navigation.ActorDetailNavAction
+import com.enmanuelbergling.core.ui.components.common.ActorCard
+import com.enmanuelbergling.core.ui.components.common.ActorPlaceHolder
+import com.enmanuelbergling.core.ui.core.dimen
+import com.enmanuelbergling.core.ui.core.items
+import com.enmanuelbergling.core.ui.core.shimmerIf
+import com.enmanuelbergling.core.ui.navigation.ActorDetailNavAction
 import corntime.composeapp.generated.resources.Res
 import corntime.composeapp.generated.resources.actors
 import corntime.composeapp.generated.resources.bars_bottom_left
@@ -45,7 +45,7 @@ import org.koin.compose.viewmodel.koinViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AnimatedContentScope.ActorsScreen(
-    onDetails: (ActorDetailNavAction) -> Unit,
+    onDetails: (com.enmanuelbergling.core.ui.navigation.ActorDetailNavAction) -> Unit,
     onOpenDrawer: () -> Unit,
 ) {
     val viewModel = koinViewModel<ActorsVM>()
@@ -89,7 +89,7 @@ fun AnimatedContentScope.ActorsScreen(
 fun AnimatedContentScope.ActorsGrid(
     actors: LazyPagingItems<Actor>,
     modifier: Modifier = Modifier,
-    onDetails: (ActorDetailNavAction) -> Unit,
+    onDetails: (com.enmanuelbergling.core.ui.navigation.ActorDetailNavAction) -> Unit,
 ) {
     val listState = rememberLazyStaggeredGridState()
 

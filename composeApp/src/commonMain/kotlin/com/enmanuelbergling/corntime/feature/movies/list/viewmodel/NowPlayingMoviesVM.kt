@@ -1,4 +1,4 @@
-package com.enmanuelbergling.feature.movies.list.viewmodel
+package com.enmanuelbergling.corntime.feature.movies.list.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

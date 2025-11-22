@@ -4,7 +4,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.navigation
-import com.enmanuelbergling.corntime.core.ui.components.topComposable
+import com.enmanuelbergling.core.ui.components.topComposable
 import com.enmanuelbergling.corntime.feature.settings.home.SettingsRoute
 import kotlinx.serialization.Serializable
 
