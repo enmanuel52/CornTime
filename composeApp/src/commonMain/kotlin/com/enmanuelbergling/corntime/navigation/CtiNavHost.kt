@@ -4,22 +4,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.navOptions
-import com.enmanuelbergling.corntime.feature.actor.navigation.actorsGraph
-import com.enmanuelbergling.corntime.feature.actor.navigation.navigateToActorsDetails
-import com.enmanuelbergling.corntime.feature.movies.navigation.MoviesGraphDestination
-import com.enmanuelbergling.corntime.feature.movies.navigation.movieSearchScreen
-import com.enmanuelbergling.corntime.feature.movies.navigation.moviesFilterScreen
-import com.enmanuelbergling.corntime.feature.movies.navigation.moviesGraph
-import com.enmanuelbergling.corntime.feature.movies.navigation.navigateToMovieFilter
-import com.enmanuelbergling.corntime.feature.movies.navigation.navigateToMovieSearch
-import com.enmanuelbergling.corntime.feature.movies.navigation.navigateToMoviesDetails
-import com.enmanuelbergling.corntime.feature.movies.navigation.navigateToMoviesGraph
-import com.enmanuelbergling.corntime.feature.movies.navigation.navigateToMoviesSection
-import com.enmanuelbergling.corntime.feature.series.navigation.seriesGraph
-import com.enmanuelbergling.corntime.feature.settings.navigation.settingsGraph
-import com.enmanuelbergling.corntime.feature.watchlists.navigation.listGraph
-import com.enmanuelbergling.corntime.feature.watchlists.navigation.navigateToListDetailsScreen
+import com.enmanuelbergling.feature.movies.navigation.movieSearchScreen
+import com.enmanuelbergling.feature.movies.navigation.moviesFilterScreen
+import com.enmanuelbergling.feature.movies.navigation.moviesGraph
+import com.enmanuelbergling.feature.movies.navigation.navigateToMovieFilter
+import com.enmanuelbergling.feature.movies.navigation.navigateToMovieSearch
+import com.enmanuelbergling.feature.movies.navigation.navigateToMoviesDetails
+import com.enmanuelbergling.feature.movies.navigation.navigateToMoviesGraph
+import com.enmanuelbergling.feature.movies.navigation.navigateToMoviesSection
+import com.enmanuelbergling.feature.series.navigation.seriesGraph
+import com.enmanuelbergling.feature.settings.navigation.settingsGraph
+import com.enmanuelbergling.feature.watchlists.navigation.listGraph
+import com.enmanuelbergling.feature.watchlists.navigation.navigateToListDetailsScreen
 import com.enmanuelbergling.corntime.ui.CornTimeAppState
+import com.enmanuelbergling.feature.actor.navigation.actorsGraph
+import com.enmanuelbergling.feature.actor.navigation.navigateToActorsDetails
 import com.enmanuelbergling.feature.auth.navigation.loginScreen
 import com.enmanuelbergling.feature.auth.navigation.navigateToLoginScreen
 
@@ -74,7 +73,7 @@ fun CtiNavHost(
             onLoginSucceed = {
                 navController.navigateToMoviesGraph(
                     navOptions = navOptions {
-                        popUpTo(MoviesGraphDestination) {
+                        popUpTo(_root_ide_package_.com.enmanuelbergling.feature.movies.navigation.MoviesGraphDestination) {
                             inclusive = true
                         }
                     }

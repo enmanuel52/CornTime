@@ -1,10 +1,9 @@
 package com.enmanuelbergling.corntime.navigation
 
-import com.enmanuelbergling.corntime.feature.actor.navigation.ActorsDestination
-import com.enmanuelbergling.corntime.feature.movies.navigation.MoviesDestination
-import com.enmanuelbergling.corntime.feature.series.navigation.SeriesDestination
-import com.enmanuelbergling.corntime.feature.settings.navigation.SettingsDestination
-import com.enmanuelbergling.corntime.feature.watchlists.navigation.WatchListDestination
+import com.enmanuelbergling.feature.series.navigation.SeriesDestination
+import com.enmanuelbergling.feature.settings.navigation.SettingsDestination
+import com.enmanuelbergling.feature.watchlists.navigation.WatchListDestination
+import com.enmanuelbergling.feature.actor.navigation.ActorsDestination
 import corntime.composeapp.generated.resources.Res
 import corntime.composeapp.generated.resources.actors
 import corntime.composeapp.generated.resources.bookmark_outline
@@ -34,7 +33,7 @@ enum class TopDestination(
         Res.string.movies,
         Res.drawable.film_solid,
         Res.drawable.film_outline,
-        MoviesDestination
+        _root_ide_package_.com.enmanuelbergling.feature.movies.navigation.MoviesDestination
     ),
     Series(
         Res.string.series,

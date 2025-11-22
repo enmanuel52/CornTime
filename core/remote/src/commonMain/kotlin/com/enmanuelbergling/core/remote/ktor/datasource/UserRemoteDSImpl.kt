@@ -1,5 +1,6 @@
 package com.enmanuelbergling.core.remote.ktor.datasource
 
+import CornTime.core.remote.BuildConfig
 import com.enmanuelbergling.core.remote.ktor.service.UserService
 import com.enmanuelbergling.core.network.mappers.asBody
 import com.enmanuelbergling.core.network.mappers.toModel
@@ -73,11 +74,10 @@ class UserRemoteDSImpl(private val service: UserService) : UserRemoteDS {
     }
 
     override suspend fun getWatchLists(
-        accountId: String,
         sessionId: String,
         page: Int,
     ): ResultHandler<PageModel<WatchList>> = safeKtorCall {
-        val result = service.getAccountLists(accountId, sessionId, page)
+        val result = service.getAccountLists(BuildConfig.ACCOUNT_ID, sessionId, page)
         val movies = result.results.map { it.toModel() }
 
         PageModel(movies, result.totalPages)

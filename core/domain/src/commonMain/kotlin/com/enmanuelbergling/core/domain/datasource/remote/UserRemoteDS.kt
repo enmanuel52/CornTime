@@ -44,7 +44,6 @@ interface UserRemoteDS : RemoteDataSource {
     ): ResultHandler<PageModel<Movie>>
 
     suspend fun getWatchLists(
-        accountId: String,
         sessionId: String,
         page: Int,
     ): ResultHandler<PageModel<WatchList>>

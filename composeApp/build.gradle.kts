@@ -82,6 +82,13 @@ kotlin {
             implementation(projects.core.local)
             implementation(projects.core.ui)
 
+            implementation(projects.feature.actor)
+            implementation(projects.feature.auth)
+            implementation(projects.feature.movies)
+            implementation(projects.feature.series)
+            implementation(projects.feature.settings)
+            implementation(projects.feature.watchlists)
+
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)

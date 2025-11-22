@@ -62,7 +62,7 @@ import com.enmanuelbergling.core.ui.core.dimen
 import com.enmanuelbergling.core.ui.theme.CornTimeTheme
 import com.enmanuelbergling.core.ui.theme.onBackgroundLight
 import com.enmanuelbergling.core.ui.theme.primaryLight
-import com.enmanuelbergling.corntime.feature.settings.home.SPEED
+import com.enmanuelbergling.feature.settings.home.SPEED
 import com.enmanuelbergling.corntime.navigation.CtiNavHost
 import com.enmanuelbergling.corntime.navigation.TopDestination
 import corntime.composeapp.generated.resources.Res

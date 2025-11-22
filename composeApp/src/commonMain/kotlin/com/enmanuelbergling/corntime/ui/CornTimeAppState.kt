@@ -9,14 +9,13 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
-import com.enmanuelbergling.corntime.feature.actor.navigation.navigateToActorsGraph
-import com.enmanuelbergling.corntime.feature.movies.navigation.MoviesDestination
-import com.enmanuelbergling.corntime.feature.movies.navigation.MoviesGraphDestination
-import com.enmanuelbergling.corntime.feature.movies.navigation.navigateToMoviesGraph
-import com.enmanuelbergling.corntime.feature.series.navigation.navigateToSeriesGraph
-import com.enmanuelbergling.corntime.feature.settings.navigation.navigateToSettingsGraph
-import com.enmanuelbergling.corntime.feature.watchlists.navigation.navigateToListGraph
+import com.enmanuelbergling.feature.movies.navigation.MoviesDestination
+import com.enmanuelbergling.feature.movies.navigation.navigateToMoviesGraph
+import com.enmanuelbergling.feature.series.navigation.navigateToSeriesGraph
+import com.enmanuelbergling.feature.settings.navigation.navigateToSettingsGraph
+import com.enmanuelbergling.feature.watchlists.navigation.navigateToListGraph
 import com.enmanuelbergling.corntime.navigation.TopDestination
+import com.enmanuelbergling.feature.actor.navigation.navigateToActorsGraph
 
 @Composable
 fun rememberCornTimeAppState(
@@ -34,7 +33,8 @@ class CornTimeAppState(
         @Composable get() = navController
             .currentBackStackEntryAsState().value?.destination
 
-    val startDestination = MoviesGraphDestination
+    val startDestination =
+        _root_ide_package_.com.enmanuelbergling.feature.movies.navigation.MoviesGraphDestination
 
     val isTopDestination: Boolean
         @Composable get() = currentDestination?.let { destination ->
@@ -56,7 +56,7 @@ class CornTimeAppState(
         when (destination) {
             TopDestination.Movies -> navController.navigateToMoviesGraph(
                 navOptions {
-                    popUpTo<MoviesDestination> {
+                    popUpTo<com.enmanuelbergling.feature.movies.navigation.MoviesDestination> {
                         inclusive = true
                     }
                 }
@@ -72,7 +72,7 @@ class CornTimeAppState(
 
             TopDestination.Actors -> navController.navigateToActorsGraph(
                 navOptions {
-                    popUpTo<MoviesDestination>()
+                    popUpTo<com.enmanuelbergling.feature.movies.navigation.MoviesDestination>()
                 }
             )
 
