@@ -1,6 +1,6 @@
 package com.enmanuelbergling.corntime.feature.settings.model
 
-import com.enmanuelbergling.corntime.core.model.settings.DarkTheme
+import com.enmanuelbergling.core.model.settings.DarkTheme
 
 internal enum class DarkThemeUi(val label: String) {
     No("Light"), Yes("Dark"), System("System");

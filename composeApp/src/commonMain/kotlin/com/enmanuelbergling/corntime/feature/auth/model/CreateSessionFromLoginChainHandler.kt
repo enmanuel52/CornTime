@@ -1,13 +1,13 @@
 package com.enmanuelbergling.corntime.feature.auth.model
 
-import com.enmanuelbergling.corntime.core.domain.design.CannotHandleException
-import com.enmanuelbergling.corntime.core.domain.design.ChainHandler
-import com.enmanuelbergling.corntime.core.domain.usecase.auth.CreateSessionFromLoginUC
-import com.enmanuelbergling.corntime.core.model.core.ResultHandler
+import com.enmanuelbergling.core.domain.design.CannotHandleException
+import com.enmanuelbergling.core.domain.design.ChainHandler
+import com.enmanuelbergling.core.domain.usecase.auth.CreateSessionFromLoginUC
+import com.enmanuelbergling.core.model.core.ResultHandler
 
 class CreateSessionFromLoginChainHandler(
     private val nextHandler: CreateSessionIdChainHandler,
-    private val createSessionFromLoginUC: CreateSessionFromLoginUC,
+    private val createSessionFromLoginUC: com.enmanuelbergling.core.domain.usecase.auth.CreateSessionFromLoginUC,
 ) : ChainHandler<LoginChainState> {
     override val nextChainHandler: ChainHandler<LoginChainState>?
         get() = nextHandler

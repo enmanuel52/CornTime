@@ -1,14 +1,14 @@
 package com.enmanuelbergling.corntime.feature.actor.details.model
 
-import com.enmanuelbergling.corntime.core.domain.design.CannotHandleException
-import com.enmanuelbergling.corntime.core.domain.design.ChainHandler
-import com.enmanuelbergling.corntime.core.domain.usecase.movie.GetActorDetailsUC
-import com.enmanuelbergling.corntime.core.model.core.ResultHandler
+import com.enmanuelbergling.core.domain.design.CannotHandleException
+import com.enmanuelbergling.core.domain.design.ChainHandler
+import com.enmanuelbergling.core.domain.usecase.movie.GetActorDetailsUC
+import com.enmanuelbergling.core.model.core.ResultHandler
 import kotlinx.coroutines.flow.update
 
 class ActorDetailsChainHandler(
     private val nextHandler: ActorKnownMoviesChainHandler,
-    private val getActorDetailsUC: GetActorDetailsUC,
+    private val getActorDetailsUC: com.enmanuelbergling.core.domain.usecase.movie.GetActorDetailsUC,
 ) : ChainHandler<ActorDetailsUiState> {
     override val nextChainHandler: ChainHandler<ActorDetailsUiState>
         get() = nextHandler

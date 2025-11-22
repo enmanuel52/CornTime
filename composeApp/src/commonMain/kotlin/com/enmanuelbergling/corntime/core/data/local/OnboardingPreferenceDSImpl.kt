@@ -4,7 +4,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
-import com.enmanuelbergling.corntime.core.domain.datasource.preferences.OnboardingPreferenceDS
+import com.enmanuelbergling.core.domain.datasource.preferences.OnboardingPreferenceDS
 import kotlinx.coroutines.flow.map
 
 class OnboardingPreferenceDSImpl(private val dataStore: DataStore<Preferences>) :

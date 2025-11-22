@@ -1,6 +1,6 @@
 package com.enmanuelbergling.corntime.feature.watchlists.model
 
-import com.enmanuelbergling.corntime.core.model.user.CreateListPost
+import com.enmanuelbergling.core.model.user.CreateListPost
 
 data class CreateListForm(
     val name: String = "",

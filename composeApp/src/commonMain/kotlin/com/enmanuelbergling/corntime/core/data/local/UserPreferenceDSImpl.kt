@@ -5,8 +5,8 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.enmanuelbergling.corntime.core.domain.datasource.preferences.UserPreferenceDS
-import com.enmanuelbergling.corntime.core.model.user.UserDetails
+import com.enmanuelbergling.core.domain.datasource.preferences.UserPreferenceDS
+import com.enmanuelbergling.core.model.user.UserDetails
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

@@ -28,7 +28,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import app.cash.paging.compose.LazyPagingItems
 import app.cash.paging.compose.collectAsLazyPagingItems
-import com.enmanuelbergling.corntime.core.model.movie.Movie
+import com.enmanuelbergling.core.model.movie.Movie
 import com.enmanuelbergling.corntime.core.ui.components.HandlerPagingUiState
 import com.enmanuelbergling.corntime.core.ui.components.common.MovieCard
 import com.enmanuelbergling.corntime.core.ui.components.common.MovieCardPlaceholder

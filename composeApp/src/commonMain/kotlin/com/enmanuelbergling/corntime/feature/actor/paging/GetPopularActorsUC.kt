@@ -2,7 +2,7 @@ package com.enmanuelbergling.corntime.feature.actor.paging
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import com.enmanuelbergling.corntime.core.domain.datasource.remote.ActorRemoteDS
+import com.enmanuelbergling.core.domain.datasource.remote.ActorRemoteDS
 
 internal class GetPopularActorsUC(private val remoteDS: ActorRemoteDS) {
     operator fun invoke() = Pager(

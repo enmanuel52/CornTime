@@ -3,10 +3,10 @@ package com.enmanuelbergling.corntime.feature.movies.paging.usecase
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.enmanuelbergling.corntime.core.domain.datasource.remote.MovieRemoteDS
-import com.enmanuelbergling.corntime.core.model.movie.Movie
-import com.enmanuelbergling.corntime.core.model.movie.MovieFilter
-import com.enmanuelbergling.corntime.core.model.movie.QueryString
+import com.enmanuelbergling.core.domain.datasource.remote.MovieRemoteDS
+import com.enmanuelbergling.core.model.movie.Movie
+import com.enmanuelbergling.core.model.movie.MovieFilter
+import com.enmanuelbergling.core.model.movie.QueryString
 import com.enmanuelbergling.corntime.feature.movies.paging.source.MoviesByFilterSource
 import com.enmanuelbergling.corntime.feature.movies.paging.source.SearchMovieSource
 import kotlinx.coroutines.flow.Flow

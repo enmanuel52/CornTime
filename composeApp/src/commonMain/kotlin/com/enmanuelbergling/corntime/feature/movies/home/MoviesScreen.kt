@@ -47,9 +47,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
-import com.enmanuelbergling.corntime.core.model.MovieSection
-import com.enmanuelbergling.corntime.core.model.core.SimplerUi
-import com.enmanuelbergling.corntime.core.model.movie.Movie
+import com.enmanuelbergling.core.model.MovieSection
+import com.enmanuelbergling.corntime.core.model.SimplerUi
+import com.enmanuelbergling.core.model.movie.Movie
 import com.enmanuelbergling.corntime.core.ui.components.HandleUiState
 import com.enmanuelbergling.corntime.core.ui.components.common.HeaderMovieInfo
 import com.enmanuelbergling.corntime.core.ui.components.common.HeaderMoviePlaceholder

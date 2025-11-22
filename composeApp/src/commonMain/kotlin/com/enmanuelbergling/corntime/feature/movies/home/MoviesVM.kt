@@ -2,8 +2,8 @@ package com.enmanuelbergling.corntime.feature.movies.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.enmanuelbergling.corntime.core.model.core.NetworkException
-import com.enmanuelbergling.corntime.core.model.core.SimplerUi
+import com.enmanuelbergling.core.model.core.NetworkException
+import com.enmanuelbergling.corntime.core.model.SimplerUi
 import com.enmanuelbergling.corntime.core.ui.components.messageResource
 import com.enmanuelbergling.corntime.feature.movies.home.model.MoviesChainStart
 import com.enmanuelbergling.corntime.feature.movies.home.model.MoviesUiData

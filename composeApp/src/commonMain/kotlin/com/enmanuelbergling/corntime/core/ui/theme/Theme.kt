@@ -7,7 +7,7 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import com.enmanuelbergling.corntime.core.ui.core.LocalDimen
-import com.enmanuelbergling.corntime.core.model.settings.DarkTheme
+import com.enmanuelbergling.core.model.settings.DarkTheme
 
 
 val lightScheme = lightColorScheme(

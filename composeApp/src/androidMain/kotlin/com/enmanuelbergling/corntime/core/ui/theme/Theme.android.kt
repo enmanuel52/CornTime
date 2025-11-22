@@ -7,7 +7,7 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
-import com.enmanuelbergling.corntime.core.model.settings.DarkTheme
+import com.enmanuelbergling.core.model.settings.DarkTheme
 
 @Composable
 actual fun getColorScheme(

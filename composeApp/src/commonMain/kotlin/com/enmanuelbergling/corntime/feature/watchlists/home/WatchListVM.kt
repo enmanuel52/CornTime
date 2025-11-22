@@ -5,13 +5,13 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.enmanuelbergling.core.domain.usecase.form.BasicFormValidationUC
-import com.enmanuelbergling.corntime.core.domain.usecase.auth.GetSavedSessionIdUC
-import com.enmanuelbergling.corntime.core.domain.usecase.user.watchlist.CreateListUC
-import com.enmanuelbergling.corntime.core.domain.usecase.user.watchlist.DeleteListUC
-import com.enmanuelbergling.corntime.core.model.core.ResultHandler
-import com.enmanuelbergling.corntime.core.model.core.SimplerUi
-import com.enmanuelbergling.corntime.core.model.user.AccountListsFilter
-import com.enmanuelbergling.corntime.core.model.user.WatchList
+import com.enmanuelbergling.core.domain.usecase.auth.GetSavedSessionIdUC
+import com.enmanuelbergling.core.domain.usecase.user.watchlist.CreateListUC
+import com.enmanuelbergling.core.domain.usecase.user.watchlist.DeleteListUC
+import com.enmanuelbergling.core.model.core.ResultHandler
+import com.enmanuelbergling.corntime.core.model.SimplerUi
+import com.enmanuelbergling.core.model.user.AccountListsFilter
+import com.enmanuelbergling.core.model.user.WatchList
 import com.enmanuelbergling.corntime.core.ui.components.messageResource
 import com.enmanuelbergling.corntime.feature.watchlists.model.CreateListEvent
 import com.enmanuelbergling.corntime.feature.watchlists.model.CreateListForm
@@ -29,10 +29,10 @@ import kotlinx.coroutines.launch
 
 internal class WatchListVM(
     getPaginatedLists: GetUserWatchListsUC,
-    getSessionId: GetSavedSessionIdUC,
-    private val createListUC: CreateListUC,
-    private val deleteListUC: DeleteListUC,
-    private val basicFormValidationUC: BasicFormValidationUC,
+    getSessionId: com.enmanuelbergling.core.domain.usecase.auth.GetSavedSessionIdUC,
+    private val createListUC: com.enmanuelbergling.core.domain.usecase.user.watchlist.CreateListUC,
+    private val deleteListUC: com.enmanuelbergling.core.domain.usecase.user.watchlist.DeleteListUC,
+    private val basicFormValidationUC: com.enmanuelbergling.core.domain.usecase.form.BasicFormValidationUC,
 ) : ViewModel() {
 
     private val sessionId = getSessionId().stateIn(

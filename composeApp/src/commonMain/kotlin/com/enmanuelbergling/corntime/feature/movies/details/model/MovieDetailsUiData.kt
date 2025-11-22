@@ -1,7 +1,7 @@
 package com.enmanuelbergling.corntime.feature.movies.details.model
 
-import com.enmanuelbergling.corntime.core.model.movie.MovieCredits
-import com.enmanuelbergling.corntime.core.model.movie.MovieDetails
+import com.enmanuelbergling.core.model.movie.MovieCredits
+import com.enmanuelbergling.core.model.movie.MovieDetails
 
 data class MovieDetailsUiData(
     val details: MovieDetails? = null,

@@ -1,11 +1,11 @@
 package com.enmanuelbergling.corntime.feature.watchlists.paging
 
 import CornTime.composeApp.BuildConfig
-import com.enmanuelbergling.corntime.core.domain.datasource.remote.UserRemoteDS
-import com.enmanuelbergling.corntime.core.model.core.PageModel
-import com.enmanuelbergling.corntime.core.model.core.ResultHandler
-import com.enmanuelbergling.corntime.core.model.user.AccountListsFilter
-import com.enmanuelbergling.corntime.core.model.user.WatchList
+import com.enmanuelbergling.core.domain.datasource.remote.UserRemoteDS
+import com.enmanuelbergling.core.model.core.PageModel
+import com.enmanuelbergling.core.model.core.ResultHandler
+import com.enmanuelbergling.core.model.user.AccountListsFilter
+import com.enmanuelbergling.core.model.user.WatchList
 import com.enmanuelbergling.corntime.core.ui.core.GenericPagingSource
 
 internal class UserWatchListsSource(service: UserRemoteDS, filter: AccountListsFilter) :

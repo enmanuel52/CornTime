@@ -6,7 +6,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import androidx.navigation.toRoute
-import com.enmanuelbergling.corntime.core.model.MovieSection
+import com.enmanuelbergling.core.model.MovieSection
 import com.enmanuelbergling.corntime.core.ui.components.topComposable
 import com.enmanuelbergling.corntime.core.ui.navigation.ActorDetailNavAction
 import com.enmanuelbergling.corntime.feature.movies.search.MovieSearchScreen

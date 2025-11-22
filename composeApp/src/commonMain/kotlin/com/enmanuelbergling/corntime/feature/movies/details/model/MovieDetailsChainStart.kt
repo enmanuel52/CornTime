@@ -1,6 +1,6 @@
 package com.enmanuelbergling.corntime.feature.movies.details.model
 
-import com.enmanuelbergling.corntime.core.domain.design.ChainHandler
+import com.enmanuelbergling.core.domain.design.ChainHandler
 
 /**
  * start a chain of call to get the details of a movie

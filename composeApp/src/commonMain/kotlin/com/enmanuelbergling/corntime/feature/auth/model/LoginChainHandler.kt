@@ -1,6 +1,6 @@
 package com.enmanuelbergling.corntime.feature.auth.model
 
-import com.enmanuelbergling.corntime.core.domain.design.ChainHandler
+import com.enmanuelbergling.core.domain.design.ChainHandler
 
 class LoginChainHandler(
     private val firstHandler: CreateRequestTokenChainHandler,

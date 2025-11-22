@@ -2,7 +2,7 @@ package com.enmanuelbergling.corntime.feature.movies.paging.usecase
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import com.enmanuelbergling.corntime.core.domain.datasource.remote.MovieRemoteDS
+import com.enmanuelbergling.core.domain.datasource.remote.MovieRemoteDS
 import com.enmanuelbergling.corntime.feature.movies.paging.source.NowPlayingMovieSource
 import com.enmanuelbergling.corntime.feature.movies.paging.source.PopularMovieSource
 import com.enmanuelbergling.corntime.feature.movies.paging.source.TopRatedMovieSource

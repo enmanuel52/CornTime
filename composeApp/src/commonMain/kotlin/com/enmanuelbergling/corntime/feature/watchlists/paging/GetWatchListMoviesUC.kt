@@ -3,8 +3,8 @@ package com.enmanuelbergling.corntime.feature.watchlists.paging
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.enmanuelbergling.corntime.core.domain.datasource.remote.UserRemoteDS
-import com.enmanuelbergling.corntime.core.model.movie.Movie
+import com.enmanuelbergling.core.domain.datasource.remote.UserRemoteDS
+import com.enmanuelbergling.core.model.movie.Movie
 import kotlinx.coroutines.flow.Flow
 
 internal class GetWatchListMoviesUC(private val remoteDS: UserRemoteDS) {

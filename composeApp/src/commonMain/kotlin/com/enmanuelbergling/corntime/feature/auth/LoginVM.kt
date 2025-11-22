@@ -3,8 +3,8 @@ package com.enmanuelbergling.corntime.feature.auth
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.enmanuelbergling.core.domain.usecase.form.BasicFormValidationUC
-import com.enmanuelbergling.corntime.core.model.core.NetworkException
-import com.enmanuelbergling.corntime.core.model.core.SimplerUi
+import com.enmanuelbergling.core.model.core.NetworkException
+import com.enmanuelbergling.corntime.core.model.SimplerUi
 import com.enmanuelbergling.corntime.core.ui.components.messageResource
 import com.enmanuelbergling.corntime.feature.auth.model.LoginChain
 import com.enmanuelbergling.corntime.feature.auth.model.LoginChainHandler
@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 
 class LoginVM(
     private val loginChainHandler: LoginChainHandler,
-    private val basicFormValidationUC: BasicFormValidationUC,
+    private val basicFormValidationUC: com.enmanuelbergling.core.domain.usecase.form.BasicFormValidationUC,
 ) : ViewModel() {
 
     private val _loginFormState = MutableStateFlow(LoginForm())

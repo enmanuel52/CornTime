@@ -1,9 +1,9 @@
 package com.enmanuelbergling.corntime.feature.watchlists.paging
 
-import com.enmanuelbergling.corntime.core.domain.datasource.remote.UserRemoteDS
-import com.enmanuelbergling.corntime.core.model.core.PageModel
-import com.enmanuelbergling.corntime.core.model.core.ResultHandler
-import com.enmanuelbergling.corntime.core.model.movie.Movie
+import com.enmanuelbergling.core.domain.datasource.remote.UserRemoteDS
+import com.enmanuelbergling.core.model.core.PageModel
+import com.enmanuelbergling.core.model.core.ResultHandler
+import com.enmanuelbergling.core.model.movie.Movie
 import com.enmanuelbergling.corntime.core.ui.core.GenericPagingSource
 
 internal class WatchListMoviesSource(remoteDS: UserRemoteDS, listId: Int) : GenericPagingSource<Movie>(

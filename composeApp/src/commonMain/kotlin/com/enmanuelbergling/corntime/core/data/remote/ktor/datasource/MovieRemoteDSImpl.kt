@@ -4,13 +4,13 @@ import com.enmanuelbergling.corntime.core.data.remote.ktor.service.MovieService
 import com.enmanuelbergling.corntime.core.data.remote.ktorfit.service.MoviesFilterService
 import com.enmanuelbergling.corntime.core.data.remote.ktorfit.service.MoviesSearchService
 import com.enmanuelbergling.corntime.core.data.remote.mappers.toModel
-import com.enmanuelbergling.corntime.core.domain.datasource.remote.MovieRemoteDS
-import com.enmanuelbergling.corntime.core.model.core.PageModel
-import com.enmanuelbergling.corntime.core.model.core.ResultHandler
-import com.enmanuelbergling.corntime.core.model.movie.Genre
-import com.enmanuelbergling.corntime.core.model.movie.Movie
-import com.enmanuelbergling.corntime.core.model.movie.MovieCredits
-import com.enmanuelbergling.corntime.core.model.movie.MovieDetails
+import com.enmanuelbergling.core.domain.datasource.remote.MovieRemoteDS
+import com.enmanuelbergling.core.model.core.PageModel
+import com.enmanuelbergling.core.model.core.ResultHandler
+import com.enmanuelbergling.core.model.movie.Genre
+import com.enmanuelbergling.core.model.movie.Movie
+import com.enmanuelbergling.core.model.movie.MovieCredits
+import com.enmanuelbergling.core.model.movie.MovieDetails
 
 internal class MovieRemoteDSImpl(
     private val service: MovieService,

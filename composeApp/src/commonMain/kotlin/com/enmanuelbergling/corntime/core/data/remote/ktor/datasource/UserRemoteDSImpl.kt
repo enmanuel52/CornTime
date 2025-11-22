@@ -5,13 +5,13 @@ import com.enmanuelbergling.core.network.mappers.asBody
 import com.enmanuelbergling.core.network.mappers.toModel
 import com.enmanuelbergling.corntime.core.data.remote.dto.user.watch.MediaOnListBody
 import com.enmanuelbergling.corntime.core.data.remote.mappers.toModel
-import com.enmanuelbergling.corntime.core.domain.datasource.remote.UserRemoteDS
-import com.enmanuelbergling.corntime.core.model.core.PageModel
-import com.enmanuelbergling.corntime.core.model.core.ResultHandler
-import com.enmanuelbergling.corntime.core.model.user.CreateListPost
-import com.enmanuelbergling.corntime.core.model.user.UserDetails
-import com.enmanuelbergling.corntime.core.model.user.WatchList
-import com.enmanuelbergling.corntime.core.model.user.WatchResponse
+import com.enmanuelbergling.core.domain.datasource.remote.UserRemoteDS
+import com.enmanuelbergling.core.model.core.PageModel
+import com.enmanuelbergling.core.model.core.ResultHandler
+import com.enmanuelbergling.core.model.user.CreateListPost
+import com.enmanuelbergling.core.model.user.UserDetails
+import com.enmanuelbergling.core.model.user.WatchList
+import com.enmanuelbergling.core.model.user.WatchResponse
 
 class UserRemoteDSImpl(private val service: UserService) : UserRemoteDS {
 

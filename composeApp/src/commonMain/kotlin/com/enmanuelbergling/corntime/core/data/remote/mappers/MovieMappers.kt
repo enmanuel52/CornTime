@@ -10,16 +10,16 @@ import com.enmanuelbergling.corntime.core.data.remote.dto.movie.MovieDetailsDTO
 import com.enmanuelbergling.corntime.core.data.remote.dto.movie.ProductionCompanyDTO
 import com.enmanuelbergling.corntime.core.data.remote.dto.movie.ProductionCountryDTO
 import com.enmanuelbergling.corntime.core.data.remote.dto.movie.SpokenLanguageDTO
-import com.enmanuelbergling.corntime.core.model.movie.BelongsToCollection
-import com.enmanuelbergling.corntime.core.model.movie.Cast
-import com.enmanuelbergling.corntime.core.model.movie.Crew
-import com.enmanuelbergling.corntime.core.model.movie.Genre
-import com.enmanuelbergling.corntime.core.model.movie.Movie
-import com.enmanuelbergling.corntime.core.model.movie.MovieCredits
-import com.enmanuelbergling.corntime.core.model.movie.MovieDetails
-import com.enmanuelbergling.corntime.core.model.movie.ProductionCompany
-import com.enmanuelbergling.corntime.core.model.movie.ProductionCountry
-import com.enmanuelbergling.corntime.core.model.movie.SpokenLanguage
+import com.enmanuelbergling.core.model.movie.BelongsToCollection
+import com.enmanuelbergling.core.model.movie.Cast
+import com.enmanuelbergling.core.model.movie.Crew
+import com.enmanuelbergling.core.model.movie.Genre
+import com.enmanuelbergling.core.model.movie.Movie
+import com.enmanuelbergling.core.model.movie.MovieCredits
+import com.enmanuelbergling.core.model.movie.MovieDetails
+import com.enmanuelbergling.core.model.movie.ProductionCompany
+import com.enmanuelbergling.core.model.movie.ProductionCountry
+import com.enmanuelbergling.core.model.movie.SpokenLanguage
 
 internal fun BelongsToCollectionDTO.toModel() = BelongsToCollection(
     id = id,

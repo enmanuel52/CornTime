@@ -28,7 +28,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.enmanuelbergling.corntime.core.ui.components.RatingStars
-import com.enmanuelbergling.corntime.core.model.movie.Movie
+import com.enmanuelbergling.core.model.movie.Movie
 import com.enmanuelbergling.corntime.core.ui.core.dimen
 import com.enmanuelbergling.corntime.core.ui.theme.CornTimeTheme
 import com.enmanuelbergling.corntime.core.util.BASE_POSTER_IMAGE_URL

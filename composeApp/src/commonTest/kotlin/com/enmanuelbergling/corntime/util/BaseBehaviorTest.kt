@@ -1,6 +1,6 @@
 package com.enmanuelbergling.corntime.util
 
-import com.enmanuelbergling.corntime.core.domain.usecase.di.ucModule
+import com.enmanuelbergling.core.domain.usecase.di.ucModule
 import com.enmanuelbergling.corntime.di.testingDataSourceModule
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.BehaviorSpec

@@ -14,10 +14,10 @@ import com.enmanuelbergling.corntime.core.data.remote.ktorfit.service.MoviesFilt
 import com.enmanuelbergling.corntime.core.data.remote.ktorfit.service.MoviesSearchService
 import com.enmanuelbergling.corntime.core.data.remote.ktorfit.service.createMoviesFilterService
 import com.enmanuelbergling.corntime.core.data.remote.ktorfit.service.createMoviesSearchService
-import com.enmanuelbergling.corntime.core.domain.datasource.remote.ActorRemoteDS
-import com.enmanuelbergling.corntime.core.domain.datasource.remote.AuthRemoteDS
-import com.enmanuelbergling.corntime.core.domain.datasource.remote.MovieRemoteDS
-import com.enmanuelbergling.corntime.core.domain.datasource.remote.UserRemoteDS
+import com.enmanuelbergling.core.domain.datasource.remote.ActorRemoteDS
+import com.enmanuelbergling.core.domain.datasource.remote.AuthRemoteDS
+import com.enmanuelbergling.core.domain.datasource.remote.MovieRemoteDS
+import com.enmanuelbergling.core.domain.datasource.remote.UserRemoteDS
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind

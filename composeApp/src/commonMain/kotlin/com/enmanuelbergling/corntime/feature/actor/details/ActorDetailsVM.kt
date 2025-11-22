@@ -2,8 +2,8 @@ package com.enmanuelbergling.corntime.feature.actor.details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.enmanuelbergling.corntime.core.model.core.NetworkException
-import com.enmanuelbergling.corntime.core.model.core.SimplerUi
+import com.enmanuelbergling.core.model.core.NetworkException
+import com.enmanuelbergling.corntime.core.model.SimplerUi
 import com.enmanuelbergling.corntime.core.ui.components.messageResource
 import com.enmanuelbergling.corntime.feature.actor.details.model.ActorDetailsChainStart
 import com.enmanuelbergling.corntime.feature.actor.details.model.ActorDetailsUiData

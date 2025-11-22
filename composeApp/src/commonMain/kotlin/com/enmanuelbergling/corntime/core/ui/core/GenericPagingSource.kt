@@ -2,7 +2,7 @@ package com.enmanuelbergling.corntime.core.ui.core
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.enmanuelbergling.corntime.core.model.core.PageModel
+import com.enmanuelbergling.core.model.core.PageModel
 
 open class GenericPagingSource<Model : Any>(
     private val request: suspend (page: Int) -> PageModel<Model>,

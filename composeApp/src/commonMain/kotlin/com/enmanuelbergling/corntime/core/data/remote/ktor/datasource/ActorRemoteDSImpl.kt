@@ -2,12 +2,12 @@ package com.enmanuelbergling.corntime.core.data.remote.ktor.datasource
 
 import com.enmanuelbergling.corntime.core.data.remote.ktor.service.ActorService
 import com.enmanuelbergling.corntime.core.data.remote.mappers.toModel
-import com.enmanuelbergling.corntime.core.domain.datasource.remote.ActorRemoteDS
-import com.enmanuelbergling.corntime.core.model.actor.Actor
-import com.enmanuelbergling.corntime.core.model.actor.ActorDetails
-import com.enmanuelbergling.corntime.core.model.actor.KnownMovie
-import com.enmanuelbergling.corntime.core.model.core.PageModel
-import com.enmanuelbergling.corntime.core.model.core.ResultHandler
+import com.enmanuelbergling.core.domain.datasource.remote.ActorRemoteDS
+import com.enmanuelbergling.core.model.actor.Actor
+import com.enmanuelbergling.core.model.actor.ActorDetails
+import com.enmanuelbergling.core.model.actor.KnownMovie
+import com.enmanuelbergling.core.model.core.PageModel
+import com.enmanuelbergling.core.model.core.ResultHandler
 
 internal class ActorRemoteDSImpl(private val service: ActorService) : ActorRemoteDS {
     override suspend fun getActorDetails(id: Int): ResultHandler<ActorDetails> = safeKtorCall {

@@ -7,8 +7,8 @@ import androidx.compose.material.icons.rounded.WbSunny
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.enmanuelbergling.corntime.core.model.core.NetworkException
-import com.enmanuelbergling.corntime.core.model.settings.DarkTheme
+import com.enmanuelbergling.core.model.core.NetworkException
+import com.enmanuelbergling.core.model.settings.DarkTheme
 import corntime.composeapp.generated.resources.Res
 import corntime.composeapp.generated.resources.default_net_exception_message
 import corntime.composeapp.generated.resources.net_time_out_exception_message

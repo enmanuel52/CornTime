@@ -3,11 +3,11 @@ package com.enmanuelbergling.corntime.feature.settings.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.enmanuelbergling.core.domain.usecase.user.LogoutUC
-import com.enmanuelbergling.corntime.core.domain.usecase.settings.GetDarkThemeUC
-import com.enmanuelbergling.corntime.core.domain.usecase.settings.GetDynamicColorUC
-import com.enmanuelbergling.corntime.core.domain.usecase.settings.SetDarkThemeUC
-import com.enmanuelbergling.corntime.core.domain.usecase.settings.SetDynamicColorUC
-import com.enmanuelbergling.corntime.core.domain.usecase.user.GetSavedUserUC
+import com.enmanuelbergling.core.domain.usecase.settings.GetDarkThemeUC
+import com.enmanuelbergling.core.domain.usecase.settings.GetDynamicColorUC
+import com.enmanuelbergling.core.domain.usecase.settings.SetDarkThemeUC
+import com.enmanuelbergling.core.domain.usecase.settings.SetDynamicColorUC
+import com.enmanuelbergling.core.domain.usecase.user.GetSavedUserUC
 import com.enmanuelbergling.corntime.feature.settings.model.SettingMenuUi
 import com.enmanuelbergling.corntime.feature.settings.model.SettingUiEvent
 import com.enmanuelbergling.corntime.feature.settings.model.toSettingsUi
@@ -18,12 +18,12 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 internal class SettingsVM(
-    private val setDarkThemeUC: SetDarkThemeUC,
-    getDarkThemeUC: GetDarkThemeUC,
-    private val logoutUC: LogoutUC,
-    getSavedUserUC: GetSavedUserUC,
-    getDynamicColorUC: GetDynamicColorUC,
-    private val setDynamicColorUC: SetDynamicColorUC,
+    private val setDarkThemeUC: com.enmanuelbergling.core.domain.usecase.settings.SetDarkThemeUC,
+    getDarkThemeUC: com.enmanuelbergling.core.domain.usecase.settings.GetDarkThemeUC,
+    private val logoutUC: com.enmanuelbergling.core.domain.usecase.user.LogoutUC,
+    getSavedUserUC: com.enmanuelbergling.core.domain.usecase.user.GetSavedUserUC,
+    getDynamicColorUC: com.enmanuelbergling.core.domain.usecase.settings.GetDynamicColorUC,
+    private val setDynamicColorUC: com.enmanuelbergling.core.domain.usecase.settings.SetDynamicColorUC,
 ) : ViewModel() {
     val userState = getSavedUserUC().map { it?.toSettingsUi() }
 

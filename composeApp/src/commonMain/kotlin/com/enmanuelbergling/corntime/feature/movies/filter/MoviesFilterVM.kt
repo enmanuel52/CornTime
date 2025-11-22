@@ -3,11 +3,11 @@ package com.enmanuelbergling.corntime.feature.movies.filter
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
-import com.enmanuelbergling.corntime.core.domain.usecase.movie.GetMovieGenresUC
-import com.enmanuelbergling.corntime.core.model.core.ResultHandler
-import com.enmanuelbergling.corntime.core.model.core.SimplerUi
-import com.enmanuelbergling.corntime.core.model.movie.Genre
-import com.enmanuelbergling.corntime.core.model.movie.MovieFilter
+import com.enmanuelbergling.core.domain.usecase.movie.GetMovieGenresUC
+import com.enmanuelbergling.core.model.core.ResultHandler
+import com.enmanuelbergling.corntime.core.model.SimplerUi
+import com.enmanuelbergling.core.model.movie.Genre
+import com.enmanuelbergling.core.model.movie.MovieFilter
 import com.enmanuelbergling.corntime.core.ui.components.messageResource
 import com.enmanuelbergling.corntime.feature.movies.paging.usecase.GetFilteredMoviesUC
 import com.enmanuelbergling.corntime.feature.movies.filter.model.MovieFilterEvent
@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 
 internal class MoviesFilterVM(
     getMovies: GetFilteredMoviesUC,
-    private val getMovieGenresUC: GetMovieGenresUC,
+    private val getMovieGenresUC: com.enmanuelbergling.core.domain.usecase.movie.GetMovieGenresUC,
 ) : ViewModel() {
 
     private val _filterState = MutableStateFlow(MovieFilter())

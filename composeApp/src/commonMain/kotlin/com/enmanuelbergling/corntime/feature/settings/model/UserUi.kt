@@ -1,6 +1,6 @@
 package com.enmanuelbergling.corntime.feature.settings.model
 
-import com.enmanuelbergling.corntime.core.model.user.UserDetails
+import com.enmanuelbergling.core.model.user.UserDetails
 
 internal data class UserUi(
     val username: String = "",

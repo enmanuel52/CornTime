@@ -1,6 +1,6 @@
 package com.enmanuelbergling.corntime.feature.movies.home.model
 
-import com.enmanuelbergling.corntime.core.model.movie.Movie
+import com.enmanuelbergling.core.model.movie.Movie
 
 data class MoviesUiData(
     val upcoming: List<Movie> = emptyList(),

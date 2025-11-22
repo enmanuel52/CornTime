@@ -1,13 +1,13 @@
 package com.enmanuelbergling.corntime.feature.movies.home.model
 
-import com.enmanuelbergling.corntime.core.domain.design.CannotHandleException
-import com.enmanuelbergling.corntime.core.domain.design.ChainHandler
-import com.enmanuelbergling.corntime.core.domain.usecase.movie.GetPopularMoviesUC
-import com.enmanuelbergling.corntime.core.model.core.ResultHandler
+import com.enmanuelbergling.core.domain.design.CannotHandleException
+import com.enmanuelbergling.core.domain.design.ChainHandler
+import com.enmanuelbergling.core.domain.usecase.movie.GetPopularMoviesUC
+import com.enmanuelbergling.core.model.core.ResultHandler
 import kotlinx.coroutines.flow.update
 
 class PopularMoviesChainHandler(
-    private val getPopularMoviesUC: GetPopularMoviesUC,
+    private val getPopularMoviesUC: com.enmanuelbergling.core.domain.usecase.movie.GetPopularMoviesUC,
 ) : ChainHandler<MoviesUiState> {
     override val nextChainHandler: ChainHandler<MoviesUiState>?
         get() = null

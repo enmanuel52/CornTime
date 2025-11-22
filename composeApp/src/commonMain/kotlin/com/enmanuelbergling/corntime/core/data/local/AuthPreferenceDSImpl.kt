@@ -4,7 +4,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.enmanuelbergling.corntime.core.domain.datasource.preferences.AuthPreferenceDS
+import com.enmanuelbergling.core.domain.datasource.preferences.AuthPreferenceDS
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking

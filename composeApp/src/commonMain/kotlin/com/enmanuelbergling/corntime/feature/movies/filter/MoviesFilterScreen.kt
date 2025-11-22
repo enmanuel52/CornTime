@@ -54,10 +54,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.cash.paging.compose.LazyPagingItems
 import app.cash.paging.compose.collectAsLazyPagingItems
-import com.enmanuelbergling.corntime.core.model.movie.Genre
-import com.enmanuelbergling.corntime.core.model.movie.Movie
-import com.enmanuelbergling.corntime.core.model.movie.MovieFilter
-import com.enmanuelbergling.corntime.core.model.movie.SortCriteria
+import com.enmanuelbergling.core.model.movie.Genre
+import com.enmanuelbergling.core.model.movie.Movie
+import com.enmanuelbergling.core.model.movie.MovieFilter
+import com.enmanuelbergling.core.model.movie.SortCriteria
 import com.enmanuelbergling.corntime.core.ui.components.FromDirection
 import com.enmanuelbergling.corntime.core.ui.components.LinearLoading
 import com.enmanuelbergling.corntime.core.ui.components.ShowUpFrom

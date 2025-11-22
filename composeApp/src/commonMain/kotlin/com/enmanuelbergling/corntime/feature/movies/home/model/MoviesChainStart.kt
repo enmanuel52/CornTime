@@ -1,6 +1,6 @@
 package com.enmanuelbergling.corntime.feature.movies.home.model
 
-import com.enmanuelbergling.corntime.core.domain.design.ChainHandler
+import com.enmanuelbergling.core.domain.design.ChainHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class MoviesChainStart(

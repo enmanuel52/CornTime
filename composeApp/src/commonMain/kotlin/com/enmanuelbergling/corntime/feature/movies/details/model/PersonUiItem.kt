@@ -1,7 +1,7 @@
 package com.enmanuelbergling.corntime.feature.movies.details.model
 
-import com.enmanuelbergling.corntime.core.model.movie.Cast
-import com.enmanuelbergling.corntime.core.model.movie.Crew
+import com.enmanuelbergling.core.model.movie.Cast
+import com.enmanuelbergling.core.model.movie.Crew
 
 data class PersonUiItem(
     val id: Int,

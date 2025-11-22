@@ -1,7 +1,7 @@
 package com.enmanuelbergling.corntime.feature.movies.filter.model
 
-import com.enmanuelbergling.corntime.core.model.movie.Genre
-import com.enmanuelbergling.corntime.core.model.movie.SortCriteria
+import com.enmanuelbergling.core.model.movie.Genre
+import com.enmanuelbergling.core.model.movie.SortCriteria
 
 sealed interface MovieFilterEvent {
     /**

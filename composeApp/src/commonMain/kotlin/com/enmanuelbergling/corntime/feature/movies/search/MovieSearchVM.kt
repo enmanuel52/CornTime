@@ -4,12 +4,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.enmanuelbergling.corntime.core.domain.usecase.movie.search.AddSearchSuggestionUC
-import com.enmanuelbergling.corntime.core.domain.usecase.movie.search.ClearSearchSuggestionsUC
-import com.enmanuelbergling.corntime.core.domain.usecase.movie.search.DeleteSearchSuggestionUC
-import com.enmanuelbergling.corntime.core.domain.usecase.movie.search.GetSearchSuggestionsUC
-import com.enmanuelbergling.corntime.core.model.movie.Movie
-import com.enmanuelbergling.corntime.core.model.movie.QueryString
+import com.enmanuelbergling.core.domain.usecase.movie.search.AddSearchSuggestionUC
+import com.enmanuelbergling.core.domain.usecase.movie.search.ClearSearchSuggestionsUC
+import com.enmanuelbergling.core.domain.usecase.movie.search.DeleteSearchSuggestionUC
+import com.enmanuelbergling.core.domain.usecase.movie.search.GetSearchSuggestionsUC
+import com.enmanuelbergling.core.model.movie.Movie
+import com.enmanuelbergling.core.model.movie.QueryString
 import com.enmanuelbergling.corntime.feature.movies.paging.usecase.GetFilteredMoviesUC
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -24,10 +24,10 @@ import kotlinx.coroutines.launch
 
 internal class MovieSearchVM(
     getMovies: GetFilteredMoviesUC,
-    private val addSearchSuggestionUC: AddSearchSuggestionUC,
-    private val clearSearchSuggestionsUC: ClearSearchSuggestionsUC,
-    private val deleteSearchSuggestionUC: DeleteSearchSuggestionUC,
-    getSearchSuggestionsUC: GetSearchSuggestionsUC,
+    private val addSearchSuggestionUC: com.enmanuelbergling.core.domain.usecase.movie.search.AddSearchSuggestionUC,
+    private val clearSearchSuggestionsUC: com.enmanuelbergling.core.domain.usecase.movie.search.ClearSearchSuggestionsUC,
+    private val deleteSearchSuggestionUC: com.enmanuelbergling.core.domain.usecase.movie.search.DeleteSearchSuggestionUC,
+    getSearchSuggestionsUC: com.enmanuelbergling.core.domain.usecase.movie.search.GetSearchSuggestionsUC,
 ) : ViewModel() {
 
     private val _queryState = MutableStateFlow("")

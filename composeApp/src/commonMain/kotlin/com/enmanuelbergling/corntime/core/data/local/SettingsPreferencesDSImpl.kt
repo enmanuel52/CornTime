@@ -5,8 +5,8 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.enmanuelbergling.corntime.core.domain.datasource.preferences.SettingsPreferencesDS
-import com.enmanuelbergling.corntime.core.model.settings.DarkTheme
+import com.enmanuelbergling.core.domain.datasource.preferences.SettingsPreferencesDS
+import com.enmanuelbergling.core.model.settings.DarkTheme
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking

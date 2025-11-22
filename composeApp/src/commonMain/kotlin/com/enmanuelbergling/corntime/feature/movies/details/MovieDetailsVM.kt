@@ -4,14 +4,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.enmanuelbergling.corntime.core.domain.usecase.auth.GetSavedSessionIdUC
-import com.enmanuelbergling.corntime.core.domain.usecase.user.watchlist.AddMovieToListUC
-import com.enmanuelbergling.corntime.core.domain.usecase.user.watchlist.CheckItemStatusUC
-import com.enmanuelbergling.corntime.core.model.core.NetworkException
-import com.enmanuelbergling.corntime.core.model.core.ResultHandler
-import com.enmanuelbergling.corntime.core.model.core.SimplerUi
-import com.enmanuelbergling.corntime.core.model.user.AccountListsFilter
-import com.enmanuelbergling.corntime.core.model.user.WatchList
+import com.enmanuelbergling.core.domain.usecase.auth.GetSavedSessionIdUC
+import com.enmanuelbergling.core.domain.usecase.user.watchlist.AddMovieToListUC
+import com.enmanuelbergling.core.domain.usecase.user.watchlist.CheckItemStatusUC
+import com.enmanuelbergling.core.model.core.NetworkException
+import com.enmanuelbergling.core.model.core.ResultHandler
+import com.enmanuelbergling.corntime.core.model.SimplerUi
+import com.enmanuelbergling.core.model.user.AccountListsFilter
+import com.enmanuelbergling.core.model.user.WatchList
 import com.enmanuelbergling.corntime.core.ui.components.messageResource
 import com.enmanuelbergling.corntime.feature.movies.details.model.MovieDetailsChainHandler
 import com.enmanuelbergling.corntime.feature.movies.paging.watchlist.GetUserWatchListsUC
@@ -31,9 +31,9 @@ import kotlinx.coroutines.launch
 internal class MovieDetailsVM(
     private val detailsChainHandler: MovieDetailsChainHandler,
     getWatchLists: GetUserWatchListsUC,
-    getSessionId: GetSavedSessionIdUC,
-    private val addMovieToListUC: AddMovieToListUC,
-    private val checkItemStatusUC: CheckItemStatusUC,
+    getSessionId: com.enmanuelbergling.core.domain.usecase.auth.GetSavedSessionIdUC,
+    private val addMovieToListUC: com.enmanuelbergling.core.domain.usecase.user.watchlist.AddMovieToListUC,
+    private val checkItemStatusUC: com.enmanuelbergling.core.domain.usecase.user.watchlist.CheckItemStatusUC,
     private val movieId: Int,
 ) : ViewModel() {
 

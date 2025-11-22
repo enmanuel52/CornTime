@@ -3,9 +3,9 @@ package com.enmanuelbergling.corntime.core.data.remote.mappers
 import com.enmanuelbergling.corntime.core.data.remote.dto.actor.ActorDTO
 import com.enmanuelbergling.corntime.core.data.remote.dto.actor.ActorDetailsDTO
 import com.enmanuelbergling.corntime.core.data.remote.dto.actor.KnownMovieDTO
-import com.enmanuelbergling.corntime.core.model.actor.Actor
-import com.enmanuelbergling.corntime.core.model.actor.ActorDetails
-import com.enmanuelbergling.corntime.core.model.actor.KnownMovie
+import com.enmanuelbergling.core.model.actor.Actor
+import com.enmanuelbergling.core.model.actor.ActorDetails
+import com.enmanuelbergling.core.model.actor.KnownMovie
 
 internal fun ActorDetailsDTO.toModel() = ActorDetails(
     adult = adult,

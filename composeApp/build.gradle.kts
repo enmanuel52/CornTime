@@ -76,6 +76,9 @@ kotlin {
             implementation(libs.ktor.client.okhttp)
         }
         commonMain.dependencies {
+            implementation(projects.core.model)
+            implementation(projects.core.domain)
+
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
@@ -121,6 +124,9 @@ kotlin {
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.core)
             implementation(libs.koin.test)
+
+            implementation(projects.core.model)
+            implementation(projects.core.domain)
         }
         jvmMain.dependencies {
             implementation(compose.desktop.currentOs)

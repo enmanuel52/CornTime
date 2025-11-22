@@ -60,9 +60,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.cash.paging.compose.LazyPagingItems
 import app.cash.paging.compose.collectAsLazyPagingItems
 import coil3.compose.AsyncImage
-import com.enmanuelbergling.corntime.core.model.core.SimplerUi
-import com.enmanuelbergling.corntime.core.model.movie.MovieDetails
-import com.enmanuelbergling.corntime.core.model.user.WatchList
+import com.enmanuelbergling.corntime.core.model.SimplerUi
+import com.enmanuelbergling.core.model.movie.MovieDetails
+import com.enmanuelbergling.core.model.user.WatchList
 import com.enmanuelbergling.corntime.core.ui.components.HandleUiState
 import com.enmanuelbergling.corntime.core.ui.components.RatingStars
 import com.enmanuelbergling.corntime.core.ui.components.common.ActorCard

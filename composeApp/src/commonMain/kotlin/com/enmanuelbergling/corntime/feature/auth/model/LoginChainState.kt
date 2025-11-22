@@ -1,6 +1,6 @@
 package com.enmanuelbergling.corntime.feature.auth.model
 
-import com.enmanuelbergling.corntime.core.model.auth.CreateSessionPost
+import com.enmanuelbergling.core.model.auth.CreateSessionPost
 import kotlinx.coroutines.flow.MutableStateFlow
 
 typealias LoginChainState = MutableStateFlow<LoginChain>

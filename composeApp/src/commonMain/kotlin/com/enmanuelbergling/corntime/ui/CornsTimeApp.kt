@@ -54,7 +54,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
-import com.enmanuelbergling.corntime.core.model.user.UserDetails
+import com.enmanuelbergling.core.model.user.UserDetails
 import com.enmanuelbergling.corntime.core.ui.components.runtimeShader
 import com.enmanuelbergling.corntime.core.ui.components.shaders.HotPlasmaShader
 import com.enmanuelbergling.corntime.core.ui.core.LocalSharedTransitionScope

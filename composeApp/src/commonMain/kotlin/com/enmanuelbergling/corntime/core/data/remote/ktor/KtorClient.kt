@@ -2,7 +2,7 @@ package com.enmanuelbergling.corntime.core.data.remote.ktor
 
 import CornTime.composeApp.BuildConfig
 import com.enmanuelbergling.corntime.core.data.remote.BASE_URL
-import com.enmanuelbergling.corntime.core.model.core.NetworkException
+import com.enmanuelbergling.core.model.core.NetworkException
 import com.enmanuelbergling.corntime.core.util.getSystemLanguage
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine

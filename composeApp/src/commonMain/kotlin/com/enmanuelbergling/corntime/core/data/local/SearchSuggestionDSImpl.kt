@@ -4,8 +4,8 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringSetPreferencesKey
-import com.enmanuelbergling.corntime.core.domain.datasource.preferences.SearchSuggestionDS
-import com.enmanuelbergling.corntime.core.domain.datasource.preferences.StringQuery
+import com.enmanuelbergling.core.domain.datasource.preferences.SearchSuggestionDS
+import com.enmanuelbergling.core.domain.datasource.preferences.StringQuery
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

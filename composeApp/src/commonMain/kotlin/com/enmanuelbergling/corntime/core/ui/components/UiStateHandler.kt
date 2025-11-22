@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.paging.LoadState
 import app.cash.paging.compose.LazyPagingItems
-import com.enmanuelbergling.corntime.core.model.core.SimplerUi
+import com.enmanuelbergling.corntime.core.model.SimplerUi
 import org.jetbrains.compose.resources.stringResource
 
 

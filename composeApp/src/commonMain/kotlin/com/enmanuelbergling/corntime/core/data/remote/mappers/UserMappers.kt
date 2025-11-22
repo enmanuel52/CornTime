@@ -4,10 +4,10 @@ import com.enmanuelbergling.corntime.core.data.remote.dto.user.UserDetailsDTO
 import com.enmanuelbergling.corntime.core.data.remote.dto.user.watch.CreateListBody
 import com.enmanuelbergling.corntime.core.data.remote.dto.user.watch.WatchListDTO
 import com.enmanuelbergling.corntime.core.data.remote.dto.user.watch.WatchResponseDTO
-import com.enmanuelbergling.corntime.core.model.user.CreateListPost
-import com.enmanuelbergling.corntime.core.model.user.UserDetails
-import com.enmanuelbergling.corntime.core.model.user.WatchList
-import com.enmanuelbergling.corntime.core.model.user.WatchResponse
+import com.enmanuelbergling.core.model.user.CreateListPost
+import com.enmanuelbergling.core.model.user.UserDetails
+import com.enmanuelbergling.core.model.user.WatchList
+import com.enmanuelbergling.core.model.user.WatchResponse
 
 internal fun UserDetailsDTO.toModel() = UserDetails(
     id = id, username = username, avatarPath = avatar.tmdb.avatarPath.orEmpty(), name = name

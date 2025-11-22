@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import app.cash.paging.compose.LazyPagingItems
 import app.cash.paging.compose.collectAsLazyPagingItems
-import com.enmanuelbergling.corntime.core.model.actor.Actor
+import com.enmanuelbergling.core.model.actor.Actor
 import com.enmanuelbergling.corntime.core.ui.components.common.ActorCard
 import com.enmanuelbergling.corntime.core.ui.components.common.ActorPlaceHolder
 import com.enmanuelbergling.corntime.core.ui.core.dimen

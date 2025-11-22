@@ -38,7 +38,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.LoadState
 import app.cash.paging.compose.LazyPagingItems
 import app.cash.paging.compose.collectAsLazyPagingItems
-import com.enmanuelbergling.corntime.core.model.user.WatchList
+import com.enmanuelbergling.core.model.user.WatchList
 import com.enmanuelbergling.corntime.core.ui.components.CtiContentDialog
 import com.enmanuelbergling.corntime.core.ui.components.DeleteMovieConfirmationDialog
 import com.enmanuelbergling.corntime.core.ui.components.HandleUiState

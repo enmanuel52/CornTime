@@ -1,11 +1,11 @@
 package com.enmanuelbergling.corntime.feature.movies.paging.source
 
-import com.enmanuelbergling.corntime.core.domain.datasource.remote.MovieRemoteDS
-import com.enmanuelbergling.corntime.core.model.core.PageModel
-import com.enmanuelbergling.corntime.core.model.core.ResultHandler
-import com.enmanuelbergling.corntime.core.model.movie.Movie
-import com.enmanuelbergling.corntime.core.model.movie.MovieFilter
-import com.enmanuelbergling.corntime.core.model.movie.SortCriteria
+import com.enmanuelbergling.core.domain.datasource.remote.MovieRemoteDS
+import com.enmanuelbergling.core.model.core.PageModel
+import com.enmanuelbergling.core.model.core.ResultHandler
+import com.enmanuelbergling.core.model.movie.Movie
+import com.enmanuelbergling.core.model.movie.MovieFilter
+import com.enmanuelbergling.core.model.movie.SortCriteria
 import com.enmanuelbergling.corntime.core.ui.core.GenericPagingSource
 
 internal class MoviesByFilterSource(remoteDS: MovieRemoteDS, filter: MovieFilter) :

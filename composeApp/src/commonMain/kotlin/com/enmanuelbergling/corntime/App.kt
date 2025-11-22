@@ -3,7 +3,7 @@ package com.enmanuelbergling.corntime
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.enmanuelbergling.corntime.core.model.settings.DarkTheme
+import com.enmanuelbergling.core.model.settings.DarkTheme
 import com.enmanuelbergling.corntime.core.ui.theme.CornTimeTheme
 import com.enmanuelbergling.corntime.ui.CornTimeVM
 import com.enmanuelbergling.corntime.ui.CornsTimeApp
