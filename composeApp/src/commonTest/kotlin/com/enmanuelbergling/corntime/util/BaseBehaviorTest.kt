@@ -1,7 +1,6 @@
 package com.enmanuelbergling.corntime.util
 
 import com.enmanuelbergling.core.domain.usecase.di.ucModule
-import com.enmanuelbergling.corntime.di.testingDataSourceModule
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.BehaviorSpec
 import kotlinx.coroutines.Dispatchers
@@ -25,7 +24,7 @@ open class BaseBehaviorTest(
     isViewModel: Boolean = true,
 ) : BehaviorSpec(), KoinTest {
 
-    private val modules = ucModule + testingDataSourceModule
+    private val modules = ucModule + listOf()//testingDataSourceModule
 
     override fun isolationMode() = IsolationMode.InstancePerLeaf
 

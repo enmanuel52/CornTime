@@ -86,7 +86,6 @@ class FakeUserRemoteDS(
         )
 
     override suspend fun getWatchLists(
-        accountId: String,
         sessionId: String,
         page: Int,
     ): ResultHandler<PageModel<WatchList>> =
