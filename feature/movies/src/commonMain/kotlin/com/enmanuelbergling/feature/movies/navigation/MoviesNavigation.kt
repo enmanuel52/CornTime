@@ -6,6 +6,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import androidx.navigation.toRoute
+import androidx.navigation3.runtime.NavKey
 import com.enmanuelbergling.core.model.MovieSection
 import com.enmanuelbergling.core.ui.components.topComposable
 import com.enmanuelbergling.core.ui.navigation.ActorDetailNavAction
@@ -24,10 +25,10 @@ import kotlinx.serialization.Serializable
 data object MoviesGraphDestination
 
 @Serializable
-data object MoviesDestination
+data object MoviesDestination: NavKey
 
 @Serializable
-data class MoviesDetailsDestination(val id: Int)
+data class MoviesDetailsDestination(val id: Int): NavKey
 
 @Serializable
 data class MoviesSectionDestination(val section: String)
@@ -96,6 +97,14 @@ fun NavGraphBuilder.moviesGraph(
                 }
             }.onFailure { onBack() }
         }
+
+        composable<MoviesFilterDestination> {
+            MoviesFilterRoute(onBack = onBack, onMovie = onMovie)
+        }
+
+        composable<MovieSearchDestination> {
+            MovieSearchScreen(onMovieDetails = onMovie, onBack)
+        }
     }
 }
 
@@ -106,7 +115,7 @@ fun NavHostController.navigateToMovieFilter(
 }
 
 @Serializable
-data object MoviesFilterDestination
+data object MoviesFilterDestination: NavKey
 
 fun NavGraphBuilder.moviesFilterScreen(
     onMovie: (id: Int) -> Unit,
@@ -125,7 +134,7 @@ fun NavHostController.navigateToMovieSearch(
 }
 
 @Serializable
-data object MovieSearchDestination
+data object MovieSearchDestination: NavKey
 
 fun NavGraphBuilder.movieSearchScreen(
     onMovie: (id: Int) -> Unit,
