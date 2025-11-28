@@ -13,10 +13,10 @@ import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.drawscope.clipRect
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.enmanuelbergling.core.ui.theme.Gold
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun RatingStars(

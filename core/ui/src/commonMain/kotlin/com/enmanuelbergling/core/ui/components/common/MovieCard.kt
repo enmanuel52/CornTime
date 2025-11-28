@@ -26,17 +26,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.enmanuelbergling.core.ui.components.RatingStars
-import com.enmanuelbergling.core.ui.core.dimen
 import com.enmanuelbergling.core.ui.BASE_BACKDROP_IMAGE_URL
 import com.enmanuelbergling.core.ui.BASE_POSTER_IMAGE_URL
+import com.enmanuelbergling.core.ui.components.RatingStars
+import com.enmanuelbergling.core.ui.core.dimen
 import corntime.core.ui.generated.resources.Res
 import corntime.core.ui.generated.resources.pop_corn_and_cinema_backdrop
 import corntime.core.ui.generated.resources.pop_corn_and_cinema_poster
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 /**
  * @param rating between 1 and 5 showed as yellow stars

@@ -70,7 +70,7 @@ kotlin {
 
     sourceSets {
         androidMain.dependencies {
-            implementation(compose.preview)
+            implementation(libs.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.koin.androidx.compose)
             implementation(libs.ktor.client.okhttp)
@@ -89,42 +89,18 @@ kotlin {
             implementation(projects.feature.settings)
             implementation(projects.feature.watchlists)
 
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.ui)
-            implementation(compose.materialIconsExtended)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
-            implementation(libs.androidx.lifecycle.viewmodelCompose)
-            implementation(libs.androidx.lifecycle.runtimeCompose)
+            implementation(libs.components.resources)
 
             implementation(libs.kotlinx.coroutines.core)
 
-            implementation(libs.navigation.compose)
-            implementation(libs.kotlinx.serialization.json)
-
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.bundles.koin)
-            implementation(libs.bundles.ktor)
 
             implementation(libs.androidx.room.runtime)
             implementation(libs.androidx.sqlite.bundled)
 
             implementation(libs.androidx.datastore)
             implementation(libs.androidx.datastore.preferences)
-
-            implementation(libs.ktorfit)
-
-            implementation(libs.coil.compose)
-            implementation(libs.coil.network.ktor)
-
-            implementation(libs.constraintlayout.compose.multiplatform)
-
-            implementation(libs.paging.common)
-            implementation(libs.paging.compose.common)
-
-            implementation(libs.haze)
 
         }
         commonTest.dependencies {

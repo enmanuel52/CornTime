@@ -69,13 +69,7 @@ kotlin {
                 implementation(libs.kotlin.stdlib)
                 implementation(projects.core.model)
                 // Add KMP dependencies here
-                api(compose.runtime)
-                api(compose.foundation)
-                api(compose.material3)
-                api(compose.ui)
-                api(compose.materialIconsExtended)
-                api(compose.components.resources)
-                api(compose.components.uiToolingPreview)
+                api(libs.bundles.compose)
                 api(libs.androidx.lifecycle.viewmodelCompose)
                 api(libs.androidx.lifecycle.runtimeCompose)
 
@@ -94,6 +88,12 @@ kotlin {
                 api(libs.paging.compose.common)
 
                 api(libs.haze)
+
+//              Navigation 3
+                api(libs.androidx.nav3.ui)
+                api(libs.androidx.material3.adaptive)
+                api(libs.androidx.material3.adaptive.nav3)
+                api(libs.androidx.lifecycle.viewmodel.nav3)
             }
         }
 
@@ -108,7 +108,7 @@ kotlin {
                 // Add Android-specific dependencies here. Note that this source set depends on
                 // commonMain by default and will correctly pull the Android artifacts of any KMP
                 // dependencies declared in commonMain.
-                api(compose.preview)
+                api(libs.ui.tooling.preview)
                 api(libs.androidx.activity.compose)
                 api(libs.koin.androidx.compose)
             }

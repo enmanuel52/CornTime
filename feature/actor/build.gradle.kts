@@ -70,16 +70,9 @@ kotlin {
                 // Add KMP dependencies here
                 implementation(projects.core.model)
                 implementation(projects.core.domain)
-
                 implementation(projects.core.ui)
 
-                implementation(compose.runtime)
-                implementation(compose.foundation)
-                implementation(compose.material3)
-                implementation(compose.ui)
-                implementation(compose.materialIconsExtended)
-                implementation(compose.components.resources)
-                implementation(compose.components.uiToolingPreview)
+                implementation(libs.components.resources)
             }
         }
 

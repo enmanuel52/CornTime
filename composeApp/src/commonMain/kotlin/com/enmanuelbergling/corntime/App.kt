@@ -2,6 +2,7 @@ package com.enmanuelbergling.corntime
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.enmanuelbergling.core.model.settings.DarkTheme
 import com.enmanuelbergling.core.ui.theme.CornTimeTheme
@@ -9,7 +10,6 @@ import com.enmanuelbergling.corntime.ui.CornTimeVM
 import com.enmanuelbergling.corntime.ui.CornsTimeApp
 import com.enmanuelbergling.corntime.ui.OnboardingScreen
 import com.enmanuelbergling.corntime.ui.rememberCornTimeAppState
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable

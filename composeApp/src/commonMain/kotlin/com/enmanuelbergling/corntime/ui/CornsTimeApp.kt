@@ -52,6 +52,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import com.enmanuelbergling.core.model.user.UserDetails
@@ -62,9 +63,9 @@ import com.enmanuelbergling.core.ui.core.dimen
 import com.enmanuelbergling.core.ui.theme.CornTimeTheme
 import com.enmanuelbergling.core.ui.theme.onBackgroundLight
 import com.enmanuelbergling.core.ui.theme.primaryLight
-import com.enmanuelbergling.feature.settings.home.SPEED
 import com.enmanuelbergling.corntime.navigation.CtiNavHost
 import com.enmanuelbergling.corntime.navigation.TopDestination
+import com.enmanuelbergling.feature.settings.home.SPEED
 import corntime.composeapp.generated.resources.Res
 import corntime.composeapp.generated.resources.logout
 import corntime.composeapp.generated.resources.menu
@@ -74,7 +75,6 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import kotlin.math.roundToInt
 
 enum class NewDrawerState {
