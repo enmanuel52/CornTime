@@ -1,14 +1,14 @@
 package com.enmanuelbergling.feature.movies.navigation
 
+import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
-import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import androidx.navigation.navigation
-import androidx.navigation.toRoute
+import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
+import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
+import androidx.navigation3.ui.NavDisplay
 import com.enmanuelbergling.core.model.MovieSection
-import com.enmanuelbergling.core.ui.components.topComposable
 import com.enmanuelbergling.core.ui.navigation.ActorDetailNavAction
 import com.enmanuelbergling.feature.movies.details.MovieDetailsScreen
 import com.enmanuelbergling.feature.movies.filter.MoviesFilterRoute
@@ -25,30 +25,41 @@ import kotlinx.serialization.Serializable
 data object MoviesGraphDestination
 
 @Serializable
-data object MoviesDestination: NavKey
+data object MoviesDestination : NavKey
 
 @Serializable
-data class MoviesDetailsDestination(val id: Int): NavKey
+data class MoviesDetailsDestination(val id: Int) : NavKey
 
 @Serializable
-data class MoviesSectionDestination(val section: String)
+data class MoviesSectionDestination(val section: String) : NavKey
 
-fun NavHostController.navigateToMoviesGraph(navOptions: NavOptions? = null) {
-    navigate(MoviesGraphDestination, navOptions)
+@Serializable
+data object MoviesFilterDestination : NavKey
+
+@Serializable
+data object MovieSearchDestination : NavKey
+
+fun NavBackStack<NavKey>.navigateToMoviesDetails(id: Int) {
+    add(MoviesDetailsDestination(id))
 }
 
-fun NavHostController.navigateToMoviesDetails(id: Int, navOptions: NavOptions? = null) {
-    navigate(MoviesDetailsDestination(id), navOptions)
-}
-
-fun NavHostController.navigateToMoviesSection(
+fun NavBackStack<NavKey>.navigateToMoviesSection(
     movieSection: MovieSection,
-    navOptions: NavOptions? = null,
 ) {
-    navigate(MoviesSectionDestination("$movieSection"), navOptions)
+    add(MoviesSectionDestination("$movieSection"))
+}
+
+fun NavBackStack<NavKey>.navigateToMovieFilter() {
+    add(MoviesFilterDestination)
+}
+
+
+fun NavBackStack<NavKey>.navigateToMovieSearch() {
+    add(MovieSearchDestination)
 }
 
 fun NavGraphBuilder.moviesGraph(
+    moviesBackStack: NavBackStack<NavKey>,
     onBack: () -> Unit,
     onMovie: (id: Int) -> Unit,
     onActor: (ActorDetailNavAction) -> Unit,
@@ -57,90 +68,61 @@ fun NavGraphBuilder.moviesGraph(
     onFilter: () -> Unit,
     onOpenDrawer: () -> Unit,
 ) {
-    navigation<MoviesGraphDestination>(startDestination = MoviesDestination) {
+    composable<MoviesGraphDestination> {
+        NavDisplay(
+            backStack = moviesBackStack, onBack = onBack,
+            entryDecorators = listOf(
+                rememberViewModelStoreNavEntryDecorator(),
+                rememberSaveableStateHolderNavEntryDecorator(),
+            ),
+            entryProvider = entryProvider {
 
-        topComposable<MoviesDestination> {
-            MoviesScreen(
-                onDetails = onMovie,
-                onMore = onMore,
-                onSearch = onSearch,
-                onFilter = onFilter,
-                onOpenDrawer = onOpenDrawer
-            )
-        }
-
-        composable<MoviesDetailsDestination> { backStackEntry ->
-            val id = backStackEntry.toRoute<MoviesDetailsDestination>().id
-            MovieDetailsScreen(id = id, onActor, onBack)
-        }
-        composable<MoviesSectionDestination> { backStackEntry ->
-            val stringSection: String = backStackEntry.toRoute<MoviesSectionDestination>().section
-
-            val sectionResult = runCatching { MovieSection.valueOf(stringSection) }
-            sectionResult.onSuccess { result ->
-                when (result) {
-                    MovieSection.Upcoming -> UpcomingMoviesScreen(onMovie = onMovie, onBack)
-                    MovieSection.NowPlaying -> NowPlayingMoviesScreen(
-                        onMovie = onMovie,
-                        onBack = onBack
-                    )
-
-                    MovieSection.TopRated -> TopRatedMoviesScreen(
-                        onMovie = onMovie,
-                        onBack = onBack
-                    )
-
-                    MovieSection.Popular -> PopularMoviesScreen(
-                        onMovie = onMovie,
-                        onBack = onBack
+                entry<MoviesDestination> {
+                    MoviesScreen(
+                        onDetails = onMovie,
+                        onMore = onMore,
+                        onSearch = onSearch,
+                        onFilter = onFilter,
+                        onOpenDrawer = onOpenDrawer
                     )
                 }
-            }.onFailure { onBack() }
-        }
 
-        composable<MoviesFilterDestination> {
-            MoviesFilterRoute(onBack = onBack, onMovie = onMovie)
-        }
+                entry<MoviesDetailsDestination> { entry ->
+                    MovieDetailsScreen(id = entry.id, onActor, onBack)
+                }
+                entry<MoviesSectionDestination> { entry ->
+                    val stringSection = entry.section
 
-        composable<MovieSearchDestination> {
-            MovieSearchScreen(onMovieDetails = onMovie, onBack)
-        }
-    }
-}
+                    val sectionResult = runCatching { MovieSection.valueOf(stringSection) }
+                    sectionResult.onSuccess { result ->
+                        when (result) {
+                            MovieSection.Upcoming -> UpcomingMoviesScreen(onMovie = onMovie, onBack)
+                            MovieSection.NowPlaying -> NowPlayingMoviesScreen(
+                                onMovie = onMovie,
+                                onBack = onBack
+                            )
 
-fun NavHostController.navigateToMovieFilter(
-    navOptions: NavOptions? = null,
-) {
-    navigate(MoviesFilterDestination, navOptions)
-}
+                            MovieSection.TopRated -> TopRatedMoviesScreen(
+                                onMovie = onMovie,
+                                onBack = onBack
+                            )
 
-@Serializable
-data object MoviesFilterDestination: NavKey
+                            MovieSection.Popular -> PopularMoviesScreen(
+                                onMovie = onMovie,
+                                onBack = onBack
+                            )
+                        }
+                    }.onFailure { onBack() }
+                }
 
-fun NavGraphBuilder.moviesFilterScreen(
-    onMovie: (id: Int) -> Unit,
-    onBack: () -> Unit,
-) {
-    composable<MoviesFilterDestination> {
-        MoviesFilterRoute(onBack = onBack, onMovie = onMovie)
-    }
-}
+                entry<MoviesFilterDestination> {
+                    MoviesFilterRoute(onBack = onBack, onMovie = onMovie)
+                }
 
-
-fun NavHostController.navigateToMovieSearch(
-    navOptions: NavOptions? = null,
-) {
-    navigate(MovieSearchDestination, navOptions)
-}
-
-@Serializable
-data object MovieSearchDestination: NavKey
-
-fun NavGraphBuilder.movieSearchScreen(
-    onMovie: (id: Int) -> Unit,
-    onBack: () -> Unit,
-) {
-    composable<MovieSearchDestination> {
-        MovieSearchScreen(onMovieDetails = onMovie, onBack)
+                entry<MovieSearchDestination> {
+                    MovieSearchScreen(onMovieDetails = onMovie, onBack)
+                }
+            }
+        )
     }
 }

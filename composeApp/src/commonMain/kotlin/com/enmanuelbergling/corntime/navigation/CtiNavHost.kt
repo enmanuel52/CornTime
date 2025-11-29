@@ -4,23 +4,31 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.navOptions
-import com.enmanuelbergling.feature.movies.navigation.movieSearchScreen
-import com.enmanuelbergling.feature.movies.navigation.moviesFilterScreen
-import com.enmanuelbergling.feature.movies.navigation.moviesGraph
-import com.enmanuelbergling.feature.movies.navigation.navigateToMovieFilter
-import com.enmanuelbergling.feature.movies.navigation.navigateToMovieSearch
-import com.enmanuelbergling.feature.movies.navigation.navigateToMoviesDetails
-import com.enmanuelbergling.feature.movies.navigation.navigateToMoviesGraph
-import com.enmanuelbergling.feature.movies.navigation.navigateToMoviesSection
-import com.enmanuelbergling.feature.series.navigation.seriesGraph
-import com.enmanuelbergling.feature.settings.navigation.settingsGraph
-import com.enmanuelbergling.feature.watchlists.navigation.listGraph
-import com.enmanuelbergling.feature.watchlists.navigation.navigateToListDetailsScreen
+import androidx.navigation3.runtime.NavKey
+import androidx.navigation3.runtime.rememberNavBackStack
+import androidx.savedstate.serialization.SavedStateConfiguration
 import com.enmanuelbergling.corntime.ui.CornTimeAppState
 import com.enmanuelbergling.feature.actor.navigation.actorsGraph
 import com.enmanuelbergling.feature.actor.navigation.navigateToActorsDetails
 import com.enmanuelbergling.feature.auth.navigation.loginScreen
 import com.enmanuelbergling.feature.auth.navigation.navigateToLoginScreen
+import com.enmanuelbergling.feature.movies.navigation.MovieSearchDestination
+import com.enmanuelbergling.feature.movies.navigation.MoviesDestination
+import com.enmanuelbergling.feature.movies.navigation.MoviesDetailsDestination
+import com.enmanuelbergling.feature.movies.navigation.MoviesFilterDestination
+import com.enmanuelbergling.feature.movies.navigation.MoviesGraphDestination
+import com.enmanuelbergling.feature.movies.navigation.MoviesSectionDestination
+import com.enmanuelbergling.feature.movies.navigation.moviesGraph
+import com.enmanuelbergling.feature.movies.navigation.navigateToMovieFilter
+import com.enmanuelbergling.feature.movies.navigation.navigateToMovieSearch
+import com.enmanuelbergling.feature.movies.navigation.navigateToMoviesDetails
+import com.enmanuelbergling.feature.movies.navigation.navigateToMoviesSection
+import com.enmanuelbergling.feature.series.navigation.seriesGraph
+import com.enmanuelbergling.feature.settings.navigation.settingsGraph
+import com.enmanuelbergling.feature.watchlists.navigation.listGraph
+import com.enmanuelbergling.feature.watchlists.navigation.navigateToListDetailsScreen
+import kotlinx.serialization.modules.SerializersModule
+import kotlinx.serialization.modules.polymorphic
 
 
 @Composable
@@ -31,30 +39,35 @@ fun CtiNavHost(
 ) {
     val navController = state.navController
 
+    val moviesBackStack = rememberNavBackStack(
+        configuration = configuration,
+        MoviesDestination,
+    )
 
     NavHost(
-        navController,
+        navController = navController,
         startDestination = state.startDestination,
         modifier = modifier,
-        ) {
+    ) {
 
         moviesGraph(
-            onBack = navController::navigateUp,
-            onMovie = navController::navigateToMoviesDetails,
+            moviesBackStack,
+            onBack = {
+                moviesBackStack.removeLastOrNull()
+
+                if (moviesBackStack.isEmpty()) navController.popBackStack()
+            },
+            onMovie = moviesBackStack::navigateToMoviesDetails,
             onActor = { action ->
                 navController.navigateToActorsDetails(
                     action.id, action.imageUrl, action.name
                 )
             },
-            onMore = navController::navigateToMoviesSection,
-            onSearch = state.navController::navigateToMovieSearch,
-            onFilter = state.navController::navigateToMovieFilter,
+            onMore = moviesBackStack::navigateToMoviesSection,
+            onSearch = moviesBackStack::navigateToMovieSearch,
+            onFilter = moviesBackStack::navigateToMovieFilter,
             onOpenDrawer = onOpenDrawer,
         )
-
-        movieSearchScreen(navController::navigateToMoviesDetails, navController::navigateUp)
-
-        moviesFilterScreen(navController::navigateToMoviesDetails, navController::navigateUp)
 
         seriesGraph(onOpenDrawer = onOpenDrawer)
 
@@ -65,17 +78,20 @@ fun CtiNavHost(
                     action.id, action.imageUrl, action.name
                 )
             },
-            onMovie = navController::navigateToMoviesDetails,
+            onMovie = {
+                moviesBackStack.clear()
+                moviesBackStack.add(MoviesDetailsDestination(it))
+                navController.navigate(MoviesGraphDestination)
+            },
             onOpenDrawer = onOpenDrawer,
         )
 
         loginScreen(
             onLoginSucceed = {
-                navController.navigateToMoviesGraph(
+                navController.navigate(
+                    MoviesGraphDestination,
                     navOptions = navOptions {
-                        popUpTo(_root_ide_package_.com.enmanuelbergling.feature.movies.navigation.MoviesGraphDestination) {
-                            inclusive = true
-                        }
+                        popUpTo(MoviesGraphDestination) { inclusive = true }
                     }
                 )
             },
@@ -84,7 +100,11 @@ fun CtiNavHost(
 
         listGraph(
             onDetails = navController::navigateToListDetailsScreen,
-            onMovieDetails = navController::navigateToMoviesDetails,
+            onMovieDetails = {
+                moviesBackStack.clear()
+                moviesBackStack.add(MoviesDetailsDestination(it))
+                navController.navigate(MoviesGraphDestination)
+            },
             onBack = navController::navigateUp,
             onOpenDrawer = onOpenDrawer,
         )
@@ -95,5 +115,23 @@ fun CtiNavHost(
             },
             onLogin = navController::navigateToLoginScreen
         )
+    }
+}
+
+private val configuration = SavedStateConfiguration {
+    serializersModule = SerializersModule {
+        polymorphic(NavKey::class) {
+            subclass(MoviesDestination::class, MoviesDestination.serializer())
+            subclass(
+                MoviesDetailsDestination::class,
+                MoviesDetailsDestination.serializer()
+            )
+            subclass(
+                MoviesSectionDestination::class,
+                MoviesSectionDestination.serializer()
+            )
+            subclass(MovieSearchDestination::class, MovieSearchDestination.serializer())
+            subclass(MoviesFilterDestination::class, MoviesFilterDestination.serializer())
+        }
     }
 }
