@@ -53,9 +53,12 @@ fun CtiNavHost(
         moviesGraph(
             moviesBackStack,
             onBack = {
-                moviesBackStack.removeLastOrNull()
+                if (moviesBackStack.size > 1) moviesBackStack.removeLastOrNull()
 
-                if (moviesBackStack.isEmpty()) navController.popBackStack()
+                if (moviesBackStack.size == 1) {
+                    navController.popBackStack()
+                    moviesBackStack[0] = MoviesDestination
+                }
             },
             onMovie = moviesBackStack::navigateToMoviesDetails,
             onActor = { action ->
