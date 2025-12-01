@@ -230,15 +230,19 @@ private fun AnimatedContentScope.MovieDetailsScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             details?.let {
-                detailsImage(backdropUrl = BASE_BACKDROP_IMAGE_URL + details.backdropPath)
+                item {
+                    DetailsImage(backdropUrl = BASE_BACKDROP_IMAGE_URL + details.backdropPath)
+                }
 
-                information(
-                    details.title,
-                    details.releaseYear,
-                    details.voteAverage.toFloat(),
-                    details.formattedGenres,
-                    details.duration
-                )
+                item {
+                    DetailsInformation(
+                        details.title,
+                        details.releaseYear,
+                        details.voteAverage.toFloat(),
+                        details.formattedGenres,
+                        details.duration
+                    )
+                }
 
                 item {
                     if (hasWatchList) {
@@ -432,35 +436,36 @@ private fun LazyListScope.overview(overview: String) {
     }
 }
 
-private fun LazyListScope.information(
+@Composable
+internal fun DetailsInformation(
     title: String,
     year: String,
     rating: Float,
-    genres: String,
-    duration: String,
+    genres: String? = null,
+    duration: String? = null,
 ) {
-    item {
-        Column(Modifier.padding(MaterialTheme.dimen.small)) {
-            Row(
-                Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = MaterialTheme.dimen.small),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    //getting year
-                    text = "$title ($year)",
-                    style = MaterialTheme.typography.titleMedium,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.weight(1f),
-                    fontWeight = FontWeight.SemiBold
-                )
+    Column(Modifier.padding(MaterialTheme.dimen.small)) {
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .padding(horizontal = MaterialTheme.dimen.small),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                //getting year
+                text = "$title ($year)",
+                style = MaterialTheme.typography.titleMedium,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.weight(1f),
+                fontWeight = FontWeight.SemiBold
+            )
 
-                //it comes 10 for server
-                RatingStars(value = rating.div(2))
-            }
+            //it comes 10 for server
+            RatingStars(value = rating.div(2))
+        }
 
+        if (genres != null && duration != null) {
             Text(
                 text = "$genres - $duration",
                 style = MaterialTheme.typography.bodyMedium,
@@ -470,23 +475,22 @@ private fun LazyListScope.information(
     }
 }
 
-private fun LazyListScope.detailsImage(
+@Composable
+internal fun DetailsImage(
     backdropUrl: String?,
 ) {
-    item {
-        AsyncImage(
-            model = backdropUrl,
-            contentDescription = stringResource(Res.string.poster_image),
-            placeholder = painterResource(
-                Res.drawable.pop_corn_and_cinema_backdrop
-            ),
-            error = painterResource(
-                Res.drawable.pop_corn_and_cinema_backdrop
-            ),
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .animateContentSize()
-                .fillMaxWidth(),
-        )
-    }
+    AsyncImage(
+        model = backdropUrl,
+        contentDescription = stringResource(Res.string.poster_image),
+        placeholder = painterResource(
+            Res.drawable.pop_corn_and_cinema_backdrop
+        ),
+        error = painterResource(
+            Res.drawable.pop_corn_and_cinema_backdrop
+        ),
+        contentScale = ContentScale.Crop,
+        modifier = Modifier
+            .animateContentSize()
+            .fillMaxWidth(),
+    )
 }
