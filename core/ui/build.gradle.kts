@@ -75,7 +75,6 @@ kotlin {
                 api(libs.androidx.lifecycle.viewmodelCompose)
                 api(libs.androidx.lifecycle.runtimeCompose)
 
-                api(libs.navigation.compose)
                 api(libs.kotlinx.serialization.json)
 
                 api(project.dependencies.platform(libs.koin.bom))

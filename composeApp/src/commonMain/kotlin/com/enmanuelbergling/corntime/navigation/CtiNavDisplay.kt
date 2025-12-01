@@ -1,5 +1,6 @@
 package com.enmanuelbergling.corntime.navigation
 
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
