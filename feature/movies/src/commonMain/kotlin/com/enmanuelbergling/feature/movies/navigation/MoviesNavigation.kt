@@ -18,6 +18,7 @@ import com.enmanuelbergling.feature.movies.list.NowPlayingMoviesScreen
 import com.enmanuelbergling.feature.movies.list.PopularMoviesScreen
 import com.enmanuelbergling.feature.movies.list.TopRatedMoviesScreen
 import com.enmanuelbergling.feature.movies.list.UpcomingMoviesScreen
+import com.enmanuelbergling.feature.movies.recommended.RecommendedMoviesScreen
 import com.enmanuelbergling.feature.movies.search.MovieSearchScreen
 import kotlinx.serialization.Serializable
 
@@ -27,6 +28,9 @@ data object MoviesDestination : NavKey
 
 @Serializable
 data class MoviesDetailsDestination(val id: Int) : NavKey
+
+@Serializable
+data class RecommendedMoviesDestination(val id: Int) : NavKey
 
 @Serializable
 data class MoviesSectionDestination(val section: String) : NavKey
@@ -39,6 +43,10 @@ data object MovieSearchDestination : NavKey
 
 fun NavBackStack<NavKey>.navigateToMoviesDetails(id: Int) {
     add(MoviesDetailsDestination(id))
+}
+
+fun NavBackStack<NavKey>.navigateToRecommendedMovies(id: Int) {
+    add(RecommendedMoviesDestination(id))
 }
 
 fun NavBackStack<NavKey>.navigateToMoviesSection(
@@ -59,6 +67,7 @@ fun NavBackStack<NavKey>.navigateToMovieSearch() {
 fun EntryProviderScope<Any>.moviesGraph(
     onBack: () -> Unit,
     onMovie: (id: Int) -> Unit,
+    onRecommendedMovies: (id: Int) -> Unit,
     onActor: (ActorDetailNavAction) -> Unit,
     onMore: (MovieSection) -> Unit,
     onSearch: () -> Unit,
@@ -76,7 +85,12 @@ fun EntryProviderScope<Any>.moviesGraph(
     }
 
     entry<MoviesDetailsDestination> { entry ->
-        LocalNavAnimatedContentScope.current.MovieDetailsScreen(id = entry.id, onActor, onBack)
+        LocalNavAnimatedContentScope.current.MovieDetailsScreen(
+            id = entry.id,
+            onActor = onActor,
+            onRecommended = onRecommendedMovies,
+            onBack = onBack
+        )
     }
     entry<MoviesSectionDestination> { entry ->
         val stringSection = entry.section
@@ -112,7 +126,7 @@ fun EntryProviderScope<Any>.moviesGraph(
             slideInVertically { it } togetherWith slideOutVertically { -it }
         } + NavDisplay.predictivePopTransitionSpec {
             // Slide in from bottom when navigating back
-            slideInVertically{ it } togetherWith slideOutVertically { -it }
+            slideInVertically { it } togetherWith slideOutVertically { -it }
         }
     ) {
         MoviesFilterRoute(onBack = onBack, onMovie = onMovie)
@@ -120,5 +134,9 @@ fun EntryProviderScope<Any>.moviesGraph(
 
     entry<MovieSearchDestination> {
         MovieSearchScreen(onMovieDetails = onMovie, onBack)
+    }
+
+    entry<RecommendedMoviesDestination> { entry ->
+        RecommendedMoviesScreen(movieId = entry.id, onMovie = onMovie, onBack = onBack)
     }
 }

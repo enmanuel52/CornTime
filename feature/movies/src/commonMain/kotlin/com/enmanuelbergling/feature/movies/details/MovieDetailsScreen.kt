@@ -27,6 +27,8 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBackIosNew
+import androidx.compose.material.icons.rounded.Diamond
+import androidx.compose.material3.AssistChip
 import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -34,7 +36,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -99,6 +100,7 @@ import org.koin.core.parameter.parametersOf
 fun AnimatedContentScope.MovieDetailsScreen(
     id: Int,
     onActor: (ActorDetailNavAction) -> Unit,
+    onRecommended: (movie: Int) -> Unit,
     onBack: () -> Unit,
 ) {
 
@@ -121,6 +123,7 @@ fun AnimatedContentScope.MovieDetailsScreen(
         uiState = uiState,
         hasWatchList = !watchList.isEmpty,
         onActor = onActor,
+        onRecommended,
         onBack = onBack,
         onRetry = viewModel::loadPage
     ) {
@@ -140,6 +143,7 @@ private fun AnimatedContentScope.MovieDetailsScreen(
     uiState: SimplerUi,
     hasWatchList: Boolean,
     onActor: (ActorDetailNavAction) -> Unit,
+    onRecommended: (movie: Int) -> Unit,
     onBack: () -> Unit,
     onRetry: () -> Unit,
     watchListsSheet: @Composable () -> Unit,
@@ -223,6 +227,7 @@ private fun AnimatedContentScope.MovieDetailsScreen(
                 .fillMaxSize()
                 .padding(paddingValues),
             contentPadding = WindowInsets.navigationBars.asPaddingValues(),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             details?.let {
                 detailsImage(backdropUrl = BASE_BACKDROP_IMAGE_URL + details.backdropPath)
@@ -235,12 +240,28 @@ private fun AnimatedContentScope.MovieDetailsScreen(
                     details.duration
                 )
 
-                if (hasWatchList) {
-                    addToListButton {
-                        scope.launch {
-                            isSheetOpen.value = true
+                item {
+                    if (hasWatchList) {
+                        AddToListButton {
+                            scope.launch {
+                                isSheetOpen.value = true
+                            }
                         }
                     }
+
+                    AssistChip(
+                        onClick = { onRecommended(uiData.movieId) },
+                        leadingIcon = {
+                            Icon(
+                                imageVector = Icons.Rounded.Diamond,
+                                contentDescription = "more"
+                            )
+                        },
+                        label = {
+                            Text(text = "More like this")
+
+                        }
+                    )
                 }
 
 
@@ -324,16 +345,16 @@ private fun SheetContent(
     }
 }
 
-private fun LazyListScope.addToListButton(
+@Composable
+private fun AddToListButton(
     onClick: () -> Unit,
 ) {
-    item {
-        Row(horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxWidth()) {
-            OutlinedButton(onClick = onClick) {
-                Text(text = stringResource(Res.string.add_to_watch_list))
-            }
-        }
-    }
+    AssistChip(
+        onClick = onClick,
+        label = {
+            Text(text = stringResource(Res.string.add_to_watch_list))
+        },
+    )
 }
 
 private fun LazyListScope.persons(

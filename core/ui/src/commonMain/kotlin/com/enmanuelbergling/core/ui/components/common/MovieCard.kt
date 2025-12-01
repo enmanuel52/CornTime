@@ -4,6 +4,7 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,12 +28,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.enmanuelbergling.core.ui.BASE_BACKDROP_IMAGE_URL
 import com.enmanuelbergling.core.ui.BASE_POSTER_IMAGE_URL
 import com.enmanuelbergling.core.ui.components.RatingStars
 import com.enmanuelbergling.core.ui.core.dimen
+import com.enmanuelbergling.core.ui.theme.CornTimeTheme
 import corntime.core.ui.generated.resources.Res
 import corntime.core.ui.generated.resources.pop_corn_and_cinema_backdrop
 import corntime.core.ui.generated.resources.pop_corn_and_cinema_poster
@@ -56,7 +59,8 @@ fun MovieCard(
         modifier = modifier
     ) {
         ElevatedCard(
-            onClick = onClick, modifier = Modifier
+            onClick = onClick,
+            modifier = Modifier
                 .animateContentSize(
                     spring(Spring.DampingRatioLowBouncy, Spring.StiffnessMediumLow)
                 ),
@@ -83,7 +87,7 @@ fun MovieCard(
 @Preview
 @Composable
 fun MovieCardPrev() {
-    _root_ide_package_.com.enmanuelbergling.core.ui.theme.CornTimeTheme {
+    CornTimeTheme {
         MovieCard(imageUrl = "", title = "Joker", rating = 3.5) {}
     }
 }
@@ -142,7 +146,7 @@ fun HeaderMovieCard(
             )
         }
 
-        Spacer(modifier =Modifier. height(MaterialTheme.dimen.small))
+        Spacer(modifier = Modifier.height(MaterialTheme.dimen.small))
 
         HeaderMovieInfo(
             title = title,
@@ -210,5 +214,118 @@ private fun HeaderMovieInfoPlaceholder() {
         )
         Spacer(modifier = Modifier.width(MaterialTheme.dimen.verySmall))
         RatingStars(value = 0f)
+    }
+}
+
+
+/**
+ * @param rating between 1 and 5 showed as yellow stars
+ * */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun RecommendedMovieCard(
+    imageUrl: String?,
+    title: String,
+    year: String,
+    rating: Double,
+    modifier: Modifier = Modifier,
+    titleLines: Int = 2,
+    onClick: () -> Unit,
+) {
+    Row(
+        modifier = Modifier
+            .clickable { onClick() }
+            .padding(MaterialTheme.dimen.small) then modifier,
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        ElevatedCard(
+            modifier = Modifier
+                .animateContentSize(
+                    spring(Spring.DampingRatioLowBouncy, Spring.StiffnessMediumLow)
+                )
+                .weight(.4f),
+        ) {
+            AsyncImage(
+                model = BASE_BACKDROP_IMAGE_URL + imageUrl,
+                contentDescription = "movie image",
+                error = painterResource(Res.drawable.pop_corn_and_cinema_poster),
+                placeholder = painterResource(Res.drawable.pop_corn_and_cinema_poster),
+                modifier = Modifier.aspectRatio(1.35f),
+                contentScale = ContentScale.Crop
+            )
+        }
+
+        Spacer(Modifier.width(MaterialTheme.dimen.medium))
+
+        Column(
+            modifier = Modifier.weight(.6f),
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimen.small)
+        ) {
+            Text(
+                text = title,
+                maxLines = titleLines,
+                overflow = TextOverflow.Ellipsis,
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Normal
+            )
+            Text("($year)", style = MaterialTheme.typography.labelLarge)
+            RatingStars(
+                value = rating.div(2).toFloat(), size = 16.dp, spaceBetween = 1.dp,
+            )
+        }
+    }
+}
+
+@Preview
+@Composable
+fun RecommendedMovieCardPrev() {
+    CornTimeTheme {
+        RecommendedMovieCard(
+            imageUrl = "",
+            title = LoremIpsum(10).values.joinToString(),
+            rating = 3.5,
+            year = "2025"
+        ) {}
+    }
+}
+
+@Preview
+@Composable
+fun RecommendedMovieCardPlaceholder(modifier: Modifier = Modifier) {
+    Row(
+        modifier
+            .padding(MaterialTheme.dimen.small),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Box(
+            Modifier
+                .aspectRatio(1.35f)
+                .background(
+                    MaterialTheme.colorScheme.surfaceVariant,
+                    CardDefaults.elevatedShape
+                )
+                .weight(.4f)
+        )
+        Spacer(Modifier.width(MaterialTheme.dimen.medium))
+        Column(
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimen.small),
+            modifier = Modifier.weight(.6f)
+        ) {
+            repeat(2) {
+                Box(
+                    modifier = modifier
+                        .fillMaxWidth(.9f)
+                        .height(MaterialTheme.dimen.medium)
+                        .background(
+                            MaterialTheme.colorScheme.surfaceVariant,
+                            MaterialTheme.shapes.small
+                        )
+                )
+            }
+            RatingStars(
+                value = 0f,
+                size = 16.dp, spaceBetween = 1.dp,
+            )
+        }
     }
 }

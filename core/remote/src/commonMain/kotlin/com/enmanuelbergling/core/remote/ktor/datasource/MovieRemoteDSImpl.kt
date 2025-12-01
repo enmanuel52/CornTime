@@ -80,4 +80,14 @@ internal class MovieRemoteDSImpl(
 
         PageModel(movies, result.totalPages)
     }
+
+    override suspend fun getRecommendations(
+        movieId: Int,
+        page: Int
+    ) = safeKtorCall {
+        val result = service.getRecommendations(movieId, page)
+        val movies = result.results.map { it.toModel() }
+
+        PageModel(movies, result.totalPages)
+    }
 }

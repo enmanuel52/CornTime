@@ -36,4 +36,9 @@ class FakeMovieRemoteDS : MovieRemoteDS {
 
     override suspend fun searchMovie(query: String, page: Int): ResultHandler<PageModel<Movie>> =
         ResultHandler.Success(FakeMovieData.MOVIES.asPage())
+
+    override suspend fun getRecommendations(
+        movieId: Int,
+        page: Int
+    ) = ResultHandler.Success(FakeMovieData.MOVIES.asPage())
 }

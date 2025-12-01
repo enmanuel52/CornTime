@@ -54,4 +54,11 @@ internal class MovieService(private val httpClient: KtorClient) {
     suspend fun getMovieGenres(): GenreListDTO = httpClient
         .get("genre/movie/list") {}
         .body()
+
+    suspend fun getRecommendations(movieId: Int, page: Int): MoviePageDTO = httpClient
+        .get("movie/$movieId/recommendations"){
+            url {
+                parameters.append(name = "page", value = "$page")
+            }
+        }.body()
 }

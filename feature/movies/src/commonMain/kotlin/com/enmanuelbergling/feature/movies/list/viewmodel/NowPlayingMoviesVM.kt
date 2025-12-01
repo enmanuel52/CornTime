@@ -6,5 +6,5 @@ import androidx.paging.cachedIn
 import com.enmanuelbergling.feature.movies.paging.usecase.GetSectionMoviesUC
 
 internal class NowPlayingMoviesVM(getSectionMoviesUC: GetSectionMoviesUC) : ViewModel() {
-    val movies = getSectionMoviesUC.getNowPlaying().cachedIn(viewModelScope)
+        val movies = getSectionMoviesUC.getNowPlaying().cachedIn(viewModelScope)
 }

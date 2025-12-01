@@ -21,6 +21,7 @@ import com.enmanuelbergling.feature.movies.navigation.navigateToMovieFilter
 import com.enmanuelbergling.feature.movies.navigation.navigateToMovieSearch
 import com.enmanuelbergling.feature.movies.navigation.navigateToMoviesDetails
 import com.enmanuelbergling.feature.movies.navigation.navigateToMoviesSection
+import com.enmanuelbergling.feature.movies.navigation.navigateToRecommendedMovies
 import com.enmanuelbergling.feature.series.navigation.seriesGraph
 import com.enmanuelbergling.feature.settings.navigation.settingsGraph
 import com.enmanuelbergling.feature.watchlists.navigation.listGraph
@@ -64,6 +65,7 @@ fun CtiNavDisplay(
             moviesGraph(
                 onBack = onBack,
                 onMovie = backStack::navigateToMoviesDetails,
+                onRecommendedMovies = backStack::navigateToRecommendedMovies,
                 onActor = { action ->
                     backStack.navigateToActorsDetails(
                         action.id, action.imageUrl, action.name

@@ -33,4 +33,9 @@ interface MovieRemoteDS : RemoteDataSource {
         query: String,
         page: Int,
     ): ResultHandler<PageModel<Movie>>
+
+    suspend fun getRecommendations(
+        movieId: Int,
+        page: Int,
+    ): ResultHandler<PageModel<Movie>>
 }

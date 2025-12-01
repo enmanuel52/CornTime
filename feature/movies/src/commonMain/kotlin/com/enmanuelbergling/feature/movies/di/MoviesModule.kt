@@ -16,8 +16,10 @@ import com.enmanuelbergling.feature.movies.list.viewmodel.PopularMoviesVM
 import com.enmanuelbergling.feature.movies.list.viewmodel.TopRatedMoviesVM
 import com.enmanuelbergling.feature.movies.list.viewmodel.UpcomingMoviesVM
 import com.enmanuelbergling.feature.movies.paging.usecase.GetFilteredMoviesUC
+import com.enmanuelbergling.feature.movies.paging.usecase.GetRecommendedMoviesUC
 import com.enmanuelbergling.feature.movies.paging.usecase.GetSectionMoviesUC
 import com.enmanuelbergling.feature.movies.paging.watchlist.GetUserWatchListsUC
+import com.enmanuelbergling.feature.movies.recommended.RecommendedMoviesVM
 import com.enmanuelbergling.feature.movies.search.MovieSearchVM
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModelOf
@@ -41,6 +43,7 @@ private val pagingModule = module {
     singleOf(::GetSectionMoviesUC)
     singleOf(::GetFilteredMoviesUC)
     singleOf(::GetUserWatchListsUC)
+    singleOf(::GetRecommendedMoviesUC)
 }
 
 val moviesModule = module {
@@ -54,6 +57,7 @@ val moviesModule = module {
     viewModelOf(::TopRatedMoviesVM)
     viewModelOf(::UpcomingMoviesVM)
     viewModelOf(::PopularMoviesVM)
+    viewModelOf(::RecommendedMoviesVM)
 
     viewModelOf(::MovieSearchVM)
     viewModelOf(::MoviesFilterVM)
