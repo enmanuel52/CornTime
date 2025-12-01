@@ -3,19 +3,20 @@ package com.enmanuelbergling.feature.watchlists.navigation
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
+import com.enmanuelbergling.core.ui.navigation.topEntry
 import com.enmanuelbergling.feature.watchlists.details.WatchListDetailsRoute
 import com.enmanuelbergling.feature.watchlists.home.WatchListRoute
 import kotlinx.serialization.Serializable
 
 
 @Serializable
-data object WatchListDestination: NavKey
+data object WatchListDestination : NavKey
 
 @Serializable
 data class ListDetailsDestination(
     val listId: Int,
     val listName: String,
-): NavKey
+) : NavKey
 
 fun NavBackStack<NavKey>.navigateToListDetailsScreen(
     listId: Int,
@@ -30,7 +31,7 @@ fun EntryProviderScope<Any>.listGraph(
     onBack: () -> Unit,
     onOpenDrawer: () -> Unit,
 ) {
-    entry<WatchListDestination> {
+    topEntry<WatchListDestination> {
         WatchListRoute(
             onDetails = onDetails,
             onOpenDrawer = onOpenDrawer,

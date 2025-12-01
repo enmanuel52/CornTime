@@ -1,13 +1,16 @@
 package com.enmanuelbergling.feature.movies.navigation
 
-import androidx.compose.animation.AnimatedContentScope
-import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.togetherWith
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.ui.LocalNavAnimatedContentScope
+import androidx.navigation3.ui.NavDisplay
 import com.enmanuelbergling.core.model.MovieSection
 import com.enmanuelbergling.core.ui.navigation.ActorDetailNavAction
+import com.enmanuelbergling.core.ui.navigation.topEntry
 import com.enmanuelbergling.feature.movies.details.MovieDetailsScreen
 import com.enmanuelbergling.feature.movies.filter.MoviesFilterRoute
 import com.enmanuelbergling.feature.movies.home.MoviesScreen
@@ -62,7 +65,7 @@ fun EntryProviderScope<Any>.moviesGraph(
     onFilter: () -> Unit,
     onOpenDrawer: () -> Unit,
 ) {
-    entry<MoviesDestination> {
+    topEntry<MoviesDestination> {
         MoviesScreen(
             onDetails = onMovie,
             onMore = onMore,
@@ -100,7 +103,18 @@ fun EntryProviderScope<Any>.moviesGraph(
         }.onFailure { onBack() }
     }
 
-    entry<MoviesFilterDestination> {
+    entry<MoviesFilterDestination>(
+        metadata = NavDisplay.transitionSpec {
+            // Slide in from top when navigating forward
+            slideInVertically { -it } togetherWith slideOutVertically { +it }
+        } + NavDisplay.popTransitionSpec {
+            // Slide in from bottom when navigating back
+            slideInVertically { it } togetherWith slideOutVertically { -it }
+        } + NavDisplay.predictivePopTransitionSpec {
+            // Slide in from bottom when navigating back
+            slideInVertically{ it } togetherWith slideOutVertically { -it }
+        }
+    ) {
         MoviesFilterRoute(onBack = onBack, onMovie = onMovie)
     }
 

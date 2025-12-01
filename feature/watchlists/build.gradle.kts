@@ -116,6 +116,10 @@ kotlin {
                 // KMP dependencies declared in commonMain.
             }
         }
+
+        all {
+            languageSettings.enableLanguageFeature("ContextParameters")
+        }
     }
 
 }

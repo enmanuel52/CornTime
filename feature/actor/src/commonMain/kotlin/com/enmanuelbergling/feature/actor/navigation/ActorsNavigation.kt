@@ -5,6 +5,7 @@ import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.ui.LocalNavAnimatedContentScope
 import com.enmanuelbergling.core.ui.navigation.ActorDetailNavAction
+import com.enmanuelbergling.core.ui.navigation.topEntry
 import com.enmanuelbergling.feature.actor.details.ActorDetailsRoute
 import com.enmanuelbergling.feature.actor.home.ActorsScreen
 import kotlinx.serialization.Serializable
@@ -38,7 +39,7 @@ fun EntryProviderScope<Any>.actorsGraph(
     onMovie: (movieId: Int) -> Unit,
     onOpenDrawer: () -> Unit,
 ) {
-    entry<ActorsDestination> {
+    topEntry<ActorsDestination> {
         LocalNavAnimatedContentScope.current.ActorsScreen(
             onDetails = onDetails, onOpenDrawer
         )

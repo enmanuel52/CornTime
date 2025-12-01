@@ -1,6 +1,8 @@
 package com.enmanuelbergling.corntime.navigation
 
-import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.togetherWith
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -45,6 +47,18 @@ fun CtiNavDisplay(
             rememberViewModelStoreNavEntryDecorator(),
         ),
         modifier = modifier,
+        transitionSpec = {
+            // Slide in from right when navigating forward
+            slideInHorizontally { it } togetherWith slideOutHorizontally { -it }
+        },
+        popTransitionSpec = {
+            // Slide in from left when navigating back
+            slideInHorizontally { -it } togetherWith slideOutHorizontally { it }
+        },
+        predictivePopTransitionSpec = {
+            // Slide in from left when navigating back
+            slideInHorizontally{ -it } togetherWith slideOutHorizontally { it }
+        },
         entryProvider = entryProvider<Any> {
 
             moviesGraph(
