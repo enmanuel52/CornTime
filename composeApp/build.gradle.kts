@@ -122,6 +122,9 @@ kotlin {
         nativeMain.dependencies {
             implementation(libs.ktor.client.darwin)
         }
+        all {
+            languageSettings.enableLanguageFeature("ContextParameters")
+        }
     }
 }
 

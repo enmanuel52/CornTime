@@ -1,63 +1,50 @@
 package com.enmanuelbergling.feature.watchlists.navigation
 
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
-import androidx.navigation.NavOptions
-import androidx.navigation.compose.composable
-import androidx.navigation.navigation
-import androidx.navigation.toRoute
-import com.enmanuelbergling.core.ui.components.topComposable
+import androidx.navigation3.runtime.EntryProviderScope
+import androidx.navigation3.runtime.NavBackStack
+import androidx.navigation3.runtime.NavKey
 import com.enmanuelbergling.feature.watchlists.details.WatchListDetailsRoute
 import com.enmanuelbergling.feature.watchlists.home.WatchListRoute
 import kotlinx.serialization.Serializable
 
-@Serializable
-data object ListGraphDestination
 
 @Serializable
-data object WatchListDestination
+data object WatchListDestination: NavKey
 
 @Serializable
 data class ListDetailsDestination(
     val listId: Int,
     val listName: String,
-)
+): NavKey
 
-fun NavHostController.navigateToListGraph(navOptions: NavOptions? = null) {
-    navigate(ListGraphDestination, navOptions)
-}
-
-fun NavHostController.navigateToListDetailsScreen(
+fun NavBackStack<NavKey>.navigateToListDetailsScreen(
     listId: Int,
     listName: String,
-    navOptions: NavOptions? = null,
 ) {
-    navigate(ListDetailsDestination(listId, listName), navOptions)
+    add(ListDetailsDestination(listId, listName))
 }
 
-fun NavGraphBuilder.listGraph(
+fun EntryProviderScope<Any>.listGraph(
     onDetails: (listId: Int, listName: String) -> Unit,
     onMovieDetails: (movieId: Int) -> Unit,
     onBack: () -> Unit,
     onOpenDrawer: () -> Unit,
 ) {
-    navigation<ListGraphDestination>(startDestination = WatchListDestination) {
-        topComposable<WatchListDestination> {
-            WatchListRoute(
-                onDetails = onDetails,
-                onOpenDrawer = onOpenDrawer,
-            )
-        }
+    entry<WatchListDestination> {
+        WatchListRoute(
+            onDetails = onDetails,
+            onOpenDrawer = onOpenDrawer,
+        )
+    }
 
-        composable<ListDetailsDestination> { backStackEntry ->
-            val (listId, listName) = backStackEntry.toRoute<ListDetailsDestination>()
+    entry<ListDetailsDestination> { entry ->
+        val (listId, listName) = entry
 
-            WatchListDetailsRoute(
-                listId = listId,
-                listName = listName,
-                onMovieDetails = onMovieDetails,
-                onBack = onBack
-            )
-        }
+        WatchListDetailsRoute(
+            listId = listId,
+            listName = listName,
+            onMovieDetails = onMovieDetails,
+            onBack = onBack
+        )
     }
 }

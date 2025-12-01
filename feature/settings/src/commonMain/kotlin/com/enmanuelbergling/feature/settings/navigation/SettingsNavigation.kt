@@ -1,28 +1,16 @@
 package com.enmanuelbergling.feature.settings.navigation
 
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
-import androidx.navigation.NavOptions
-import androidx.navigation.navigation
-import com.enmanuelbergling.core.ui.components.topComposable
+import androidx.navigation3.runtime.EntryProviderScope
+import androidx.navigation3.runtime.NavKey
 import com.enmanuelbergling.feature.settings.home.SettingsRoute
 import kotlinx.serialization.Serializable
 
 
 @Serializable
-data object SettingsGraphDestination
+data object SettingsDestination: NavKey
 
-@Serializable
-data object SettingsDestination
-
-fun NavHostController.navigateToSettingsGraph(navOptions: NavOptions?=null) {
-    navigate(SettingsGraphDestination, navOptions)
-}
-
-fun NavGraphBuilder.settingsGraph(onBack: ()->Unit, onLogin: ()->Unit) {
-    navigation<SettingsGraphDestination>(startDestination = SettingsDestination) {
-        topComposable<SettingsDestination> {
-            SettingsRoute(onBack, onLogin)
-        }
+fun EntryProviderScope<Any>.settingsGraph(onBack: ()->Unit, onLogin: ()->Unit) {
+    entry<SettingsDestination> {
+        SettingsRoute(onBack, onLogin)
     }
 }

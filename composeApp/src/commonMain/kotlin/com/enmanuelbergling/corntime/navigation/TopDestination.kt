@@ -1,9 +1,11 @@
 package com.enmanuelbergling.corntime.navigation
 
+import androidx.navigation3.runtime.NavKey
+import com.enmanuelbergling.feature.actor.navigation.ActorsDestination
+import com.enmanuelbergling.feature.movies.navigation.MoviesDestination
 import com.enmanuelbergling.feature.series.navigation.SeriesDestination
 import com.enmanuelbergling.feature.settings.navigation.SettingsDestination
 import com.enmanuelbergling.feature.watchlists.navigation.WatchListDestination
-import com.enmanuelbergling.feature.actor.navigation.ActorsDestination
 import corntime.composeapp.generated.resources.Res
 import corntime.composeapp.generated.resources.actors
 import corntime.composeapp.generated.resources.bookmark_outline
@@ -27,13 +29,13 @@ enum class TopDestination(
      val label: StringResource,
      val selectedIconRes: DrawableResource,
      val unselectedIconRes: DrawableResource,
-    val route: Any?,
+    val route: NavKey,
 ) {
     Movies(
         Res.string.movies,
         Res.drawable.film_solid,
         Res.drawable.film_outline,
-        _root_ide_package_.com.enmanuelbergling.feature.movies.navigation.MoviesDestination
+        MoviesDestination
     ),
     Series(
         Res.string.series,

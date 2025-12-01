@@ -3,92 +3,45 @@ package com.enmanuelbergling.corntime.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
-import androidx.navigation.NavDestination
-import androidx.navigation.NavDestination.Companion.hasRoute
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navOptions
+import androidx.navigation3.runtime.NavBackStack
+import androidx.navigation3.runtime.NavKey
 import com.enmanuelbergling.corntime.navigation.TopDestination
-import com.enmanuelbergling.feature.actor.navigation.navigateToActorsGraph
 import com.enmanuelbergling.feature.movies.navigation.MoviesDestination
-import com.enmanuelbergling.feature.movies.navigation.MoviesGraphDestination
-import com.enmanuelbergling.feature.series.navigation.navigateToSeriesGraph
-import com.enmanuelbergling.feature.settings.navigation.navigateToSettingsGraph
-import com.enmanuelbergling.feature.watchlists.navigation.navigateToListGraph
 
 @Composable
 fun rememberCornTimeAppState(
     isOnline: Boolean = true,
-    navController: NavHostController = rememberNavController(),
-) = remember(navController) { CornTimeAppState(isOnline, navController) }
+    navBackStack: NavBackStack<NavKey>,
+) = remember(navBackStack) { CornTimeAppState(isOnline, navBackStack) }
 
 
 @Stable
 class CornTimeAppState(
     val isOnline: Boolean = true,
-    val navController: NavHostController,
+    val navBackStack: NavBackStack<NavKey>,
 ) {
-    private val currentDestination: NavDestination?
-        @Composable get() = navController
-            .currentBackStackEntryAsState().value?.destination
-
-    val startDestination =
-        MoviesGraphDestination
-
     val isTopDestination: Boolean
-        @Composable get() = currentDestination?.let { destination ->
-            TopDestination.entries.mapNotNull { it.route }
-                .any { route -> destination.hasRoute(route::class) }
-        } ?: false
+        get() = TopDestination.entries.map { it.route }
+            .any { route -> navBackStack.last() == route }
 
     val mainDrawerEnabled: Boolean
-        @Composable get() = currentDestination?.let { destination ->
-            listOf(TopDestination.Movies, TopDestination.Series, TopDestination.Actors)
-                .mapNotNull { it.route }
-                .any { route -> destination.hasRoute(route::class) }
-        } ?: false
-
-    @Composable
-    fun matchRoute(route: Any) = currentDestination?.hasRoute(route::class) == true
+        get() = listOf(
+            TopDestination.Movies,
+            TopDestination.Series,
+            TopDestination.Actors
+        )
+            .map { it.route }
+            .any { route -> navBackStack.last() == route }
 
     fun navigateToDrawerDestination(destination: TopDestination) {
-        when (destination) {
-            TopDestination.Movies -> navController.navigate(
-                route = MoviesGraphDestination,
-                navOptions = navOptions {
-                    popUpTo<MoviesDestination> {
-                        inclusive = true
-                    }
-                }
-            )
+        if (destination.route == navBackStack.last()) return
 
-
-            TopDestination.Series -> navController.navigateToSeriesGraph(
-                navOptions {
-                    popUpTo<MoviesDestination>()
-                }
-            )
-
-
-            TopDestination.Actors -> navController.navigateToActorsGraph(
-                navOptions {
-                    popUpTo<MoviesDestination>()
-                }
-            )
-
-            TopDestination.Lists -> navController.navigateToListGraph(
-                navOptions {
-                    popUpTo<MoviesDestination>()
-                }
-            )
-
-            TopDestination.Settings -> navController.navigateToSettingsGraph(
-                navOptions {
-                    popUpTo<MoviesDestination>()
-                }
-            )
-
+        if (destination == TopDestination.Movies) {
+            navBackStack.removeLastOrNull()
+        } else {
+            navBackStack.clear()
+            navBackStack.add(MoviesDestination)
+            navBackStack.add(destination.route)
         }
     }
 }

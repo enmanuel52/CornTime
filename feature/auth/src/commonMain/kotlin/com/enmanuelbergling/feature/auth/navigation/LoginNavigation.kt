@@ -1,21 +1,20 @@
 package com.enmanuelbergling.feature.auth.navigation
 
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
-import androidx.navigation.NavOptions
-import androidx.navigation.compose.composable
+import androidx.navigation3.runtime.EntryProviderScope
+import androidx.navigation3.runtime.NavBackStack
+import androidx.navigation3.runtime.NavKey
 import com.enmanuelbergling.feature.auth.LoginRoute
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object LoginDestination
+data object LoginDestination: NavKey
 
-fun NavHostController.navigateToLoginScreen(navOptions: NavOptions? = null) {
-    navigate(LoginDestination, navOptions)
+fun NavBackStack<NavKey>.navigateToLoginScreen() {
+    add(LoginDestination)
 }
 
-fun NavGraphBuilder.loginScreen(onLoginSucceed: () -> Unit, onBack: ()->Unit) {
-    composable<LoginDestination> {
+fun EntryProviderScope<Any>.loginScreen(onLoginSucceed: () -> Unit, onBack: ()->Unit) {
+    entry<LoginDestination> {
         LoginRoute(onLoginSucceed,onBack)
     }
 }

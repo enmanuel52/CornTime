@@ -55,6 +55,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
+import androidx.navigation3.runtime.NavKey
 import com.enmanuelbergling.core.model.user.UserDetails
 import com.enmanuelbergling.core.ui.components.runtimeShader
 import com.enmanuelbergling.core.ui.components.shaders.HotPlasmaShader
@@ -63,7 +64,7 @@ import com.enmanuelbergling.core.ui.core.dimen
 import com.enmanuelbergling.core.ui.theme.CornTimeTheme
 import com.enmanuelbergling.core.ui.theme.onBackgroundLight
 import com.enmanuelbergling.core.ui.theme.primaryLight
-import com.enmanuelbergling.corntime.navigation.CtiNavHost
+import com.enmanuelbergling.corntime.navigation.CtiNavDisplay
 import com.enmanuelbergling.corntime.navigation.TopDestination
 import com.enmanuelbergling.feature.settings.home.SPEED
 import corntime.composeapp.generated.resources.Res
@@ -86,7 +87,7 @@ val NewDrawerWidth = 200.dp
 @OptIn(ExperimentalSharedTransitionApi::class, ExperimentalFoundationApi::class)
 @Composable
 fun CornsTimeApp(
-    state: CornTimeAppState = rememberCornTimeAppState(),
+    state: CornTimeAppState,
     userDetails: UserDetails?,
     onLogout: () -> Unit,
 ) {
@@ -143,7 +144,7 @@ fun CornsTimeApp(
                         draggableState.animateTo(NewDrawerState.Closed)
                     }
                 },
-                isSelected = { route -> state.matchRoute(route = route) },
+                currentRoute = state.navBackStack.lastOrNull(),
                 userDetails = userDetails,
                 onCloseDrawer = {
                     scope.launch {
@@ -186,7 +187,7 @@ fun CornsTimeApp(
                             )
                     ) {
                         Surface {
-                            CtiNavHost(
+                            CtiNavDisplay(
                                 state = state,
                                 onOpenDrawer = {
                                     scope.launch {
@@ -231,7 +232,7 @@ fun CornsTimeApp(
 
 val OnSurfaceLight = Color(0xFF231918)
 
-val onShaderColor  = onBackgroundLight
+val onShaderColor = onBackgroundLight
 val onShaderActiveColor = primaryLight
 
 
@@ -239,7 +240,7 @@ val onShaderActiveColor = primaryLight
 fun DrawerContent(
     onDrawerDestination: (TopDestination) -> Unit,
     onCloseDrawer: () -> Unit,
-    isSelected: @Composable (route: Any) -> Boolean,
+    currentRoute: NavKey?,
     userDetails: UserDetails?,
     onLogout: () -> Unit,
     modifier: Modifier = Modifier,
@@ -261,7 +262,7 @@ fun DrawerContent(
             TopDestination.entries
                 .filterNot { it.loginRequired && userDetails == null }
                 .forEach { destination ->
-                    val selected = destination.route?.let { route -> isSelected(route) } == true
+                    val selected = destination.route == currentRoute
                     NavDrawerItem(
                         label = stringResource(destination.label),
                         selected = selected,
@@ -346,7 +347,7 @@ private fun DrawerContentPrev() {
     CornTimeTheme {
         DrawerContent(
             onDrawerDestination = {},
-            isSelected = { true },
+            currentRoute = TopDestination.Series.route,
             userDetails = null,
             modifier = Modifier
                 .width(NewDrawerWidth)

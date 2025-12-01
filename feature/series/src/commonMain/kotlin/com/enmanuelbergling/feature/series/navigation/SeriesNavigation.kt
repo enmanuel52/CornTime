@@ -1,30 +1,18 @@
 package com.enmanuelbergling.feature.series.navigation
 
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
-import androidx.navigation.NavOptions
-import androidx.navigation.navigation
-import com.enmanuelbergling.core.ui.components.topComposable
+import androidx.navigation3.runtime.EntryProviderScope
+import androidx.navigation3.runtime.NavKey
 import com.enmanuelbergling.feature.series.home.SeriesScreen
 import kotlinx.serialization.Serializable
 
 
 @Serializable
-data object SeriesGraphDestination
+data object SeriesDestination : NavKey
 
-@Serializable
-data object SeriesDestination
-
-fun NavHostController.navigateToSeriesGraph(navOptions: NavOptions) {
-    navigate(SeriesGraphDestination, navOptions)
-}
-
-fun NavGraphBuilder.seriesGraph(
+fun EntryProviderScope<Any>.seriesGraph(
     onOpenDrawer: () -> Unit,
 ) {
-    navigation<SeriesGraphDestination>(startDestination = SeriesDestination) {
-        topComposable<SeriesDestination> {
-            SeriesScreen(onOpenDrawer)
-        }
+    entry<SeriesDestination> {
+        SeriesScreen(onOpenDrawer)
     }
 }

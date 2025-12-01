@@ -1,12 +1,9 @@
 package com.enmanuelbergling.feature.actor.navigation
 
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
-import androidx.navigation.NavOptions
-import androidx.navigation.compose.composable
-import androidx.navigation.navigation
-import androidx.navigation.toRoute
-import com.enmanuelbergling.core.ui.components.topComposable
+import androidx.navigation3.runtime.EntryProviderScope
+import androidx.navigation3.runtime.NavBackStack
+import androidx.navigation3.runtime.NavKey
+import androidx.navigation3.ui.LocalNavAnimatedContentScope
 import com.enmanuelbergling.core.ui.navigation.ActorDetailNavAction
 import com.enmanuelbergling.feature.actor.details.ActorDetailsRoute
 import com.enmanuelbergling.feature.actor.home.ActorsScreen
@@ -14,58 +11,46 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data object ActorsGraphDestination
+data object ActorsDestination : NavKey
 
 @Serializable
-data object ActorsDestination
-
-@Serializable
-internal data class ActorDetailsDestination(
+data class ActorDetailsDestination(
     val id: Int,
     val imageUrl: String?,
     val name: String,
-) {
+) : NavKey {
     init {
         require(imageUrl == null || imageUrl.isNotBlank()) { "actor image url must not be blank" }
     }
 }
 
-fun NavHostController.navigateToActorsGraph(navOptions: NavOptions? = null) {
-    navigate(ActorsGraphDestination, navOptions)
-}
-
-fun NavHostController.navigateToActorsDetails(
+fun NavBackStack<NavKey>.navigateToActorsDetails(
     id: Int,
     imageUrl: String?,
     name: String,
-    navOptions: NavOptions? = null,
 ) {
-    navigate(ActorDetailsDestination(id, imageUrl, name), navOptions)
+    add(ActorDetailsDestination(id, imageUrl, name))
 }
 
-fun NavGraphBuilder.actorsGraph(
+fun EntryProviderScope<Any>.actorsGraph(
     onBack: () -> Unit,
     onDetails: (ActorDetailNavAction) -> Unit,
     onMovie: (movieId: Int) -> Unit,
     onOpenDrawer: () -> Unit,
 ) {
-    navigation<ActorsGraphDestination>(ActorsDestination) {
-        topComposable<ActorsDestination> {
-            ActorsScreen(
-                onDetails = onDetails, onOpenDrawer
-            )
-        }
+    entry<ActorsDestination> {
+        LocalNavAnimatedContentScope.current.ActorsScreen(
+            onDetails = onDetails, onOpenDrawer
+        )
+    }
 
-        composable<ActorDetailsDestination> { backStackEntry ->
-            val destination = backStackEntry.toRoute<ActorDetailsDestination>()
-
-            ActorDetailsRoute(
-                id = destination.id,
-                imagePath = destination.imageUrl,
-                name = destination.name,
-                onMovie = onMovie,
-                onBack = onBack
-            )
-        }
+    entry<ActorDetailsDestination> { entry ->
+        LocalNavAnimatedContentScope.current.ActorDetailsRoute(
+            id = entry.id,
+            imagePath = entry.imageUrl,
+            name = entry.name,
+            onMovie = onMovie,
+            onBack = onBack
+        )
     }
 }

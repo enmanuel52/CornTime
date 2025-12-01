@@ -76,7 +76,15 @@ import com.enmanuelbergling.core.ui.core.isRefreshing
 import com.enmanuelbergling.core.ui.navigation.ActorDetailNavAction
 import com.enmanuelbergling.feature.movies.details.model.PersonUiItem
 import com.enmanuelbergling.feature.movies.details.model.toPersonUi
-import corntime.feature.movies.generated.resources.*
+import corntime.feature.movies.generated.resources.Res
+import corntime.feature.movies.generated.resources.add_to_watch_list
+import corntime.feature.movies.generated.resources.cast
+import corntime.feature.movies.generated.resources.crew
+import corntime.feature.movies.generated.resources.details
+import corntime.feature.movies.generated.resources.list_background_animation
+import corntime.feature.movies.generated.resources.pop_corn_and_cinema_backdrop
+import corntime.feature.movies.generated.resources.poster_image
+import corntime.feature.movies.generated.resources.watch_lists
 import dev.chrisbanes.haze.HazeState
 import dev.chrisbanes.haze.HazeStyle
 import dev.chrisbanes.haze.haze
@@ -94,7 +102,7 @@ fun AnimatedContentScope.MovieDetailsScreen(
     onBack: () -> Unit,
 ) {
 
-    val viewModel = koinViewModel<com.enmanuelbergling.feature.movies.details.MovieDetailsVM> { parametersOf(id) }
+    val viewModel = koinViewModel<MovieDetailsVM> { parametersOf(id) }
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val watchList = viewModel.watchlists.collectAsLazyPagingItems()
@@ -116,7 +124,7 @@ fun AnimatedContentScope.MovieDetailsScreen(
         onBack = onBack,
         onRetry = viewModel::loadPage
     ) {
-        _root_ide_package_.com.enmanuelbergling.feature.movies.details.SheetContent(
+        SheetContent(
             watchList = watchList,
             withinListsState = withinListsState,
             details = uiData.details,
