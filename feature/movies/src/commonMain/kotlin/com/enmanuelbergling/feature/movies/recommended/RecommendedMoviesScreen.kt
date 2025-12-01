@@ -1,5 +1,6 @@
 package com.enmanuelbergling.feature.movies.recommended
 
+import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -26,7 +27,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import app.cash.paging.compose.collectAsLazyPagingItems
 import com.enmanuelbergling.core.model.movie.Movie
-import com.enmanuelbergling.core.ui.BASE_BACKDROP_IMAGE_URL
 import com.enmanuelbergling.core.ui.components.HandlerPagingUiState
 import com.enmanuelbergling.core.ui.components.common.RecommendedMovieCard
 import com.enmanuelbergling.core.ui.components.common.RecommendedMovieCardPlaceholder
@@ -44,7 +44,11 @@ import org.koin.core.parameter.parametersOf
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RecommendedMoviesScreen(movieId: Int, onMovie: (movieId: Int) -> Unit, onBack: () -> Unit) {
+fun AnimatedContentScope.RecommendedMoviesScreen(
+    movieId: Int,
+    onMovie: (movieId: Int, backdropUrl: String?) -> Unit,
+    onBack: () -> Unit
+) {
     val viewModel = koinViewModel<RecommendedMoviesVM> { parametersOf(movieId) }
     val movies = viewModel.movies.collectAsLazyPagingItems()
 
@@ -95,7 +99,7 @@ fun RecommendedMoviesScreen(movieId: Int, onMovie: (movieId: Int) -> Unit, onBac
                                         rotation = 4f,
                                         durationMillis = 200,
                                     )
-                            ) { onMovie(movie.id) }
+                            ) { onMovie(movie.id, movie.backdropPath) }
                         } else {
                             RecommendedMovieCard(
                                 imageUrl = movie.backdropPath,
@@ -108,7 +112,7 @@ fun RecommendedMoviesScreen(movieId: Int, onMovie: (movieId: Int) -> Unit, onBac
                                     durationMillis = 200
                                 )
                             ) {
-                                onMovie(movie.id)
+                                onMovie(movie.id, movie.backdropPath)
                             }
                         }
 
@@ -126,7 +130,7 @@ fun RecommendedMoviesScreen(movieId: Int, onMovie: (movieId: Int) -> Unit, onBac
 }
 
 @Composable
-fun FirstRecommendation(
+fun AnimatedContentScope.FirstRecommendation(
     movie: Movie,
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
@@ -135,7 +139,7 @@ fun FirstRecommendation(
         modifier = Modifier.clickable { onClick() } then modifier,
         verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimen.superSmall),
     ) {
-        DetailsImage(BASE_BACKDROP_IMAGE_URL + movie.backdropPath)
+        DetailsImage(movie.backdropPath)
 
         DetailsInformation(
             title = movie.title,

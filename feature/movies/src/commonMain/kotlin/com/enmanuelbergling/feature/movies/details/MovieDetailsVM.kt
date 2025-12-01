@@ -32,6 +32,7 @@ internal class MovieDetailsVM(
     private val addMovieToListUC: com.enmanuelbergling.core.domain.usecase.user.watchlist.AddMovieToListUC,
     private val checkItemStatusUC: com.enmanuelbergling.core.domain.usecase.user.watchlist.CheckItemStatusUC,
     private val movieId: Int,
+    private val backdropUrl: String,
 ) : ViewModel() {
 
     val sessionId = getSessionId().stateIn(
@@ -61,7 +62,7 @@ internal class MovieDetailsVM(
     private val _uiState = MutableStateFlow<SimplerUi>(SimplerUi.Idle)
     val uiState = _uiState.asStateFlow()
 
-    private val _uiDataState = MutableStateFlow(MovieDetailsUiData(movieId = movieId))
+    private val _uiDataState = MutableStateFlow(MovieDetailsUiData(movieId = movieId, backdropUrl = backdropUrl))
     val uiDataState get() = _uiDataState.asStateFlow()
 
     init {

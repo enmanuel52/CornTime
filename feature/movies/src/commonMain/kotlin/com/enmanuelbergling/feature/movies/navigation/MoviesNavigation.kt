@@ -27,7 +27,7 @@ import kotlinx.serialization.Serializable
 data object MoviesDestination : NavKey
 
 @Serializable
-data class MoviesDetailsDestination(val id: Int) : NavKey
+data class MoviesDetailsDestination(val id: Int, val backdropUrl: String? = null) : NavKey
 
 @Serializable
 data class RecommendedMoviesDestination(val id: Int) : NavKey
@@ -43,6 +43,10 @@ data object MovieSearchDestination : NavKey
 
 fun NavBackStack<NavKey>.navigateToMoviesDetails(id: Int) {
     add(MoviesDetailsDestination(id))
+}
+
+fun NavBackStack<NavKey>.animateToMoviesDetails(id: Int, backdropUrl: String?) {
+    add(MoviesDetailsDestination(id, backdropUrl))
 }
 
 fun NavBackStack<NavKey>.navigateToRecommendedMovies(id: Int) {
@@ -67,6 +71,7 @@ fun NavBackStack<NavKey>.navigateToMovieSearch() {
 fun EntryProviderScope<Any>.moviesGraph(
     onBack: () -> Unit,
     onMovie: (id: Int) -> Unit,
+    onAnimateToMovieDetails: (id: Int, backdropUrl: String?) -> Unit,
     onRecommendedMovies: (id: Int) -> Unit,
     onActor: (ActorDetailNavAction) -> Unit,
     onMore: (MovieSection) -> Unit,
@@ -74,6 +79,7 @@ fun EntryProviderScope<Any>.moviesGraph(
     onFilter: () -> Unit,
     onOpenDrawer: () -> Unit,
 ) {
+
     topEntry<MoviesDestination> {
         MoviesScreen(
             onDetails = onMovie,
@@ -87,6 +93,7 @@ fun EntryProviderScope<Any>.moviesGraph(
     entry<MoviesDetailsDestination> { entry ->
         LocalNavAnimatedContentScope.current.MovieDetailsScreen(
             id = entry.id,
+            backdropUrl = entry.backdropUrl,
             onActor = onActor,
             onRecommended = onRecommendedMovies,
             onBack = onBack
@@ -137,6 +144,10 @@ fun EntryProviderScope<Any>.moviesGraph(
     }
 
     entry<RecommendedMoviesDestination> { entry ->
-        RecommendedMoviesScreen(movieId = entry.id, onMovie = onMovie, onBack = onBack)
+        LocalNavAnimatedContentScope.current.RecommendedMoviesScreen(
+            movieId = entry.id,
+            onMovie = onAnimateToMovieDetails,
+            onBack = onBack
+        )
     }
 }
