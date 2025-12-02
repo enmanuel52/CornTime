@@ -37,6 +37,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -46,6 +47,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import coil3.compose.AsyncImage
 import com.enmanuelbergling.core.model.MovieSection
 import com.enmanuelbergling.core.model.movie.Movie
@@ -104,6 +106,8 @@ fun MoviesScreen(
 
     HandleUiState(uiState, snackState = snackBarHostState, onRetry = viewModel::loadUi)
 
+    val windowSize = currentWindowAdaptiveInfo().windowSizeClass
+
     Scaffold(
         snackbarHost = { SnackbarHost(snackBarHostState) },
         topBar = {
@@ -117,19 +121,30 @@ fun MoviesScreen(
         contentWindowInsets = WindowInsets.statusBars,
     ) { paddingValues ->
         Column(
-            modifier = Modifier
-                .padding(paddingValues)
+            modifier = Modifier.padding(paddingValues)
         ) {
 
-            MoviesGrid(
-                upcoming = upcomingMovies.take(5),
-                topRated = topRatedMovies,
-                nowPlaying = nowPlayingMovies,
-                popular = popularMovies,
-                onDetails = onDetails,
-                onMore = onMore,
-                isLoading = uiState == SimplerUi.Loading
-            )
+            if (windowSize.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
+                MoviesGridLandscape(
+                    upcoming = upcomingMovies.take(5),
+                    topRated = topRatedMovies,
+                    nowPlaying = nowPlayingMovies,
+                    popular = popularMovies,
+                    onDetails = onDetails,
+                    onMore = onMore,
+                    isLoading = uiState == SimplerUi.Loading
+                )
+            } else {
+                MoviesGridPortrait(
+                    upcoming = upcomingMovies.take(5),
+                    topRated = topRatedMovies,
+                    nowPlaying = nowPlayingMovies,
+                    popular = popularMovies,
+                    onDetails = onDetails,
+                    onMore = onMore,
+                    isLoading = uiState == SimplerUi.Loading
+                )
+            }
         }
     }
 }
@@ -143,18 +158,17 @@ fun MoviesTopBar(
     onFilter: () -> Unit,
 ) {
     TopAppBar(
-        title = { Text(text = stringResource(Res.string.movies)) },
-        navigationIcon = {
+        title = { Text(text = stringResource(Res.string.movies)) }, navigationIcon = {
 
             IconButton(
                 onClick = onOpenDrawer
             ) {
                 Icon(
-                    painter = painterResource(Res.drawable.bars_bottom_left), contentDescription = "Sandwich menu icon"
+                    painter = painterResource(Res.drawable.bars_bottom_left),
+                    contentDescription = "Sandwich menu icon"
                 )
             }
-        },
-        actions = {
+        }, actions = {
             IconButton(onClick = onFilter) {
                 Icon(
                     painter = painterResource(Res.drawable.funnel),
@@ -168,13 +182,12 @@ fun MoviesTopBar(
                     contentDescription = stringResource(Res.string.search_icon)
                 )
             }
-        },
-        scrollBehavior = scrollBehavior
+        }, scrollBehavior = scrollBehavior
     )
 }
 
 @Composable
-fun MoviesGrid(
+fun MoviesGridPortrait(
     upcoming: List<Movie>,
     topRated: List<Movie>,
     nowPlaying: List<Movie>,
@@ -188,20 +201,18 @@ fun MoviesGrid(
     val nowPlayingTitle = stringResource(Res.string.now_playing)
     val popularTitle = stringResource(Res.string.popular)
     LazyColumn(
-        modifier = modifier.fillMaxWidth()
-            .padding(horizontal = MaterialTheme.dimen.verySmall),
+        modifier = modifier.fillMaxWidth().padding(horizontal = MaterialTheme.dimen.verySmall),
         contentPadding = WindowInsets.navigationBars.asPaddingValues(),
         verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimen.small),
     ) {
-        headersMovies(upcoming, onDetails, isLoading) { onMore(MovieSection.Upcoming) }
+        item {
+            HeadersMovies(upcoming, onDetails, isLoading) { onMore(MovieSection.Upcoming) }
+        }
 
         forYouText()
 
         moviesSection(
-            title = topRatedTitle,
-            movies = topRated,
-            onDetails = onDetails,
-            isLoading = isLoading
+            title = topRatedTitle, movies = topRated, onDetails = onDetails, isLoading = isLoading
         ) { onMore(MovieSection.TopRated) }
 
         moviesSection(
@@ -212,11 +223,63 @@ fun MoviesGrid(
         ) { onMore(MovieSection.NowPlaying) }
 
         moviesSection(
-            title = popularTitle,
-            movies = popular,
-            onDetails = onDetails,
-            isLoading = isLoading
+            title = popularTitle, movies = popular, onDetails = onDetails, isLoading = isLoading
         ) { onMore(MovieSection.Popular) }
+    }
+}
+
+@Composable
+fun MoviesGridLandscape(
+    upcoming: List<Movie>,
+    topRated: List<Movie>,
+    nowPlaying: List<Movie>,
+    popular: List<Movie>,
+    modifier: Modifier = Modifier,
+    onDetails: (id: Int) -> Unit,
+    onMore: (MovieSection) -> Unit,
+    isLoading: Boolean,
+) {
+    val topRatedTitle = stringResource(Res.string.top_rated)
+    val nowPlayingTitle = stringResource(Res.string.now_playing)
+    val popularTitle = stringResource(Res.string.popular)
+
+    Row(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.dimen.small),
+    ) {
+        HeadersMovies(
+            upcoming = upcoming,
+            onDetails = onDetails,
+            isLoading = isLoading,
+            modifier = Modifier.align(Alignment.CenterVertically)
+                .weight(.55f),
+        ) { onMore(MovieSection.Upcoming) }
+
+        LazyColumn(
+            modifier = Modifier.weight(.45f).padding(horizontal = MaterialTheme.dimen.verySmall),
+            contentPadding = WindowInsets.navigationBars.asPaddingValues(),
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimen.small),
+        ) {
+            forYouText()
+
+            moviesSection(
+                title = topRatedTitle,
+                movies = topRated,
+                onDetails = onDetails,
+                isLoading = isLoading
+            ) { onMore(MovieSection.TopRated) }
+
+            moviesSection(
+                title = nowPlayingTitle,
+                movies = nowPlaying,
+                onDetails = onDetails,
+                isLoading = isLoading
+            ) { onMore(MovieSection.NowPlaying) }
+
+            moviesSection(
+                title = popularTitle, movies = popular, onDetails = onDetails, isLoading = isLoading
+            ) { onMore(MovieSection.Popular) }
+        }
     }
 }
 
@@ -231,12 +294,11 @@ fun LazyListScope.moviesSection(
     item {
         if (movies.isEmpty() && isLoading) {
             Row(
-                Modifier.shimmer()) {
+                Modifier.shimmer()
+            ) {
                 repeat(5) {
                     MovieCardPlaceholder(
-                        modifier = Modifier
-                            .padding(start = MaterialTheme.dimen.small)
-                            .width(180.dp)
+                        modifier = Modifier.padding(start = MaterialTheme.dimen.small).width(180.dp)
                     )
                 }
             }
@@ -261,12 +323,9 @@ fun LazyListScope.moviesSection(
                             imageUrl = movie.posterPath,
                             title = movie.title,
                             rating = movie.voteAverage,
-                            modifier = Modifier
-                                .width(180.dp)
-                                .listItemWindAnimation(
-                                    listState.isScrollingForward(),
-                                    Orientation.Horizontal
-                                )
+                            modifier = Modifier.width(180.dp).listItemWindAnimation(
+                                listState.isScrollingForward(), Orientation.Horizontal
+                            )
                         ) {
                             onDetails(movie.id)
                         }
@@ -277,79 +336,76 @@ fun LazyListScope.moviesSection(
     }
 }
 
-private fun LazyListScope.headersMovies(
+@Composable
+private fun HeadersMovies(
     upcoming: List<Movie>,
     onDetails: (id: Int) -> Unit,
     isLoading: Boolean,
+    modifier: Modifier = Modifier,
     onMore: () -> Unit,
 ) {
 
-    item {
+    if (upcoming.isEmpty() && isLoading) {
+        HeaderMoviePlaceholder(modifier.shimmer())
+    } else {
+        val pagerState = rememberPagerState { upcoming.count() }
+        Column(modifier) {
+            SectionHeader(
+                title = stringResource(Res.string.upcoming),
+                modifier = Modifier.padding(horizontal = MaterialTheme.dimen.small),
+                onMore = onMore
+            )
 
-        if (upcoming.isEmpty() && isLoading) {
-            HeaderMoviePlaceholder(Modifier.shimmer())
-        } else {
-            val pagerState = rememberPagerState { upcoming.count() }
-            Column {
-                SectionHeader(
-                    title = stringResource(Res.string.upcoming),
-                    modifier = Modifier.padding(horizontal = MaterialTheme.dimen.small),
-                    onMore = onMore
-                )
+            Spacer(modifier = Modifier.height(MaterialTheme.dimen.small))
 
-                Spacer(modifier = Modifier.height(MaterialTheme.dimen.small))
-
-                InstagramPager(
-                    state = pagerState,
-                    pageSpacing = MaterialTheme.dimen.verySmall,
-                    boxAngle = 20
-                ) { page, pageModifier ->
-                    val movie = upcoming.getOrNull(page)
-                    movie?.let {
-                        ElevatedCard(onClick = { onDetails(movie.id) }, modifier = pageModifier) {
-                            AsyncImage(
-                                model = BASE_BACKDROP_IMAGE_URL + movie.backdropPath.orEmpty(),
-                                contentDescription = "header image",
-                                placeholder = painterResource(
-                                    Res.drawable.pop_corn_and_cinema_backdrop
-                                ),
-                                error = painterResource(
-                                    Res.drawable.pop_corn_and_cinema_backdrop
-                                ),
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .aspectRatio(1.78f),
-                                contentScale = ContentScale.FillWidth
-                            )
-                        }
+            InstagramPager(
+                state = pagerState, pageSpacing = MaterialTheme.dimen.verySmall, boxAngle = 20
+            ) { page, pageModifier ->
+                val movie = upcoming.getOrNull(page)
+                movie?.let {
+                    ElevatedCard(onClick = { onDetails(movie.id) }, modifier = pageModifier) {
+                        AsyncImage(
+                            model = BASE_BACKDROP_IMAGE_URL + movie.backdropPath.orEmpty(),
+                            contentDescription = "header image",
+                            placeholder = painterResource(
+                                Res.drawable.pop_corn_and_cinema_backdrop
+                            ),
+                            error = painterResource(
+                                Res.drawable.pop_corn_and_cinema_backdrop
+                            ),
+                            modifier = Modifier.fillMaxWidth().aspectRatio(1.78f),
+                            contentScale = ContentScale.FillWidth
+                        )
                     }
                 }
+            }
 
-                AnimatedContent(
-                    targetState = pagerState.currentPage,
-                    transitionSpec = {
-                        slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Up) togetherWith
-                                slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Down)
-                    },
-                    label = "movie info animation",
-                    modifier = Modifier.padding(MaterialTheme.dimen.small)
-                ) { page ->
-                    val movie = upcoming.getOrNull(page)
+            AnimatedContent(
+                targetState = pagerState.currentPage,
+                transitionSpec = {
+                    slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Up) togetherWith slideOutOfContainer(
+                        AnimatedContentTransitionScope.SlideDirection.Down
+                    )
+                },
+                label = "movie info animation",
+                modifier = Modifier.padding(MaterialTheme.dimen.small)
+            ) { page ->
+                val movie = upcoming.getOrNull(page)
 
-                    HeaderMovieInfo(title = movie?.title.orEmpty(), rating = movie?.voteAverage ?: .0)
-                }
-
-                Spacer(modifier = Modifier.height(MaterialTheme.dimen.verySmall))
-
-                ShiftIndicator(
-                    pagerState = pagerState,
-                    modifier = Modifier.align(Alignment.CenterHorizontally),
-                    stepSize = MaterialTheme.dimen.small,
-                    spaceBetween = MaterialTheme.dimen.small
+                HeaderMovieInfo(
+                    title = movie?.title.orEmpty(), rating = movie?.voteAverage ?: .0
                 )
             }
-        }
 
+            Spacer(modifier = Modifier.height(MaterialTheme.dimen.verySmall))
+
+            ShiftIndicator(
+                pagerState = pagerState,
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                stepSize = MaterialTheme.dimen.small,
+                spaceBetween = MaterialTheme.dimen.small
+            )
+        }
     }
 }
 
