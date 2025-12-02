@@ -3,6 +3,8 @@ package com.enmanuelbergling.feature.movies.navigation
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.togetherWith
+import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
+import androidx.compose.material3.adaptive.navigation3.SupportingPaneSceneStrategy
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
@@ -64,6 +66,7 @@ fun NavBackStack<NavKey>.navigateToMovieSearch() {
     add(MovieSearchDestination)
 }
 
+@OptIn(ExperimentalMaterial3AdaptiveApi::class)
 fun EntryProviderScope<Any>.moviesGraph(
     onBack: () -> Unit,
     onMovie: (id: Int) -> Unit,
@@ -84,7 +87,9 @@ fun EntryProviderScope<Any>.moviesGraph(
         )
     }
 
-    entry<MoviesDetailsDestination> { entry ->
+    entry<MoviesDetailsDestination>(
+        metadata = SupportingPaneSceneStrategy.mainPane()
+    ) { entry ->
         LocalNavAnimatedContentScope.current.MovieDetailsScreen(
             id = entry.id,
             onActor = onActor,
@@ -136,7 +141,9 @@ fun EntryProviderScope<Any>.moviesGraph(
         MovieSearchScreen(onMovieDetails = onMovie, onBack)
     }
 
-    entry<RecommendedMoviesDestination> { entry ->
+    entry<RecommendedMoviesDestination>(
+        metadata = SupportingPaneSceneStrategy.supportingPane(),
+    ) { entry ->
         RecommendedMoviesScreen(movieId = entry.id, onMovie = onMovie, onBack = onBack)
     }
 }
