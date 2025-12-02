@@ -5,11 +5,11 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.togetherWith
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.navigation3.rememberListDetailSceneStrategy
+import androidx.compose.material3.adaptive.navigation3.rememberSupportingPaneSceneStrategy
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
-import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
@@ -42,6 +42,7 @@ fun CtiNavDisplay(
     val backStack = state.navBackStack
 
     val listDetailStrategy = rememberListDetailSceneStrategy<Any>()
+    val supportingPaneStrategy = rememberSupportingPaneSceneStrategy<Any>()
 
     val onBack = remember {
         { if (backStack.size > 1) backStack.removeLastOrNull() }
@@ -54,7 +55,7 @@ fun CtiNavDisplay(
             rememberSaveableStateHolderNavEntryDecorator(),
             rememberViewModelStoreNavEntryDecorator(),
         ),
-        sceneStrategy = listDetailStrategy,
+        sceneStrategy = listDetailStrategy then supportingPaneStrategy,
         modifier = modifier,
         transitionSpec = {
             // Slide in from right when navigating forward
