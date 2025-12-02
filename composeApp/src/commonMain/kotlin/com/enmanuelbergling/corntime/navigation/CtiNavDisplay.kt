@@ -19,7 +19,6 @@ import com.enmanuelbergling.feature.actor.navigation.navigateToActorsDetails
 import com.enmanuelbergling.feature.auth.navigation.loginScreen
 import com.enmanuelbergling.feature.auth.navigation.navigateToLoginScreen
 import com.enmanuelbergling.feature.movies.navigation.MoviesDestination
-import com.enmanuelbergling.feature.movies.navigation.animateToMoviesDetails
 import com.enmanuelbergling.feature.movies.navigation.moviesGraph
 import com.enmanuelbergling.feature.movies.navigation.navigateToMovieFilter
 import com.enmanuelbergling.feature.movies.navigation.navigateToMovieSearch
@@ -67,14 +66,13 @@ fun CtiNavDisplay(
         },
         predictivePopTransitionSpec = {
             // Slide in from left when navigating back
-            slideInHorizontally { -it } togetherWith slideOutHorizontally { it }
+            slideInHorizontally{ -it } togetherWith slideOutHorizontally { it }
         },
         entryProvider = entryProvider {
 
             moviesGraph(
                 onBack = onBack,
                 onMovie = backStack::navigateToMoviesDetails,
-                onAnimateToMovieDetails = backStack::animateToMoviesDetails,
                 onRecommendedMovies = backStack::navigateToRecommendedMovies,
                 onActor = { action ->
                     backStack.navigateToActorsDetails(

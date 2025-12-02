@@ -7,7 +7,6 @@ data class MovieDetailsUiData(
     val details: MovieDetails? = null,
     val credits: MovieCredits? = null,
     val movieId: Int = 0,
-    val backdropUrl: String = "",
 ) {
     val skipDetails get() = details != null
     val skipCredits get() = credits != null

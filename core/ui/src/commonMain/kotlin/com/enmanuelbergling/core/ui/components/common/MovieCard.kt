@@ -1,7 +1,5 @@
 package com.enmanuelbergling.core.ui.components.common
 
-import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
@@ -26,7 +24,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -37,8 +34,6 @@ import coil3.compose.AsyncImage
 import com.enmanuelbergling.core.ui.BASE_BACKDROP_IMAGE_URL
 import com.enmanuelbergling.core.ui.BASE_POSTER_IMAGE_URL
 import com.enmanuelbergling.core.ui.components.RatingStars
-import com.enmanuelbergling.core.ui.core.BoundsTransition
-import com.enmanuelbergling.core.ui.core.LocalSharedTransitionScope
 import com.enmanuelbergling.core.ui.core.dimen
 import com.enmanuelbergling.core.ui.theme.CornTimeTheme
 import corntime.core.ui.generated.resources.Res
@@ -228,7 +223,7 @@ private fun HeaderMovieInfoPlaceholder() {
  * */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AnimatedContentScope.RecommendedMovieCard(
+fun RecommendedMovieCard(
     imageUrl: String?,
     title: String,
     year: String,
@@ -237,8 +232,6 @@ fun AnimatedContentScope.RecommendedMovieCard(
     titleLines: Int = 2,
     onClick: () -> Unit,
 ) {
-    val sharedTransitionScope = LocalSharedTransitionScope.current!!
-
     Row(
         modifier = Modifier
             .clickable { onClick() }
@@ -257,15 +250,7 @@ fun AnimatedContentScope.RecommendedMovieCard(
                 contentDescription = "movie image",
                 error = painterResource(Res.drawable.pop_corn_and_cinema_poster),
                 placeholder = painterResource(Res.drawable.pop_corn_and_cinema_poster),
-                modifier = Modifier.aspectRatio(1.35f)
-                        then with(sharedTransitionScope) {
-                    Modifier.sharedElement(
-                        sharedContentState = rememberSharedContentState(key = imageUrl.orEmpty()),
-                        animatedVisibilityScope = this@RecommendedMovieCard,
-                        boundsTransform = BoundsTransition
-                    )
-                        .clip(CardDefaults.elevatedShape)
-                },
+                modifier = Modifier.aspectRatio(1.35f),
                 contentScale = ContentScale.Crop
             )
         }
@@ -295,17 +280,12 @@ fun AnimatedContentScope.RecommendedMovieCard(
 @Composable
 fun RecommendedMovieCardPrev() {
     CornTimeTheme {
-        val shown = true
-        AnimatedContent(
-            shown
-        ) {
-            RecommendedMovieCard(
-                imageUrl = "",
-                title = LoremIpsum(10).values.joinToString(),
-                rating = 3.5,
-                year = "2025"
-            ) {}
-        }
+        RecommendedMovieCard(
+            imageUrl = "",
+            title = LoremIpsum(10).values.joinToString(),
+            rating = 3.5,
+            year = "2025"
+        ) {}
     }
 }
 

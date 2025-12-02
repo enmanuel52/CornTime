@@ -30,7 +30,6 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.enmanuelbergling.core.ui.BASE_POSTER_IMAGE_URL
 import com.enmanuelbergling.core.ui.core.BoundsTransition
-import com.enmanuelbergling.core.ui.core.LocalSharedTransitionScope
 import com.enmanuelbergling.core.ui.core.dimen
 import corntime.core.ui.generated.resources.Res
 import corntime.core.ui.generated.resources.mr_bean
@@ -70,7 +69,7 @@ fun ActorPlaceHolder(modifier: Modifier = Modifier) {
 fun ActorsRowPlaceholder(modifier: Modifier = Modifier) {
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(MaterialTheme.dimen.small),
-        modifier = modifier,
+//        modifier = modifier.shimmer(),
     ) {
         items(50) { ActorPlaceHolder(modifier = Modifier.width(110.dp)) }
     }
@@ -84,14 +83,14 @@ fun AnimatedContentScope.ActorCard(
     modifier: Modifier = Modifier,
     onCLick: () -> Unit,
 ) {
-    val sharedTransitionScope = LocalSharedTransitionScope.current!!
+    val sharedTransitionScope = _root_ide_package_.com.enmanuelbergling.core.ui.core.LocalSharedTransitionScope.current!!
 
     Column(modifier) {
         ElevatedCard(onCLick) {
             AsyncImage(
                 model = BASE_POSTER_IMAGE_URL + imageUrl,
                 contentDescription = "movie image",
-                error = painterResource(Res.drawable.mr_bean),
+                error = painterResource( Res.drawable.mr_bean),
                 placeholder = painterResource(Res.drawable.mr_bean),
                 modifier = Modifier
                     .aspectRatio(.65f)

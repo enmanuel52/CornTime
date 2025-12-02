@@ -30,7 +30,6 @@ import androidx.compose.material.icons.rounded.ArrowBackIosNew
 import androidx.compose.material.icons.rounded.Diamond
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.BottomSheetDefaults
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -53,7 +52,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
@@ -72,8 +70,6 @@ import com.enmanuelbergling.core.ui.components.RatingStars
 import com.enmanuelbergling.core.ui.components.common.ActorCard
 import com.enmanuelbergling.core.ui.components.common.ActorsRowPlaceholder
 import com.enmanuelbergling.core.ui.components.common.WatchListCard
-import com.enmanuelbergling.core.ui.core.BoundsTransition
-import com.enmanuelbergling.core.ui.core.LocalSharedTransitionScope
 import com.enmanuelbergling.core.ui.core.dimen
 import com.enmanuelbergling.core.ui.core.isAppending
 import com.enmanuelbergling.core.ui.core.isEmpty
@@ -103,13 +99,12 @@ import org.koin.core.parameter.parametersOf
 @Composable
 fun AnimatedContentScope.MovieDetailsScreen(
     id: Int,
-    backdropUrl: String?,
     onActor: (ActorDetailNavAction) -> Unit,
     onRecommended: (movie: Int) -> Unit,
     onBack: () -> Unit,
 ) {
 
-    val viewModel = koinViewModel<MovieDetailsVM> { parametersOf(id, backdropUrl.orEmpty()) }
+    val viewModel = koinViewModel<MovieDetailsVM> { parametersOf(id) }
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val watchList = viewModel.watchlists.collectAsLazyPagingItems()
@@ -171,7 +166,7 @@ private fun AnimatedContentScope.MovieDetailsScreen(
         uiState = uiState,
         snackState = snackbarHostState,
         onRetry,
-        getFocus = false,
+        getFocus = details == null
     )
 
     if (isSheetOpen.value) {
@@ -234,11 +229,11 @@ private fun AnimatedContentScope.MovieDetailsScreen(
             contentPadding = WindowInsets.navigationBars.asPaddingValues(),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            item {
-                DetailsImage(backdropUrl = uiData.backdropUrl.ifBlank { details?.backdropPath })
-            }
-
             details?.let {
+                item {
+                    DetailsImage(backdropUrl = BASE_BACKDROP_IMAGE_URL + details.backdropPath)
+                }
+
                 item {
                     DetailsInformation(
                         details.title,
@@ -483,13 +478,11 @@ internal fun DetailsInformation(
 }
 
 @Composable
-internal fun AnimatedContentScope.DetailsImage(
+internal fun DetailsImage(
     backdropUrl: String?,
 ) {
-    val sharedTransitionScope = LocalSharedTransitionScope.current!!
-
     AsyncImage(
-        model = BASE_BACKDROP_IMAGE_URL + backdropUrl,
+        model = backdropUrl,
         contentDescription = stringResource(Res.string.poster_image),
         placeholder = painterResource(
             Res.drawable.pop_corn_and_cinema_backdrop
@@ -499,14 +492,7 @@ internal fun AnimatedContentScope.DetailsImage(
         ),
         contentScale = ContentScale.Crop,
         modifier = Modifier
-            .fillMaxWidth()
-                then with(sharedTransitionScope) {
-            Modifier.sharedElement(
-                sharedContentState = rememberSharedContentState(key = backdropUrl.orEmpty()),
-                animatedVisibilityScope = this@DetailsImage,
-                boundsTransform = BoundsTransition
-            )
-                .clip(CardDefaults.elevatedShape)
-        },
+            .animateContentSize()
+            .fillMaxWidth(),
     )
 }
