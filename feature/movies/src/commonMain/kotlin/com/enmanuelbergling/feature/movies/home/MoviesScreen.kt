@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
@@ -242,44 +243,39 @@ fun MoviesGridLandscape(
     val topRatedTitle = stringResource(Res.string.top_rated)
     val nowPlayingTitle = stringResource(Res.string.now_playing)
     val popularTitle = stringResource(Res.string.popular)
+    val upcomingTitle = stringResource(Res.string.upcoming)
 
-    Row(
-        modifier = modifier,
-        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.dimen.small),
+    LazyColumn(
+        modifier = Modifier.fillMaxSize().padding(horizontal = MaterialTheme.dimen.verySmall),
+        contentPadding = WindowInsets.navigationBars.asPaddingValues(),
+        verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimen.small),
     ) {
-        HeadersMovies(
-            upcoming = upcoming,
+        moviesSection(
+            title = upcomingTitle,
+            movies = upcoming,
             onDetails = onDetails,
-            isLoading = isLoading,
-            modifier = Modifier.align(Alignment.CenterVertically)
-                .weight(.55f),
+            isLoading = isLoading
         ) { onMore(MovieSection.Upcoming) }
 
-        LazyColumn(
-            modifier = Modifier.weight(.45f).padding(horizontal = MaterialTheme.dimen.verySmall),
-            contentPadding = WindowInsets.navigationBars.asPaddingValues(),
-            verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimen.small),
-        ) {
-            forYouText()
+        forYouText()
 
-            moviesSection(
-                title = topRatedTitle,
-                movies = topRated,
-                onDetails = onDetails,
-                isLoading = isLoading
-            ) { onMore(MovieSection.TopRated) }
+        moviesSection(
+            title = topRatedTitle,
+            movies = topRated,
+            onDetails = onDetails,
+            isLoading = isLoading
+        ) { onMore(MovieSection.TopRated) }
 
-            moviesSection(
-                title = nowPlayingTitle,
-                movies = nowPlaying,
-                onDetails = onDetails,
-                isLoading = isLoading
-            ) { onMore(MovieSection.NowPlaying) }
+        moviesSection(
+            title = nowPlayingTitle,
+            movies = nowPlaying,
+            onDetails = onDetails,
+            isLoading = isLoading
+        ) { onMore(MovieSection.NowPlaying) }
 
-            moviesSection(
-                title = popularTitle, movies = popular, onDetails = onDetails, isLoading = isLoading
-            ) { onMore(MovieSection.Popular) }
-        }
+        moviesSection(
+            title = popularTitle, movies = popular, onDetails = onDetails, isLoading = isLoading
+        ) { onMore(MovieSection.Popular) }
     }
 }
 
