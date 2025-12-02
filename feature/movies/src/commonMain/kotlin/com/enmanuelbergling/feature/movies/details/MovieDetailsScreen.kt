@@ -250,27 +250,29 @@ private fun AnimatedContentScope.MovieDetailsScreen(
                 }
 
                 item {
-                    if (hasWatchList) {
-                        AddToListButton {
-                            scope.launch {
-                                isSheetOpen.value = true
+                    Row(horizontalArrangement = Arrangement.spacedBy(MaterialTheme.dimen.medium)) {
+                        if (hasWatchList) {
+                            AddToListButton {
+                                scope.launch {
+                                    isSheetOpen.value = true
+                                }
                             }
                         }
+
+                        AssistChip(
+                            onClick = { onRecommended(uiData.movieId) },
+                            leadingIcon = {
+                                Icon(
+                                    imageVector = Icons.Rounded.Diamond,
+                                    contentDescription = "more"
+                                )
+                            },
+                            label = {
+                                Text(text = "More like this")
+
+                            }
+                        )
                     }
-
-                    AssistChip(
-                        onClick = { onRecommended(uiData.movieId) },
-                        leadingIcon = {
-                            Icon(
-                                imageVector = Icons.Rounded.Diamond,
-                                contentDescription = "more"
-                            )
-                        },
-                        label = {
-                            Text(text = "More like this")
-
-                        }
-                    )
                 }
 
 

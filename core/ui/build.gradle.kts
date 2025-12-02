@@ -89,6 +89,7 @@ kotlin {
                 api(libs.paging.compose.common)
 
                 api(libs.haze)
+                api(libs.compottie)
 
 //              Navigation 3
                 api(libs.androidx.nav3.ui)
